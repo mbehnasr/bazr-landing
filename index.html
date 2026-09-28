@@ -15,8 +15,13 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Vazirmatn:wght@300..800&display=swap">
+<link rel="preload" href="assets/fonts/vazirmatn.woff2" as="font" type="font/woff2" crossorigin>
+<link id="latin-fonts" rel="stylesheet" media="print" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap">
 <style>
+/* Vazirmatn ships with the page. Google Fonts cannot be reached from inside Iran,
+   so loading it from there left Persian readers in a fallback face (same fix as the app, bazr@50d6e88). */
+@font-face{ font-family:"Vazirmatn"; src:url("assets/fonts/vazirmatn.woff2") format("woff2"); font-weight:100 900; font-style:normal; font-display:swap; }
+
 /* ── Tokens ─────────────────────────────────────────────
    One deliberate light world with two dark bands (hero instrument, method, closing).
    Palette is exploratory, not brand book 1.1 — see README. */
@@ -35,6 +40,14 @@
   --nav-h:68px;
 }
 html[lang="en"]{ --f-body:var(--f-en); }
+/* The Persian page reads in Vazirmatn throughout, English terms and labels included
+   (brand book 1.1: Latin text uses Vazirmatn's own Latin set). */
+html[lang="fa"]{ --f-term:var(--f-fa); --f-mono:var(--f-fa); --f-en:var(--f-fa); }
+html[lang="fa"] .term{ font-style:normal; font-weight:600; }
+html[lang="fa"] .mono, html[lang="fa"] .band-label{ letter-spacing:.06em; }
+html[lang="fa"] .kbb-en{ font-style:normal; font-weight:700; letter-spacing:0; }
+html[lang="fa"] .mq-set li, html[lang="fa"] .principle{ font-style:normal; font-weight:600; }
+html[lang="fa"] .qmark{ font-style:normal; font-weight:700; }
 html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
 *,*::before,*::after{ box-sizing:border-box; }
 body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--f-body); font-size:1.0625rem; line-height:1.9; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; overflow-x:clip; }
@@ -435,7 +448,8 @@ html[dir="rtl"] .cycle li.arr::before{ content:"←"; }
 /* Pick the language before first paint: #en / #fa in the link, then the viewer's last choice, then Persian. */
 (function(){var l="fa";try{var s=localStorage.getItem("bazr-lang");if(s==="en"||s==="fa")l=s;}catch(e){}
 var h=(location.hash||"").slice(1);if(h==="en"||h==="fa")l=h;
-var d=document.documentElement;d.lang=l;d.dir=l==="fa"?"rtl":"ltr";})();
+var d=document.documentElement;d.lang=l;d.dir=l==="fa"?"rtl":"ltr";
+var g=document.getElementById("latin-fonts");if(g){if(g.sheet)g.media="all";else g.addEventListener("load",function(){g.media="all";});}})();
 </script>
 
 <header class="nav on-dark">
