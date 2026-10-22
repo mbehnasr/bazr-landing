@@ -5,12 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>بذر · مسیری برای آگاهی، حضور و تغییر</title>
 <meta name="description" content="بذر یک پلتفرم Lifestyle و Behavior Change است که کمک می‌کند الگوهای رفتاری، نیازها، عادت‌ها و سبک زندگی خودت را بهتر بشناسی و قدم‌به‌قدم مسیر تغییر خودت را بسازی.">
+<!-- Search engines (BZR-138). The page lives at the root of Bazr's domain (ADR-0019), so the address below is final;
+     the GitHub Pages copy points search engines here too. The noindex line stays until Owner پروژه approves this
+     design and says when the page goes public (BZR-139, ADR-0005); then delete that one line and nothing else.
+     robots.txt and sitemap.xml are already in place. README, «پیش از انتشار عمومی», has the whole list, and
+     tools/launch-check.py shows what is still open. -->
 <meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://bazrlife.com/">
+<!-- The app's address, from ADR-0019 (BZR-138). It stays empty until the app opens to the public. While it is empty
+     the «شروع» buttons and the terms and privacy links stay hidden, and the page keeps its in-page buttons. -->
+<meta name="bazr-app-url" content="">
 <meta name="theme-color" content="#101915">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://bazrlife.com/">
+<meta property="og:site_name" content="بذر · BAZR">
+<meta property="og:locale" content="fa_IR">
+<meta property="og:locale:alternate" content="en_US">
 <meta property="og:title" content="بذر · A place to know, to be, to become">
 <meta property="og:description" content="Health × Self-Knowledge × Behavior Change">
-<meta property="og:image" content="https://mbehnasr.github.io/bazr-landing/assets/hero-poster.jpg">
+<meta property="og:image" content="https://bazrlife.com/assets/hero-poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,6 +67,10 @@ html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
 body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--f-body); font-size:1.0625rem; line-height:1.9; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; overflow-x:clip; }
 html[lang="en"] body{ line-height:1.6; }
 html[lang="fa"] .en, html[lang="en"] .fa{ display:none !important; }
+/* [hidden] has to win over the display set by classes (.btn, .ai-card, …). */
+[hidden]{ display:none !important; }
+/* Links to the app show only once <meta name="bazr-app-url"> holds an address; until then the in-page buttons stay (BZR-138). */
+html:not(.has-app) [data-app-path], html:not(.has-app) [data-app-only], html.has-app [data-no-app]{ display:none !important; }
 img, svg, canvas{ max-width:100%; }
 img{ display:block; height:auto; }
 a{ color:inherit; }
@@ -295,6 +313,7 @@ html[lang="en"] .ask li{ font-weight:600; line-height:1.3; letter-spacing:-.01em
 .feat svg{ width:40px; height:40px; fill:none; stroke:var(--ink); stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
 .feat .h3{ font-size:1.12rem; }
 .pair{ display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:16px; margin-top:16px; }
+.pair:has(> [hidden]){ grid-template-columns:minmax(0, 1fr); }
 .pattern-card{ background:var(--surface); border-radius:20px; padding:28px; display:grid; gap:12px; align-content:start; }
 .ai-card{ background:var(--ink); color:var(--on-night); border-radius:20px; padding:28px; display:grid; gap:12px; align-content:start; }
 .ai-card p{ color:var(--on-night-2); }
@@ -380,12 +399,23 @@ html[dir="rtl"] .cycle li.arr::before{ content:"←"; }
 .final .lead{ margin-inline:auto; }
 .foot{ padding-block:clamp(56px, 7vw, 80px) 36px; }
 .foot-grid{ display:grid; grid-template-columns:minmax(0, 1.3fr) repeat(2, minmax(0, .7fr)) minmax(0, 1fr); gap:32px; }
-.foot-brand{ display:grid; gap:14px; justify-items:start; }
+.foot-brand{ display:grid; gap:14px; justify-items:start; align-content:start; }
 .foot-logo{ width:112px; }
 .foot-h{ font-weight:700; font-size:.95rem; margin-bottom:10px; }
 .foot ul{ list-style:none; padding:0; display:grid; gap:6px; }
 .foot ul a{ text-decoration:none; color:var(--ink-2); }
 .foot ul a:hover{ color:var(--ink); }
+/* Contact and business identity (BZR-138). A fact nobody has given yet is an empty <dd>, drawn as a placeholder bar
+   like the price cards; typing the value into it is all it takes. tools/launch-check.py lists the empty ones. */
+.biz{ display:grid; gap:12px; margin:0; }
+.biz dt{ font-size:.82rem; line-height:1.5; color:var(--ink-2); }
+.biz dd{ margin:0; line-height:1.7; overflow-wrap:anywhere; }
+.biz dd a{ text-decoration:none; }
+.biz dd a:hover{ text-decoration:underline; }
+.biz dd:empty::before{ content:""; display:block; width:70%; height:12px; margin-top:6px; border-radius:6px; background:var(--soil); }
+.seal{ margin-top:18px; }
+.seal:empty{ width:88px; height:96px; border:1.5px dashed #C9CEC4; border-radius:12px; }
+.seal img{ max-width:120px; }
 .legal{ margin-top:48px; padding-top:20px; border-top:1px solid var(--rule); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px 24px; font-size:.85rem; color:var(--ink-2); }
 
 /* ── Motion ── */
@@ -449,6 +479,7 @@ html[dir="rtl"] .cycle li.arr::before{ content:"←"; }
 (function(){var l="fa";try{var s=localStorage.getItem("bazr-lang");if(s==="en"||s==="fa")l=s;}catch(e){}
 var h=(location.hash||"").slice(1);if(h==="en"||h==="fa")l=h;
 var d=document.documentElement;d.lang=l;d.dir=l==="fa"?"rtl":"ltr";
+var m=document.querySelector('meta[name="bazr-app-url"]');if(m&&/^https:\/\/[^\s"'<>]+$/.test(m.content.trim()))d.classList.add("has-app");
 var g=document.getElementById("latin-fonts");if(g){if(g.sheet)g.media="all";else g.addEventListener("load",function(){g.media="all";});}})();
 </script>
 
@@ -465,7 +496,8 @@ var g=document.getElementById("latin-fonts");if(g){if(g.sheet)g.media="all";else
     </nav>
     <div class="nav-end">
       <button class="lang" id="lang-toggle" type="button" aria-label="Switch to English"><span class="fa" lang="en">EN</span><span class="en" lang="fa">فا</span></button>
-      <a class="btn btn-ink btn-sm nav-cta" href="#membership"><span class="fa">عضویت بذر</span><span class="en">Membership</span></a>
+      <a class="btn btn-ink btn-sm nav-cta" href="#membership" data-no-app><span class="fa">عضویت بذر</span><span class="en">Membership</span></a>
+      <a class="btn btn-ink btn-sm nav-cta" data-app-path="/"><span class="fa">شروع</span><span class="en">Start</span></a>
       <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="site-links" aria-label="Menu"><span></span></button>
     </div>
   </div>
@@ -490,7 +522,8 @@ var g=document.getElementById("latin-fonts");if(g){if(g.sheet)g.media="all";else
       <p class="lead"><span class="fa">بذر برای کم کردن فاصله‌ی میان دانستن و زندگی کردن آنچه می‌دانیم به وجود آمده است.</span><span class="en">Bazr exists to close the gap between knowing what’s good for us and actually living it.</span></p>
       <div class="cta-row">
         <a class="btn btn-light arrow" href="#signal"><span class="fa">مسیرت رو بشناس</span><span class="en">Get to know your path</span></a>
-        <a class="btn btn-outline-light" href="#membership"><span class="fa">عضویت بذر</span><span class="en">Membership</span></a>
+        <a class="btn btn-outline-light" href="#membership" data-no-app><span class="fa">عضویت بذر</span><span class="en">Membership</span></a>
+        <a class="btn btn-outline-light" data-app-path="/"><span class="fa">شروع</span><span class="en">Start</span></a>
       </div>
     </div>
     <div class="vhero-foot">
@@ -830,7 +863,9 @@ var g=document.getElementById("latin-fonts");if(g){if(g.sheet)g.media="all";else
         <p class="eyebrow"><span class="fa">الگوها</span><span class="en">Patterns</span></p>
         <p class="h3"><span class="fa">و به مرور، بذر از این داده‌ها برای پیدا کردن الگوهای تکرارشونده‌ی تو استفاده می‌کنه.</span><span class="en">Over time, Bazr uses this data to find the patterns that keep repeating for you.</span></p>
       </article>
-      <article class="ai-card rv">
+      <!-- AI claim, off the page (BZR-138): the app has no AI feature yet. Owner پروژه decides E3: (a) delete this card,
+           or (b) show it again, worded and labelled as planned. Same for the AI question in the FAQ. -->
+      <article class="ai-card rv" hidden data-pending="E3">
         <p class="term" dir="ltr" style="font-size:1.6rem;line-height:1.1">AI</p>
         <p><span class="fa"><i class="term" dir="ltr">AI</i> در بذر قرار نیست جای انسان تصمیم بگیره. وظیفه‌ش کمک به تحلیل اطلاعات، پیدا کردن الگوها و شخصی‌تر کردن تجربه‌ی هر کاربره.</span><span class="en"><i class="term">AI</i> in Bazr isn’t there to make decisions for people. Its job is to help analyze information, find patterns, and make each person’s experience more personal.</span></p>
         <p class="principle" dir="ltr">We illuminate. You decide.</p>
@@ -948,7 +983,8 @@ var g=document.getElementById("latin-fonts");if(g){if(g.sheet)g.media="all";else
         <summary><span class="fa">بذر روان‌درمانیه؟</span><span class="en">Is Bazr psychotherapy?</span></summary>
         <p class="ans"><span class="fa">نه. بذر جایگزین روان‌درمانی یا خدمات پزشکی نیست. تمرکز بذر روی <i class="term" dir="ltr">Lifestyle Coaching</i>، شناخت رفتار و ایجاد تغییرات قابل اجرا در زندگی روزمره است.</span><span class="en">No. Bazr is not a replacement for psychotherapy or medical care. Its focus is <i class="term">Lifestyle Coaching</i>, understanding behavior, and making changes you can actually carry out in daily life.</span></p>
       </details>
-      <details>
+      <!-- AI question, off the page until Owner پروژه decides E3 (BZR-138); see the AI card in «داخل بذر». -->
+      <details hidden data-pending="E3">
         <summary><span class="fa"><i class="term" dir="ltr">AI</i> چه کاری انجام می‌ده؟</span><span class="en">What does the <i class="term">AI</i> do?</span></summary>
         <p class="ans"><span class="fa">کمک می‌کنه اطلاعاتی که در طول مسیر ثبت می‌کنی بهتر تحلیل بشن، الگوهای تکرارشونده شناسایی بشن و تجربه‌ی شخصی‌تری داشته باشی.</span><span class="en">It helps analyze the information you log along the way, spot recurring patterns, and give you a more personal experience.</span></p>
       </details>
@@ -987,7 +1023,8 @@ var g=document.getElementById("latin-fonts");if(g){if(g.sheet)g.media="all";else
   <div class="wrap">
     <p class="principle" dir="ltr">We illuminate. You decide.</p>
     <h2 class="h2"><span class="fa">ما مسیر را روشن‌تر می‌کنیم؛ انتخاب با توست.</span><span class="en">Bazr makes the path clearer. The choice is yours.</span></h2>
-    <a class="btn btn-saffron arrow" href="#membership"><span class="fa">مسیر مناسب خودت رو انتخاب کن</span><span class="en">Choose the path that fits you</span></a>
+    <a class="btn btn-saffron arrow" href="#membership" data-no-app><span class="fa">مسیر مناسب خودت رو انتخاب کن</span><span class="en">Choose the path that fits you</span></a>
+    <a class="btn btn-saffron arrow" data-app-path="/"><span class="fa">شروع</span><span class="en">Start</span></a>
   </div>
 </section>
 </main>
@@ -1002,6 +1039,7 @@ var g=document.getElementById("latin-fonts");if(g){if(g.sheet)g.media="all";else
         </picture>
         <p><i class="term" dir="ltr">A place to know, to be, to become.</i></p>
         <p class="muted small fa">مسیری برای آگاهی، حضور و تغییر</p>
+        <p class="muted small"><span class="fa">بذر جایگزین روان‌درمانی یا خدمات پزشکی نیست.</span><span class="en">Bazr is not a replacement for psychotherapy or medical care.</span></p>
       </div>
       <div>
         <p class="foot-h"><span class="fa">بذر</span><span class="en">Bazr</span></p>
@@ -1018,9 +1056,24 @@ var g=document.getElementById("latin-fonts");if(g){if(g.sheet)g.media="all";else
           <li><a href="#membership"><span class="fa">عضویت بذر</span><span class="en">Membership</span></a></li>
           <li><a href="#faq"><span class="fa">سؤال‌های شما</span><span class="en">FAQ</span></a></li>
           <li><a href="#story"><span class="fa">پشت صحنه</span><span class="en">Behind the scenes</span></a></li>
+          <!-- Both pages live in the app; /privacy is added by BZR-74. -->
+          <li data-app-only><a data-app-path="/terms"><span class="fa">قوانین و شرایط</span><span class="en">Terms of use</span></a></li>
+          <li data-app-only><a data-app-path="/privacy"><span class="fa">حریم خصوصی</span><span class="en">Privacy</span></a></li>
         </ul>
       </div>
-      <p class="muted small"><span class="fa">بذر جایگزین روان‌درمانی یا خدمات پزشکی نیست.</span><span class="en">Bazr is not a replacement for psychotherapy or medical care.</span></p>
+      <!-- Contact and business identity, which e-Namad and Zarinpal look for (BZR-138, BZR-67). Each fact goes inside its
+           empty <dd>, as text, in static HTML; until then the page draws a placeholder bar. The facts come from Owner پروژه
+           and follow decision B1 (who the legal owner is, BZR-67): nothing here may be guessed. -->
+      <div id="contact">
+        <p class="foot-h"><span class="fa">تماس با ما</span><span class="en">Contact</span></p>
+        <dl class="biz">
+          <div><dt><span class="fa">مالک کسب‌وکار</span><span class="en">Business owner</span></dt><dd data-fact="owner"><!-- the name registered with e-Namad (B1) --></dd></div>
+          <div><dt><span class="fa">نشانی</span><span class="en">Address</span></dt><dd data-fact="address"><!-- the address registered with e-Namad, with postcode --></dd></div>
+          <div><dt><span class="fa">تلفن</span><span class="en">Phone</span></dt><dd data-fact="phone"><!-- <a href="tel:+98…" dir="ltr">…</a> --></dd></div>
+          <div><dt><span class="fa">ایمیل</span><span class="en">Email</span></dt><dd data-fact="email"><!-- <a href="mailto:…" dir="ltr">…</a> --></dd></div>
+        </dl>
+        <div class="seal" id="enamad"><!-- Paste the trust-seal code e-Namad issues for the domain here, exactly as given. --></div>
+      </div>
     </div>
     <div class="legal">
       <span><span class="fa">© ۱۴۰۵ بذر</span><span class="en">© 2026 Bazr</span></span>
@@ -1050,6 +1103,13 @@ var g=document.getElementById("latin-fonts");if(g){if(g.sheet)g.media="all";else
     try { localStorage.setItem("bazr-lang", next); } catch (e) {}
     applyLang(next);
   });
+
+  /* Links to the app (BZR-138): one address in <meta name="bazr-app-url">, each link adds its own path.
+     The first script already showed them (html.has-app) when the address is a valid https URL. */
+  if (root.classList.contains("has-app")){
+    var appUrl = document.querySelector('meta[name="bazr-app-url"]').content.trim().replace(/\/+$/, "");
+    document.querySelectorAll("a[data-app-path]").forEach(function(a){ a.href = appUrl + a.getAttribute("data-app-path"); });
+  }
 
   /* Nav */
   var nav = document.querySelector(".nav"), menuBtn = document.getElementById("menu-btn");
