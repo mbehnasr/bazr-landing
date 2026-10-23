@@ -10,7 +10,9 @@
  * (the installed one; or set CHROME to its path). Files are served from disk, and every request to another host
  * fails, as Google Fonts does from inside Iran. Exits 1 when a check fails. It changes nothing. */
 const fs = require("fs");
+const os = require("os");
 const path = require("path");
+const { spawnSync } = require("child_process");
 
 const ROOT = path.resolve(__dirname, "..");
 const SHOTS = process.argv[2] ? path.resolve(process.argv[2]) : null;
@@ -122,11 +124,27 @@ async function shot(page, sel, name) {
     await shot(page, "footer", "footer-fa-with-app.png");
     await ctx.close();
   }
-  for (const bad of ["http://app.example.test", "javascript:alert(1)", " "]) {
-    const { ctx, page } = await open(browser, { appUrl: bad });
-    check(`address ${JSON.stringify(bad)} does not switch the app links on`, !(await page.evaluate(() => document.documentElement.classList.contains("has-app"))));
+  // Only https:// and a host switch the links on: each link appends its own path, so anything after the host would
+  // break them (…/login/terms). tools/launch-check.py must agree with the page on every value.
+  const ADDRESSES = [
+    [TEST_APP, true], [TEST_APP + ":8443/", true],
+    ["http://app.example.test", false], ["javascript:alert(1)", false], [" ", false], ["https://", false],
+    [TEST_APP + "/login", false], [TEST_APP + "?x=1", false], [TEST_APP + "/#x", false], [TEST_APP + "/ x", false],
+  ];
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "bazr-landing-"));
+  const source = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
+  for (const [value, on] of ADDRESSES) {
+    const { ctx, page } = await open(browser, { appUrl: value });
+    const hasApp = await page.evaluate(() => document.documentElement.classList.contains("has-app"));
+    check(`address ${JSON.stringify(value)} ${on ? "switches" : "does not switch"} the app links on`, hasApp === on);
     await ctx.close();
+    const file = path.join(tmp, "index.html");
+    fs.writeFileSync(file, source.replace(META, `<meta name="bazr-app-url" content="${value}">`));
+    const out = spawnSync("python3", [path.join(__dirname, "launch-check.py"), file], { encoding: "utf8" }).stdout || "";
+    const flagged = /bazr-app-url is (?!empty)/.test(out), empty = /bazr-app-url is empty/.test(out);
+    check(`launch-check agrees on ${JSON.stringify(value)}`, on ? !flagged && !empty : flagged || (empty && !value.trim()), out.split("\n").filter((l) => l.includes("bazr-app-url")));
   }
+  fs.rmSync(tmp, { recursive: true, force: true });
 
   // robots.txt and sitemap.xml.
   {

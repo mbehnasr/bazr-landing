@@ -13,7 +13,8 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://bazrlife.com/">
 <!-- The app's address, from ADR-0019 (BZR-138). It stays empty until the app opens to the public. While it is empty
-     the «شروع» buttons and the terms and privacy links stay hidden, and the page keeps its in-page buttons. -->
+     the «شروع» buttons and the terms and privacy links stay hidden, and the page keeps its in-page buttons.
+     Write https:// and the host only, like https://app.example.com: a path, query or anything else is ignored. -->
 <meta name="bazr-app-url" content="">
 <meta name="theme-color" content="#101915">
 <meta property="og:type" content="website">
@@ -479,7 +480,7 @@ html[dir="rtl"] .cycle li.arr::before{ content:"←"; }
 (function(){var l="fa";try{var s=localStorage.getItem("bazr-lang");if(s==="en"||s==="fa")l=s;}catch(e){}
 var h=(location.hash||"").slice(1);if(h==="en"||h==="fa")l=h;
 var d=document.documentElement;d.lang=l;d.dir=l==="fa"?"rtl":"ltr";
-var m=document.querySelector('meta[name="bazr-app-url"]');if(m&&/^https:\/\/[^\s"'<>]+$/.test(m.content.trim()))d.classList.add("has-app");
+var m=document.querySelector('meta[name="bazr-app-url"]');if(m&&/^https:\/\/[a-z0-9-]+(\.[a-z0-9-]+)*(:[0-9]{1,5})?\/?$/i.test(m.content.trim()))d.classList.add("has-app");
 var g=document.getElementById("latin-fonts");if(g){if(g.sheet)g.media="all";else g.addEventListener("load",function(){g.media="all";});}})();
 </script>
 
@@ -1105,7 +1106,7 @@ var g=document.getElementById("latin-fonts");if(g){if(g.sheet)g.media="all";else
   });
 
   /* Links to the app (BZR-138): one address in <meta name="bazr-app-url">, each link adds its own path.
-     The first script already showed them (html.has-app) when the address is a valid https URL. */
+     The first script already showed them (html.has-app) when the address is https:// and a host with nothing after it. */
   if (root.classList.contains("has-app")){
     var appUrl = document.querySelector('meta[name="bazr-app-url"]').content.trim().replace(/\/+$/, "");
     document.querySelectorAll("a[data-app-path]").forEach(function(a){ a.href = appUrl + a.getAttribute("data-app-path"); });

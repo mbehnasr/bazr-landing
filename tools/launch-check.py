@@ -5,12 +5,15 @@ Run:  python3 tools/launch-check.py [path/to/index.html]
 Prints one line per open item, with the decision or issue it waits on, and exits 1 while anything is open.
 It only reads the page; it changes nothing.
 """
+import re
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
 
 PAGE = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).resolve().parent.parent / "index.html"
 SITE = "https://bazrlife.com/"   # the landing's address, ADR-0019
+# The same rule as the first script in index.html: https:// and a host, nothing after it.
+APP_ORIGIN = re.compile(r"https://[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(:[0-9]{1,5})?/?")
 
 FACTS = {
     "owner": "business owner's name (decision B1, BZR-67)",
@@ -83,9 +86,12 @@ def main():
         todo.append(f"canonical link and og:url must both be {SITE} (ADR-0019)")
     if not (p.og_image or "").startswith(SITE):
         todo.append(f"og:image must be an absolute address under {SITE} (ADR-0019)")
-    if not (p.app_url or "").startswith("https://"):
+    if not p.app_url:
         todo.append("meta bazr-app-url is empty: the «شروع» buttons and the terms/privacy links stay hidden "
                     "until the app opens to the public (ADR-0019); /privacy must exist in the app first (BZR-74)")
+    elif not APP_ORIGIN.fullmatch(p.app_url):
+        todo.append(f"meta bazr-app-url is {p.app_url!r}, which the page ignores: write https:// and the host only, "
+                    "with no path, query or fragment (ADR-0019)")
     robots = PAGE.parent / "robots.txt"
     if not robots.is_file() or any(l.split("#")[0].strip().lower().replace(" ", "") == "disallow:/"
                                    for l in robots.read_text(encoding="utf-8").splitlines()):
