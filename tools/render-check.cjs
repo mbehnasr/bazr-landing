@@ -31,7 +31,7 @@ function check(label, ok, detail) {
   if (!ok) failed++;
 }
 
-async function open(browser, { width = 1366, height = 900, lang, appUrl, phone = false } = {}) {
+async function open(browser, { width = 1366, height = 900, lang, appUrl, edit, phone = false } = {}) {
   const ctx = await browser.newContext({ viewport: { width, height }, isMobile: phone, hasTouch: phone });
   const page = await ctx.newPage();
   const errors = [];
@@ -47,6 +47,7 @@ async function open(browser, { width = 1366, height = 900, lang, appUrl, phone =
     if (!file.startsWith(ROOT + path.sep) || !fs.existsSync(file) || !fs.statSync(file).isFile()) return route.fulfill({ status: 404, body: "" });
     let body = fs.readFileSync(file);
     if (rel === "/index.html" && appUrl !== undefined) body = Buffer.from(body.toString("utf8").replace(META, `<meta name="bazr-app-url" content="${appUrl}">`));
+    if (rel === "/index.html" && edit) body = Buffer.from(edit(body.toString("utf8")));
     return route.fulfill({ status: 200, body, contentType: TYPES[path.extname(file)] || "application/octet-stream" });
   });
   await page.goto(ORIGIN + "/" + (lang ? "#" + lang : ""), { waitUntil: "load" });
@@ -55,6 +56,11 @@ async function open(browser, { width = 1366, height = 900, lang, appUrl, phone =
 }
 
 const shown = (page, sel) => page.$$eval(sel, (els) => els.filter((e) => e.getClientRects().length > 0).length);
+// A fact with nothing in it draws a bar; a filled one must show text in the page's language (its .fa or .en half).
+const factsShown = (page) => page.$$eval("#contact dd", (ds) => ds.length === 4 && ds.every((d) =>
+  d.matches(":empty") ? getComputedStyle(d, "::before").content === '""' : d.innerText.trim().length > 0));
+// What a Persian reader sees in the contact column, the email aside (it is one Latin text for both languages).
+const contactText = (page) => page.$$eval('#contact dt, #contact dd:not([data-fact="email"])', (es) => es.map((e) => e.innerText).join(" "));
 
 async function shot(page, sel, name) {
   if (!SHOTS) return;
@@ -89,8 +95,8 @@ async function shot(page, sel, name) {
     if (head.hasApp) check(p + "app address set: «شروع» buttons instead of #membership", ctas === 3 && inPage === 0, { ctas, inPage });
     else check(p + "no app address: #membership buttons, no app links", ctas === 0 && inPage === 3 && (await shown(page, "[data-app-path]")) === 0, { ctas, inPage });
     check(p + "contact column with four labels", (await shown(page, `#contact dt .${lang}`)) === 4);
-    check(p + "each fact is either filled in or drawn as a bar", await page.$$eval("#contact dd", (ds) => ds.length === 4 && ds.every((d) =>
-      d.matches(":empty") ? getComputedStyle(d, "::before").content === '""' : d.textContent.trim().length > 0)));
+    check(p + "each fact is either filled in for this language or drawn as a bar", await factsShown(page));
+    if (lang === "fa") check(p + "no Latin digits in the contact column", !/[0-9]/.test(await contactText(page)));
     check(p + "e-Namad slot present", (await page.$$("#enamad")).length === 1);
     check(p + "loads without errors", errors.length === 0, errors);
     await shot(page, "footer", `footer-${lang}.png`);
@@ -145,6 +151,37 @@ async function shot(page, sel, name) {
     check(`launch-check agrees on ${JSON.stringify(value)}`, on ? !flagged && !empty : flagged || (empty && !value.trim()), out.split("\n").filter((l) => l.includes("bazr-app-url")));
   }
   fs.rmSync(tmp, { recursive: true, force: true });
+
+  // Simulated: the footer facts written in the shape the comments in #contact ask for. The values are made up, live only
+  // in memory like TEST_APP, and are never written into the page.
+  const fill = (facts) => (html) => Object.entries(facts).reduce((h, [name, value]) =>
+    h.replace(new RegExp(`(<dd data-fact="${name}">)<!--[^]*?-->(</dd>)`), `$1${value}$2`), html);
+  const SAMPLE = {
+    owner: '<span class="fa">نمونه</span><span class="en">Sample</span>',
+    address: '<span class="fa">خیابان نمونه، پلاک ۷، کد پستی ۱۲۳۴۵۶۷۸۹۰</span><span class="en">7 Sample St, postcode 1234567890</span>',
+    phone: '<a href="tel:+982100000000" dir="ltr"><span class="fa">۰۲۱ ۰۰۰۰ ۰۰۰۰</span><span class="en">+98 21 0000 0000</span></a>',
+    email: '<a href="mailto:hello@example.test" dir="ltr">hello@example.test</a>',
+  };
+  for (const lang of ["fa", "en"]) {
+    const { ctx, page, errors } = await open(browser, { lang, edit: fill(SAMPLE) });
+    check(`facts filled, ${lang}: every fact shows text and no bar`, (await factsShown(page)) &&
+      (await page.$$eval("#contact dd", (ds) => ds.every((d) => !d.matches(":empty")))));
+    if (lang === "fa") check(`facts filled, ${lang}: no Latin digits in the contact column`, !/[0-9]/.test(await contactText(page)));
+    check(`facts filled, ${lang}: loads without errors`, errors.length === 0, errors);
+    if (lang === "fa") await shot(page, "footer", "footer-fa-filled.png");
+    await ctx.close();
+  }
+  // The two mistakes the shape guards against must be caught: a fact in one language only, and Latin digits on the fa page.
+  {
+    const { ctx, page } = await open(browser, { lang: "en", edit: fill({ ...SAMPLE, owner: '<span class="fa">نمونه</span>' }) });
+    check("a fact written only in Persian is caught on the English page", !(await factsShown(page)));
+    await ctx.close();
+  }
+  {
+    const { ctx, page } = await open(browser, { lang: "fa", edit: fill({ ...SAMPLE, phone: '<a href="tel:+982100000000" dir="ltr">021 0000 0000</a>' }) });
+    check("a phone number written once, in Latin digits, is caught on the Persian page", /[0-9]/.test(await contactText(page)));
+    await ctx.close();
+  }
 
   // robots.txt and sitemap.xml.
   {

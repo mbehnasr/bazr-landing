@@ -1065,14 +1065,17 @@ var g=document.getElementById("latin-fonts");if(g){if(g.sheet)g.media="all";else
       </div>
       <!-- Contact and business identity, which e-Namad and Zarinpal look for (BZR-138, BZR-67). Each fact goes inside its
            empty <dd>, as text, in static HTML; until then the page draws a placeholder bar. The facts come from Owner پروژه
-           and follow decision B1 (who the legal owner is, BZR-67): nothing here may be guessed. -->
+           and follow decision B1 (who the legal owner is, BZR-67): nothing here may be guessed.
+           Like the rest of the page, each fact is written twice, <span class="fa">…</span><span class="en">…</span>, with
+           Persian digits (۰۱۲…) in the fa one and Latin digits in the en one; only the email is one Latin text for both.
+           The comment in each <dd> shows its shape; tools/render-check.cjs checks it once the facts are in. -->
       <div id="contact">
         <p class="foot-h"><span class="fa">تماس با ما</span><span class="en">Contact</span></p>
         <dl class="biz">
-          <div><dt><span class="fa">مالک کسب‌وکار</span><span class="en">Business owner</span></dt><dd data-fact="owner"><!-- the name registered with e-Namad (B1) --></dd></div>
-          <div><dt><span class="fa">نشانی</span><span class="en">Address</span></dt><dd data-fact="address"><!-- the address registered with e-Namad, with postcode --></dd></div>
-          <div><dt><span class="fa">تلفن</span><span class="en">Phone</span></dt><dd data-fact="phone"><!-- <a href="tel:+98…" dir="ltr">…</a> --></dd></div>
-          <div><dt><span class="fa">ایمیل</span><span class="en">Email</span></dt><dd data-fact="email"><!-- <a href="mailto:…" dir="ltr">…</a> --></dd></div>
+          <div><dt><span class="fa">مالک کسب‌وکار</span><span class="en">Business owner</span></dt><dd data-fact="owner"><!-- the name registered with e-Namad (B1): <span class="fa">…</span><span class="en">…</span> --></dd></div>
+          <div><dt><span class="fa">نشانی</span><span class="en">Address</span></dt><dd data-fact="address"><!-- the address registered with e-Namad, with postcode: <span class="fa">…، کد پستی …</span><span class="en">…, postcode …</span> --></dd></div>
+          <div><dt><span class="fa">تلفن</span><span class="en">Phone</span></dt><dd data-fact="phone"><!-- <a href="tel:+98…" dir="ltr"><span class="fa">۰…</span><span class="en">+98 …</span></a> --></dd></div>
+          <div><dt><span class="fa">ایمیل</span><span class="en">Email</span></dt><dd data-fact="email"><!-- one Latin text for both languages: <a href="mailto:…" dir="ltr">…</a> --></dd></div>
         </dl>
         <div class="seal" id="enamad"><!-- Paste the trust-seal code e-Namad issues for the domain here, exactly as given. --></div>
       </div>
