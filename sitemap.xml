@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bazr landing (BZR-138): one page at the root of the domain (ADR-0019). The English text is the same page (#en). -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://bazrlife.com/</loc>
+  </url>
+</urlset>

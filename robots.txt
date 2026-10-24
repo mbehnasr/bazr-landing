@@ -1,0 +1,6 @@
+# Bazr landing (BZR-138). Crawlers may read everything: while index.html carries its noindex meta (BZR-139),
+# they have to be able to fetch the page to see it. Served at https://bazrlife.com/robots.txt (ADR-0019).
+User-agent: *
+Allow: /
+
+Sitemap: https://bazrlife.com/sitemap.xml
