@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>[پیش‌نویس] بذر · هر قدم کوچک، رشد بزرگ‌تری می‌سازد</title>
+<!-- «داستان بذر» (BZR-175): a character-led landing whose structure and rhythm follow gordol.app (a huge headline over a
+     big character, a scroll story where the character grows, a snap carousel of scenes, one dark section, a playful
+     tap, a gallery of the character's moods, pricing, install, questions, a last call), told with Bazr's own seed, the
+     Owner's painting and the course-garden stage art. A private preview: noindex stays and the footer says it is an
+     internal preview until Owner پروژه picks a design and says when it goes public (BZR-139, ADR-0005).
+     No app screens (ADR-0006): each carousel card is a framed piece of the painting or a moment with the seed.
+     Copy: today's landing (index.html at the repo root) and its highlights, addressed with «شما» (ADR-0013); the new
+     lines are listed in the BZR-175 report. Prices stay empty until they are announced. Pictures are shown at most at
+     half their pixels, so they stay sharp on a 2× screen. Characters: assets/looks/story/characters.js, the seed and the
+     earthworm of bazr-design-directions/characters.js (the Owner's sheets), never over words or buttons, the worm once. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="بذر برای کم کردن فاصله‌ی میان دانستن و زندگی کردن آنچه می‌دانیم به وجود آمده است. هر قدمی که در مسیرتان جلو می‌روید، بذر شما هم رشد می‌کند.">
+<meta name="theme-color" content="#f6efe6">
+<meta name="color-scheme" content="light">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preload" href="../assets/fonts/vazirmatn.woff2" as="font" type="font/woff2" crossorigin>
+<script>(function(d){d.classList.add("js");if(!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches))d.classList.add("anim");})(document.documentElement);</script>
+<style>
+@font-face{ font-family:"Vazirmatn"; src:url("../assets/fonts/vazirmatn.woff2") format("woff2"); font-weight:100 900; font-style:normal; font-display:swap; }
+
+/* ── Tokens: «باغ زنده» (bazr-app src/styles/looks/garden/base.css, sampled from the Owner's painting) ── */
+:root{
+  --canvas:#f6efe6; --card:#fdf9f3; --band:#f4ece2; --stone:#efe6da; --line:#e6dacb; --line-2:#d6c6b0;
+  --ink:#173e32; --ink-2:#3f4743; --ink-3:#5d625e;
+  --primary:#4c7350; --primary-hi:#567f5a; --primary-lo:#3f6343; --on-primary:#fdf9f3; --stage:#557a59; --on-stage:#fbf6ec;
+  --accent:#e3a54f; --accent-ink:#80520e; --accent-soft:#f8e8cc;
+  --bar:#5b8d58; --track:#e6dfd7;
+  --night:#121a30; --night-2:#1b2440; --night-card:#1e2742; --night-line:#2f3a5a; --on-night:#f7efe2; --on-night-2:#cbc4d4; --lamp:#ffcf86;
+  --stone-a:#f4e8d6; --stone-b:#e2cfb2; --stone-c:#c9b08c; --stone-lip:#ad946f; --shade:rgb(70 44 20 / .28);
+  --done-a:#a3c785; --done-b:#6f9a5c; --done-c:#507a45; --done-lip:#3d5e35;
+  --leaf:#7ea65c; --leaf-hi:#a3c473; --leaf-dk:#4f7a45; --vine-old:#6e9257; --vine-new:#8db06e; --gold:#e3a54f;
+  --soil:#7b5b44; --soil-hi:#a07a5c; --soil-dk:#4e3727; --grass-dk:#86a06a; --water:#5fbccb; --water-hi:#bfe8ec;
+  --path:#eadcc3; --path-edge:#d4c09f;
+  --shadow:0 1px 0 rgb(255 255 255 / .7) inset, 0 2px 6px -2px rgb(96 64 32 / .12), 0 14px 30px -16px rgb(96 64 32 / .3);
+  --frame-shadow:0 2px 4px rgb(96 64 32 / .08), 0 26px 50px -26px rgb(96 64 32 / .55);
+  --ease-out:cubic-bezier(.23,1,.32,1); --ease-io:cubic-bezier(.65,0,.35,1); --spring:cubic-bezier(.34,1.4,.64,1);
+  --f:"Vazirmatn", Tahoma, system-ui, sans-serif;
+  --max:1200px; --gut:16px; --sec:104px;
+  color-scheme:light;
+}
+@media (min-width:700px){ :root{ --gut:32px; --sec:136px; } }
+@media (min-width:1024px){ :root{ --gut:40px; --sec:168px; } }
+
+html{ -webkit-text-size-adjust:100%; -webkit-tap-highlight-color:transparent; scroll-padding-top:88px; }
+@media (prefers-reduced-motion:no-preference){ html{ scroll-behavior:smooth; } }
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--canvas); color:var(--ink-2); font-family:var(--f); font-size:1.0625rem; line-height:1.9; -webkit-font-smoothing:antialiased; overflow-x:clip; }
+h1,h2,h3,p,ul,ol,figure,dl,dd{ margin:0; }
+ul,ol{ padding:0; list-style:none; }
+h1,h2,h3{ color:var(--ink); text-wrap:balance; }
+p{ text-wrap:pretty; }
+img{ display:block; max-width:100%; }
+a{ color:inherit; }
+button{ font:inherit; color:inherit; }
+a,button{ touch-action:manipulation; }
+[hidden]{ display:none !important; }
+:focus-visible{ outline:2.5px solid var(--ink); outline-offset:3px; border-radius:12px; }
+.term{ font-weight:600; unicode-bidi:isolate; white-space:nowrap; font-style:normal; }
+.sr{ position:absolute !important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; border:0; }
+.skip{ position:absolute; inset-inline-start:12px; top:-60px; z-index:60; background:var(--ink); color:var(--on-primary); padding:10px 18px; border-radius:999px; font-weight:700; text-decoration:none; }
+.skip:focus{ top:12px; }
+
+.wrap{ width:100%; max-width:calc(var(--max) + 2 * var(--gut)); margin-inline:auto; padding-inline:var(--gut); }
+.center{ text-align:center; }
+.sec{ padding-top:var(--sec); }
+
+/* ── Type: Vazirmatn at 800–900 for every heading ── */
+.display{ font-size:clamp(1.875rem, 9.4vw, 5.25rem); font-weight:900; line-height:1.24; }
+.h2{ font-size:clamp(1.875rem, 6.6vw, 3.5rem); font-weight:900; line-height:1.3; }
+.lead{ font-size:clamp(1.0625rem, 2.6vw, 1.1875rem); line-height:1.95; color:var(--ink-2); }
+.eyebrow{ font-size:.9375rem; font-weight:800; color:var(--primary); margin-bottom:10px; }
+.eyebrow.grey{ color:var(--ink-3); font-weight:700; }
+.head{ max-width:760px; margin-inline:auto; }
+.head .lead{ margin-top:14px; }
+
+/* ── Buttons ── */
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:52px; padding:0 30px; border:0; border-radius:999px; background:var(--primary); color:var(--on-primary); font-weight:800; font-size:1.0625rem; line-height:1.2; text-decoration:none; cursor:pointer; user-select:none; -webkit-user-select:none; box-shadow:0 1px 0 rgb(255 255 255 / .22) inset, 0 12px 22px -14px rgb(40 76 46 / .9); transition:transform 140ms var(--ease-out), background-color 140ms ease; }
+.btn:active{ transform:scale(.97); background:var(--primary-lo); }
+.btn-sm{ min-height:44px; padding:0 22px; font-size:.9375rem; }
+.btn-lg{ min-height:58px; padding:0 40px; font-size:1.125rem; }
+.btn-dark{ background:var(--ink); box-shadow:0 12px 22px -14px rgb(10 30 24 / .9); }
+.btn-dark:active{ background:#0f2c23; }
+.btn-block{ display:flex; width:100%; }
+.more{ display:inline-flex; align-items:center; gap:4px; min-height:48px; padding:0 10px; font-weight:800; color:var(--primary); text-decoration:none; border-radius:999px; transition:transform 140ms var(--ease-out); }
+.more svg{ width:18px; height:18px; transition:transform 200ms var(--ease-out); }
+.more:active{ transform:scale(.97); }
+@media (hover:hover) and (pointer:fine){
+  .btn:hover{ background:var(--primary-hi); }
+  .btn-dark:hover{ background:#20493b; }
+  .more:hover svg{ transform:translateX(-3px); }
+  .bar-links a:hover{ color:var(--ink); background:rgb(23 62 50 / .06); }
+  .car-arrow:enabled:hover{ background:#fff; }
+  .qa summary:hover{ color:var(--primary); }
+  .foot a:hover{ color:var(--ink); }
+}
+
+/* ── The bar: a cream glass pill floating over the page ── */
+.bar{ position:fixed; z-index:40; top:max(10px, env(safe-area-inset-top)); inset-inline:0; padding-inline:max(10px, env(safe-area-inset-left)) max(10px, env(safe-area-inset-right)); pointer-events:none; }
+.bar-in{ pointer-events:auto; max-width:1120px; margin-inline:auto; height:60px; display:flex; align-items:center; gap:8px; padding-inline:10px 8px; border-radius:999px; background:rgb(253 249 243 / .84); -webkit-backdrop-filter:blur(14px) saturate(1.15); backdrop-filter:blur(14px) saturate(1.15); box-shadow:0 0 0 1px rgb(255 255 255 / .75) inset, 0 0 0 1px rgb(214 198 176 / .45), 0 10px 26px -18px rgb(70 44 20 / .55); }
+.brand{ display:flex; align-items:center; gap:8px; min-height:44px; padding-inline:2px 8px; text-decoration:none; font-weight:900; font-size:1.25rem; color:var(--ink); border-radius:999px; }
+.brand img{ width:40px; height:42px; }
+.bar-in{ transition:background-color 260ms ease, box-shadow 260ms ease; }
+.brand,.bar-links a{ transition:color 260ms ease, background-color 140ms ease; }
+.bar[data-dark] .bar-in{ background:rgb(30 39 66 / .78); box-shadow:0 0 0 1px rgb(255 255 255 / .08) inset, 0 10px 26px -18px rgb(0 0 0 / .8); }
+.bar[data-dark] .brand,.bar[data-dark] .bar-links a{ color:var(--on-night); }
+.bar-links{ display:none; margin-inline:auto; gap:2px; }
+.bar-links a{ display:inline-flex; align-items:center; min-height:44px; padding:0 14px; border-radius:999px; text-decoration:none; font-weight:700; font-size:.9375rem; color:var(--ink-2); transition:background-color 140ms ease, color 140ms ease; }
+.bar .btn{ margin-inline-start:auto; }
+@media (min-width:900px){ .bar-links{ display:flex; } .bar .btn{ margin-inline-start:0; } }
+
+/* ── The seed and the earthworm (characters.js): sized by their host, never in the tab order ── */
+.seed-host,.worm-host{ position:absolute; line-height:0; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; }
+.seed-host svg,.worm-host svg{ width:100% !important; height:auto !important; overflow:visible; }
+.seed-host[data-tap]{ cursor:pointer; }
+
+/* ── 1 · Hero ── */
+.hero{ position:relative; min-height:100svh; display:flex; flex-direction:column; padding-top:calc(96px + env(safe-area-inset-top)); padding-bottom:20px; }
+.hero-grid{ flex:1; display:grid; align-content:center; justify-items:center; text-align:center; gap:clamp(16px, 3svh, 32px); }
+.hero-text{ max-width:720px; }
+.hero .lead{ margin-top:14px; max-width:34rem; margin-inline:auto; }
+.cta-row{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:10px 14px; margin-top:24px; }
+.hero-art{ position:relative; width:min(100%, 380px); height:clamp(196px, calc(100svh - 560px), 245px); }
+.hero-art .glow{ position:absolute; inset:-14% -4% -6%; border-radius:50%; background:radial-gradient(closest-side, rgb(253 227 180 / .8), rgb(253 227 180 / 0)); }
+/* a plant picture is 480×720 and its drawing fills the lower part: the box is the drawing, the empty top overflows */
+.hero-art .plant{ position:absolute; bottom:0; left:2%; height:calc(100% / .68); max-height:360px; width:auto; aspect-ratio:2/3; }
+.hero-art .seed-host{ right:3%; bottom:-1%; width:37%; }
+.hint{ display:flex; align-items:center; justify-content:center; gap:6px; margin-top:14px; font-size:.875rem; color:var(--ink-3); }
+.hint svg{ width:16px; height:16px; }
+.anim .hint svg{ animation:nudge 1.6s var(--ease-io) 1.2s 3 both; }
+@keyframes nudge{ 0%,100%{ transform:none; } 50%{ transform:translateY(4px); } }
+/* the hero's first appearance: words rise in turn, the art settles (CSS, so it runs before any script) */
+.anim .rise{ animation:rise 720ms var(--ease-out) both; animation-delay:calc(var(--i, 0) * 70ms); }
+@keyframes rise{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
+.anim .hero-art{ animation:settle 900ms var(--ease-out) 260ms both; }
+@keyframes settle{ from{ opacity:0; transform:translateY(18px) scale(.97); } to{ opacity:1; transform:none; } }
+@media (min-width:1024px){
+  .hero-grid{ grid-template-columns:minmax(0, 1.4fr) minmax(0, .8fr); justify-items:stretch; align-items:center; text-align:start; gap:40px; }
+  .hero .display{ font-size:clamp(3.5rem, 5.4vw, 4.75rem); }
+  .hero .lead{ margin-inline:0; }
+  .cta-row{ justify-content:flex-start; }
+  .hero-art{ width:100%; max-width:420px; height:min(245px, calc(100svh - 300px)); justify-self:center; }
+
+}
+
+/* ── 2 · The growth story: day 1 → 29 → 83, ریشه → گل (sticky while the section scrolls by) ── */
+.grow{ position:relative; }
+.grow-stick{ padding-block:var(--sec) 0; }
+.grow-grid{ display:grid; gap:24px; justify-items:center; text-align:center; }
+.grow-text{ max-width:640px; display:flex; flex-direction:column; align-items:center; }
+.grow .h2{ font-size:clamp(1.625rem, 5.6vw, 3rem); }
+.day{ display:flex; align-items:baseline; justify-content:center; gap:10px; margin-top:20px; direction:rtl; }
+.day-l{ font-size:1.25rem; font-weight:800; color:var(--ink-3); }
+.day-n{ display:inline-block; width:1.24em; text-align:start; font-size:clamp(3.5rem, 13vw, 6rem); font-weight:900; line-height:1; color:var(--ink); }
+.day-bar{ width:min(260px, 70%); height:6px; margin-top:14px; border-radius:3px; background:var(--track); overflow:hidden; }
+.day-bar i{ display:block; height:100%; border-radius:inherit; background:var(--bar); transform-origin:100% 50%; transform:scaleX(0); }
+.stage-chip{ display:inline-flex; align-items:center; gap:6px; margin-top:16px; min-height:36px; padding:0 18px; border-radius:999px; background:var(--stage); color:var(--on-stage); font-weight:800; font-size:1rem; }
+.grow-art{ position:relative; width:min(100%, 360px); height:245px; }
+.grow-art .plant{ position:absolute; bottom:0; left:4%; height:calc(100% / .68); max-height:360px; width:auto; aspect-ratio:2/3; opacity:0; transform:scale(.9); transform-origin:50% 96%; transition:opacity 200ms var(--ease-out), transform 520ms var(--spring); }
+.grow-art .plant.on{ opacity:1; transform:none; transition:opacity 280ms var(--ease-out), transform 560ms var(--spring); }
+.grow-art .seed-host{ right:2%; bottom:-1%; width:35%; }
+.grow-art .worm-host{ left:-7%; bottom:-2%; width:34%; opacity:1; transition:opacity 300ms var(--ease-out); }
+.grow-live{ display:none; }
+.grow-art::before{ content:""; position:absolute; left:-14%; right:-14%; bottom:-18px; height:44px; border-radius:50%; background:radial-gradient(closest-side, rgb(214 198 176 / .55), rgb(214 198 176 / 0)); }
+/* without motion (or without script) the story is three still moments, like a page of a picture book */
+.strip{ display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:12px; width:100%; max-width:760px; margin-top:28px; }
+.strip li{ display:flex; flex-direction:column; align-items:center; gap:6px; padding:14px 6px 16px; border-radius:24px; background:var(--card); box-shadow:var(--shadow); }
+.strip img{ width:min(100%, 150px); height:auto; aspect-ratio:2/3; }
+.strip b{ color:var(--ink); font-weight:900; font-size:1.125rem; }
+.strip small{ display:inline-flex; min-height:28px; align-items:center; padding:0 12px; border-radius:999px; background:var(--stage); color:var(--on-stage); font-weight:800; font-size:.875rem; }
+.stages-all{ margin-top:16px; font-size:.9375rem; color:var(--ink-3); }
+.live .grow{ height:400svh; }
+.live .grow-stick{ position:sticky; top:0; height:100svh; padding-block:calc(92px + env(safe-area-inset-top)) clamp(20px, 5svh, 56px); display:flex; flex-direction:column; overflow:hidden; }
+.live .grow-stick > .wrap{ flex:1; }
+.live .grow-grid{ grid-template-rows:auto 1fr; }
+.live .grow-art{ align-self:center; }
+.live .grow-live{ display:block; }
+.live .day,.live .day-bar{ display:flex; }
+.live .grow-static{ position:absolute !important; width:1px; height:1px; margin:-1px; overflow:hidden; clip-path:inset(50%); }
+.day,.day-bar,.stage-chip{ display:none; }
+.live .day-bar{ display:block; }
+.live .stage-chip{ display:inline-flex; }
+.live .grow-grid{ gap:clamp(8px, 2svh, 24px); }
+.live .grow-art{ height:clamp(150px, calc(100svh - 560px), 245px); }
+@media (max-height:700px){ .live .grow .h2{ font-size:1.375rem; } .live .day{ margin-top:10px; } .live .day-n{ font-size:3.25rem; } .live .stage-chip{ margin-top:10px; } }
+@media (min-width:1024px){
+  .live .grow-grid,.grow-grid{ grid-template-columns:minmax(0, 1.1fr) minmax(0, .9fr); align-items:center; text-align:start; justify-items:stretch; gap:48px; }
+  .grow .h2{ font-size:clamp(2rem, 3vw, 2.625rem); }
+  .grow-text{ align-items:flex-start; }
+  .day{ justify-content:flex-start; }
+  .live .grow-art{ height:min(245px, calc(100svh - 300px)); width:100%; max-width:400px; justify-self:center; align-self:center; }
+  .live .grow-grid{ grid-template-rows:1fr; }
+  .grow-grid > .strip{ grid-column:1 / -1; justify-self:center; }
+}
+
+/* ── 3 · Inside Bazr: a snap carousel of painted scenes and moments with the seed ── */
+.car{ position:relative; margin-top:40px; }
+.car-track{ display:flex; gap:16px; overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; padding:12px max(var(--gut), calc((100% - var(--max)) / 2)) 16px; scroll-padding-inline:max(var(--gut), calc((100% - var(--max)) / 2)); scrollbar-width:none; }
+.car-track::-webkit-scrollbar{ display:none; }
+.car-track:focus-visible{ outline-offset:-4px; border-radius:28px; }
+.card{ flex:0 0 min(calc(100% - 2 * var(--gut) - 40px), 380px); scroll-snap-align:center; text-align:center; }
+@media (min-width:700px){ .card{ flex-basis:340px; scroll-snap-align:start; } }
+@media (min-width:1024px){ .card{ flex-basis:calc((min(100%, var(--max) + 2 * var(--gut)) - 2 * var(--gut) - 2 * 24px) / 3); } .car-track{ gap:24px; } }
+.frame{ position:relative; aspect-ratio:4/5; border-radius:28px; overflow:hidden; background:var(--stone); box-shadow:var(--frame-shadow); isolation:isolate; }
+.frame::after{ content:""; position:absolute; inset:0; z-index:5; border-radius:inherit; box-shadow:inset 0 0 0 1px rgb(255 255 255 / .38); pointer-events:none; }
+.frame > img:not(.cg-plant){ width:100%; height:100%; object-fit:cover; }
+.card-eye{ margin-top:22px; font-size:.9375rem; font-weight:800; color:var(--primary); }
+.card-h{ margin-top:4px; font-size:clamp(1.5rem, 5.4vw, 1.75rem); font-weight:900; line-height:1.42; }
+.card-p{ margin:8px auto 0; max-width:22rem; font-size:1rem; line-height:1.85; color:var(--ink-2); }
+.car-nav{ display:flex; align-items:center; justify-content:center; gap:10px; }
+.dots{ display:flex; }
+.dot{ position:relative; width:44px; height:44px; padding:0; border:0; background:none; cursor:pointer; border-radius:12px; }
+.dot::before,.dot::after{ content:""; position:absolute; top:50%; left:50%; height:8px; margin-top:-4px; border-radius:4px; transition:opacity 220ms var(--ease-out), transform 320ms var(--ease-out); }
+.dot::before{ width:8px; margin-left:-4px; background:var(--line-2); }
+.dot::after{ width:24px; margin-left:-12px; background:var(--ink); opacity:0; transform:scaleX(.34); }
+.dot[aria-current="true"]::before{ opacity:0; }
+.dot[aria-current="true"]::after{ opacity:1; transform:none; }
+.car-arrow{ display:none; width:48px; height:48px; place-items:center; border:0; border-radius:50%; background:var(--card); color:var(--ink); box-shadow:var(--shadow); cursor:pointer; transition:transform 140ms var(--ease-out), opacity 200ms ease, background-color 140ms ease; }
+.car-arrow svg{ width:22px; height:22px; }
+.car-arrow:active{ transform:scale(.95); }
+.car-arrow:disabled{ opacity:.35; cursor:default; }
+@media (min-width:700px){ .js .car-arrow{ display:grid; } .car-nav{ gap:16px; } }
+/* the moments drawn on the card: the sky of the painting over the cream of the path */
+.moment{ background:var(--canvas); }
+.moment .sky{ position:absolute; inset:0 0 auto; width:100%; height:auto; aspect-ratio:4/3; -webkit-mask-image:linear-gradient(#000 62%, transparent); mask-image:linear-gradient(#000 62%, transparent); }
+.moment .trail{ position:absolute; inset:auto 0 0; width:100%; height:58%; }
+.stone{ position:absolute; z-index:2; width:27%; aspect-ratio:1.12; border-radius:46% 54% 50% 50% / 56% 52% 48% 44%; background:radial-gradient(120% 95% at 35% 22%, var(--stone-a), var(--stone-b) 58%, var(--stone-c)); box-shadow:0 5px 0 var(--stone-lip), 0 16px 22px -10px var(--shade); display:grid; place-items:center; color:#a4532e; }
+.stone::after{ content:""; position:absolute; inset:9% 18% auto 20%; height:20%; border-radius:50%; background:rgb(255 255 255 / .45); filter:blur(3px); }
+.stone-fill{ position:absolute; inset:0; border-radius:inherit; background:radial-gradient(120% 95% at 35% 22%, var(--done-a), var(--done-b) 58%, var(--done-c)); box-shadow:0 5px 0 var(--done-lip); transition:opacity 180ms var(--ease-out), transform 480ms var(--spring); }
+.stone svg{ position:relative; z-index:1; width:42%; height:auto; }
+.stone .ic-check{ color:#fff; transition:opacity 160ms var(--ease-out), transform 480ms var(--spring) 80ms; }
+.stone .ic-task{ position:absolute; inset:0; margin:auto; transition:opacity 160ms var(--ease-out); }
+.patch{ position:absolute; z-index:1; width:24%; }
+.patch > svg{ display:block; width:100%; height:auto; }
+.patch .spark{ transition:opacity 220ms var(--ease-out); }
+.sprout{ position:absolute; left:50%; bottom:46%; width:62%; margin-left:-31%; transform-origin:50% 100%; transition:opacity 140ms var(--ease-out), transform 620ms var(--spring) 160ms; }
+.sprout svg{ display:block; width:100%; height:auto; }
+.vine{ position:absolute; z-index:1; left:4%; top:54%; width:92%; height:auto; overflow:visible; }
+.vine .today{ transform-box:fill-box; transform-origin:50% 100%; transition:opacity 220ms var(--ease-out), transform 700ms var(--spring); }
+.vine .bud{ transition:opacity 200ms var(--ease-out); }
+/* before a moment plays (only when motion is on and the script is here): the task waits, the vine's leaf is a bud */
+.anim .ready .card:not(.played) .stone-fill{ opacity:0; transform:scale(.6); }
+.anim .ready .card:not(.played) .ic-check{ opacity:0; transform:scale(.5); }
+.anim .ready .card:not(.played) .sprout{ opacity:0; transform:scale(.3, .05); }
+.ready .card.played .ic-task, .card .ic-task{ opacity:0; }
+.anim .ready .card:not(.played) .ic-task{ opacity:1; }
+.ready .card.played .patch .spark{ opacity:0; }
+.card .patch .spark{ opacity:0; }
+.anim .ready .card:not(.played) .patch .spark{ opacity:1; }
+.vine .bud{ opacity:0; }
+.anim .ready .card:not(.played) .vine .today{ opacity:0; transform:scale(.4); }
+.anim .ready .card:not(.played) .vine .bud{ opacity:1; }
+/* a course's garden: its plant stands in the planter of the painting (bazr-app course-garden/scenes.ts) */
+.cg-plant{ position:absolute; z-index:2; left:8.333%; top:11.26%; width:44.444%; height:53.333%; opacity:0; transform:scale(.92); transform-origin:50% 96%; transition:opacity 260ms var(--ease-out), transform 560ms var(--spring); }
+.cg-plant.on{ opacity:1; transform:none; }
+.cg-stage{ position:absolute; z-index:3; right:5%; top:5%; display:inline-flex; align-items:center; min-height:32px; padding:0 14px; border-radius:999px; background:rgb(253 249 243 / .9); color:var(--ink); font-weight:800; font-size:.875rem; box-shadow:0 0 0 1px rgb(255 255 255 / .7) inset, 0 6px 14px -8px rgb(70 44 20 / .5); }
+
+/* ── Words, big and slow, between the scenes (Know · Be · Become, today's landing) ── */
+.words{ overflow:hidden; padding-block:calc(var(--sec) * .6) 0; }
+.words-track{ display:flex; width:max-content; }
+.words-run{ display:flex; align-items:center; gap:clamp(18px, 3vw, 34px); padding-inline-end:clamp(18px, 3vw, 34px); flex:none; }
+.words-run span{ font-size:clamp(2.75rem, 9vw, 5.5rem); font-weight:900; line-height:1.3; color:var(--ink); white-space:nowrap; }
+.words-run span.pale{ color:#e4d9ca; }
+.words-run svg{ width:clamp(22px, 3.4vw, 36px); height:auto; flex:none; }
+.anim .words-track{ animation:drift 46s linear infinite; }
+.words[data-paused] .words-track{ animation-play-state:paused; }
+@keyframes drift{ from{ transform:translateX(0); } to{ transform:translateX(50%); } }
+
+/* ── 4 · «آب بدهید»: a tap waters the seed's sprout and the رکورد grows a day ── */
+.water-grid{ display:grid; gap:32px; justify-items:center; text-align:center; }
+.water-text{ max-width:560px; }
+.water .lead{ margin-top:14px; }
+.try{ margin-top:14px; font-weight:800; color:var(--ink); font-size:1rem; }
+html:not(.js) .try, html:not(.js) [data-water-btn]{ display:none; }
+.wcard{ width:min(100%, 440px); border-radius:32px; overflow:hidden; background:linear-gradient(#fbf0dd, #f5e4c8); box-shadow:var(--frame-shadow); }
+.wstage{ position:relative; height:clamp(300px, 92vw, 380px); overflow:hidden; }
+.wstage .sky{ position:absolute; inset:0 0 auto; width:100%; height:auto; aspect-ratio:4/3; -webkit-mask-image:linear-gradient(#000 55%, transparent 92%); mask-image:linear-gradient(#000 55%, transparent 92%); }
+.wstage .ground{ position:absolute; inset:auto 0 0; width:100%; height:34%; }
+.wstage .pot{ position:absolute; left:8%; bottom:6%; width:56%; aspect-ratio:2/3; }
+.wplant{ position:absolute; inset:0; width:100%; height:100%; opacity:0; transform:scale(.88); transform-origin:50% 96%; transition:opacity 220ms var(--ease-out), transform 560ms var(--spring); }
+.wplant.on{ opacity:1; transform:none; }
+.mound{ position:absolute; left:18%; right:18%; bottom:0; width:64%; height:auto; transition:opacity 240ms var(--ease-out); }
+.wstage .seed-host{ right:7%; bottom:8%; width:32%; z-index:3; }
+.drops{ position:absolute; inset:0; pointer-events:none; }
+.drops svg{ position:absolute; width:22px; height:auto; margin-left:-11px; opacity:0; }
+.wchip{ position:absolute; top:16px; right:16px; z-index:4; display:inline-flex; align-items:center; min-height:34px; padding:0 16px; border-radius:999px; background:var(--stage); color:var(--on-stage); font-weight:800; font-size:.9375rem; transition:opacity 200ms var(--ease-out), transform 300ms var(--spring); }
+.wchip[data-empty]{ opacity:0; transform:scale(.9); }
+.wfoot{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 18px 18px; background:rgb(253 249 243 / .7); box-shadow:0 1px 0 rgb(214 198 176 / .6) inset; }
+.streak{ display:flex; align-items:baseline; gap:8px; color:var(--ink); }
+.streak b{ display:inline-block; min-width:1.1ch; font-size:2.25rem; font-weight:900; line-height:1; }
+.streak span{ font-weight:800; font-size:1rem; }
+@media (min-width:1024px){
+  .water-grid{ grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); align-items:center; justify-items:stretch; text-align:start; gap:64px; }
+  .wcard{ justify-self:center; }
+}
+
+/* ── 5 · The night (the one dark section): the painting at night, the lanterns lit, the seed asleep ── */
+.night{ --bz-glyph:#f7efe2; position:relative; margin-top:var(--sec); padding-block:var(--sec); background:radial-gradient(120% 60% at 50% 0%, #1d2850 0%, var(--night) 60%); color:var(--on-night-2); border-radius:36px; }
+@media (min-width:1024px){ .night{ border-radius:48px; margin-inline:max(0px, calc((100% - 1440px) / 2)); } }
+.night h2,.night h3,.night .h2{ color:var(--on-night); }
+.night .eyebrow{ color:var(--lamp); }
+.night .lead{ color:var(--on-night-2); }
+.night-grid{ display:grid; gap:40px; justify-items:center; text-align:center; }
+.night-text{ max-width:560px; }
+.night .lead{ margin-top:14px; }
+.nframe{ position:relative; width:min(100%, 400px); }
+.nframe .frame{ aspect-ratio:9/16; max-height:78svh; margin-inline:auto; background:#0c1224; box-shadow:0 0 0 1px rgb(255 207 134 / .08), 0 30px 80px -30px rgb(255 207 134 / .28), 0 30px 60px -30px rgb(0 0 0 / .8); }
+.nframe .seed-host{ right:3%; bottom:-5%; width:28%; z-index:6; }
+@media (min-width:1024px){
+  .night-grid{ grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); align-items:center; justify-items:stretch; text-align:start; gap:64px; }
+  .nframe{ justify-self:center; }
+}
+.moods-head{ margin-top:clamp(88px, 12vw, 140px); }
+.moods{ display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:12px; margin-top:36px; }
+@media (min-width:900px){ .moods{ grid-template-columns:repeat(4, minmax(0, 1fr)); gap:20px; } }
+.mood{ position:relative; display:flex; flex-direction:column; align-items:center; text-align:center; padding:18px 12px 20px; border-radius:28px; background:linear-gradient(180deg, #232d4c, var(--night-card)); box-shadow:inset 0 0 0 1px var(--night-line); }
+.mood .pose{ position:relative; width:min(62%, 124px); aspect-ratio:1 / 1.25; margin:10px auto 14px; }
+.mood .pose::before{ content:""; position:absolute; inset:-14% -24% -4%; border-radius:50%; background:radial-gradient(closest-side, rgb(255 207 134 / .2), rgb(255 207 134 / 0)); }
+.mood .seed-host{ inset:auto 0 0; width:100%; }
+.mood .gold-leaf{ position:absolute; z-index:2; left:-12%; top:0; width:26%; height:auto; transform:rotate(-18deg); filter:drop-shadow(0 4px 8px rgb(227 165 79 / .35)); }
+.mood b{ color:var(--on-night); font-weight:900; font-size:1.125rem; }
+.mood p{ margin-top:2px; font-size:.9375rem; line-height:1.7; color:var(--on-night-2); }
+
+/* ── 6 · عضویت بذر: the section is here, its prices wait to be announced (ADR-0006) ── */
+.price{ width:min(100%, 520px); margin:36px auto 0; padding:10px 22px 24px; border-radius:32px; background:var(--card); box-shadow:var(--frame-shadow); text-align:start; }
+.plans li{ display:flex; align-items:center; gap:12px; min-height:72px; padding-block:14px; border-bottom:1px solid var(--line); }
+.plans .pn{ font-weight:800; color:var(--ink-3); }
+.plans .ph{ flex:1; height:12px; max-width:120px; margin-inline-start:auto; border-radius:6px; background:linear-gradient(90deg, var(--stone), var(--line)); }
+.soon{ display:inline-flex; align-items:center; min-height:32px; padding:0 14px; border-radius:999px; background:var(--accent-soft); color:var(--accent-ink); font-weight:800; font-size:.875rem; white-space:nowrap; }
+.price .btn{ margin-top:22px; }
+.fine{ margin-top:14px; font-size:.875rem; line-height:1.8; color:var(--ink-3); text-align:center; }
+
+/* ── 7 · Install ── */
+.inst-grid{ display:grid; gap:16px; margin-top:36px; }
+@media (min-width:760px){ .inst-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); gap:24px; max-width:960px; margin-inline:auto; } }
+.inst{ display:flex; flex-direction:column; align-items:flex-start; gap:10px; padding:26px 24px 26px; border-radius:32px; background:var(--card); box-shadow:var(--shadow); }
+.inst-ic{ width:56px; height:56px; display:grid; place-items:center; border-radius:50%; background:var(--accent-soft); color:var(--accent-ink); }
+.inst-ic svg{ width:28px; height:28px; }
+.inst h3{ font-size:1.5rem; font-weight:900; margin-top:4px; }
+.inst p{ color:var(--ink-2); }
+.inst ul{ display:grid; gap:8px; margin-top:2px; }
+.inst li{ position:relative; padding-inline-start:22px; font-size:.9375rem; line-height:1.85; color:var(--ink-2); }
+.inst li::before{ content:""; position:absolute; inset-inline-start:4px; top:.72em; width:8px; height:8px; border-radius:50%; background:var(--leaf); }
+.inst .btn,.inst .soon{ margin-top:auto; }
+.inst .btn{ margin-top:12px; }
+.inst .push{ margin-top:auto; padding-top:12px; }
+
+/* ── 8 · Questions ── */
+.qa{ max-width:760px; margin:32px auto 0; display:grid; gap:12px; }
+.qa details{ border-radius:24px; background:var(--card); box-shadow:var(--shadow); }
+.qa summary{ display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:64px; padding:14px 22px; list-style:none; cursor:pointer; font-weight:800; font-size:1.0625rem; color:var(--ink); border-radius:24px; transition:color 140ms ease; }
+.qa summary::-webkit-details-marker{ display:none; }
+.qa summary svg{ width:22px; height:22px; flex:none; color:var(--primary); transition:transform 260ms var(--ease-out); }
+.qa details[open] summary svg{ transform:rotate(45deg); }
+.qa .ans{ padding:0 22px 20px; color:var(--ink-2); }
+
+/* ── 9 · The last call: the seed peeks over the card ── */
+.final{ padding-bottom:var(--sec); }
+.fcard{ position:relative; max-width:880px; margin:calc(var(--sec) + 80px) auto 0; padding:clamp(44px, 8vw, 72px) clamp(22px, 6vw, 64px) clamp(36px, 6vw, 56px); border-radius:40px; background:var(--card); box-shadow:var(--frame-shadow); text-align:center; }
+.fcard .peek{ position:absolute; z-index:0; left:50%; top:0; width:180px; height:160px; margin-left:-90px; transform:translateY(-100%); overflow:hidden; pointer-events:none; }
+.fcard .peek .seed-host{ position:absolute; left:24px; right:24px; top:36px; width:132px; pointer-events:auto; }
+.fcard::before{ content:""; position:absolute; inset:0; z-index:1; border-radius:inherit; background:var(--card); }
+.fcard > :not(.peek){ position:relative; z-index:2; }
+.fcard .h2{ font-size:clamp(2rem, 7vw, 3.5rem); }
+.fcard .btn{ margin-top:28px; }
+.motto{ margin-top:26px; color:var(--ink-3); font-size:1rem; line-height:1.9; }
+.motto .term{ display:block; color:var(--ink); font-weight:700; }
+
+/* ── Footer ── */
+.foot{ padding:48px 0 calc(36px + env(safe-area-inset-bottom)); border-top:1px solid var(--line); }
+.foot-grid{ display:grid; gap:20px; }
+.foot-brand{ display:flex; align-items:center; gap:12px; }
+.foot-brand img{ width:48px; height:50px; }
+.foot-brand b{ display:block; font-size:1.25rem; font-weight:900; color:var(--ink); line-height:1.4; }
+.foot-brand span{ font-size:.9375rem; color:var(--ink-3); }
+.foot nav{ display:flex; flex-wrap:wrap; gap:4px 8px; margin-inline-start:-12px; }
+.foot nav a{ display:inline-flex; align-items:center; min-height:44px; padding:0 12px; border-radius:999px; text-decoration:none; font-weight:700; color:var(--ink-2); transition:color 140ms ease; }
+.legal{ font-size:.875rem; line-height:1.9; color:var(--ink-3); }
+@media (min-width:900px){ .foot-grid{ grid-template-columns:1fr auto; align-items:center; } .foot .legal{ grid-column:1 / -1; } }
+
+/* ── Things that appear as they come into view (only when the script runs and motion is on) ── */
+.anim .ready .rv{ opacity:0; transform:translateY(22px); transition:opacity 700ms var(--ease-out), transform 700ms var(--ease-out); transition-delay:var(--d, 0ms); }
+.anim .ready .rv.in{ opacity:1; transform:none; }
+
+/* on a 1× desktop screen the 720 px plant pictures can stand half as tall again and still not be blown up */
+@media (min-width:1024px) and (max-resolution:1.4dppx){
+  .hero-art{ max-width:520px; height:min(367px, calc(100svh - 300px)); }
+  .hero-art .plant,.grow-art .plant{ max-height:540px; }
+  .live .grow-art{ max-width:520px; height:min(367px, calc(100svh - 280px)); }
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{ animation-duration:1ms !important; animation-iteration-count:1 !important; transition-duration:1ms !important; transition-delay:0ms !important; }
+}
+</style>
+<script src="../assets/looks/story/characters.js" defer></script>
+<script src="../assets/looks/story/story.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">رفتن به متن اصلی</a>
+
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="#top"><img src="../assets/looks/story/logo-96.webp" width="40" height="42" alt="">بذر</a>
+    <nav class="bar-links" aria-label="بخش‌های صفحه">
+      <a href="#grow">مراحل رشد</a>
+      <a href="#inside">داخل بذر</a>
+      <a href="#membership">عضویت بذر</a>
+      <a href="#faq">سؤال‌ها</a>
+    </nav>
+    <a class="btn btn-sm" href="https://app.bazrlife.ir/login">شروع</a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ── 1 · Hero. Headline: the Owner's own line under «باغ بذر» in her painted mockup (originals/5); the line under it:
+     today's hero (brand book 1.1, Purpose). ── -->
+<section class="hero" id="top" aria-labelledby="hero-h">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <p class="eyebrow grey rise" style="--i:0">مسیری برای آگاهی، حضور و تغییر</p>
+      <h1 id="hero-h" class="display rise" style="--i:1">هر قدم کوچک،<br>رشد بزرگ‌تری می‌سازد.</h1>
+      <p class="lead rise" style="--i:2">بذر برای کم کردن فاصله‌ی میان دانستن و زندگی کردن آنچه می‌دانیم به وجود آمده است.</p>
+      <div class="cta-row rise" style="--i:3">
+        <a class="btn btn-lg" href="https://app.bazrlife.ir/login">شروع</a>
+        <a class="more" href="#membership">عضویت بذر<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6 8.5 12l6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+    <div class="hero-art" role="img" aria-label="بذر، کنار گیاهی که گل داده است">
+      <span class="glow" aria-hidden="true"></span>
+      <img class="plant" src="../assets/looks/story/plant-5.webp" width="480" height="720" alt="" fetchpriority="high" decoding="async">
+      <div class="seed-host" aria-hidden="true" data-seed='{"size":150,"mood":"happy","enter":"happy"}' data-tap></div>
+    </div>
+  </div>
+  <p class="hint rise" style="--i:5"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v13M6.5 12.5 12 18l5.5-5.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>پایین بیایید تا رشد بذر را ببینید.</p>
+</section>
+
+<!-- ── 2 · Growth (highlight 4, today's «مراحل رشد»; stage names from the glossary). The days are the Owner's choice for
+     this page (1405/08/11), a story, not a course's length. ── -->
+<section class="grow" id="grow" aria-labelledby="grow-h">
+  <div class="grow-stick">
+    <div class="wrap grow-grid">
+      <div class="grow-text">
+        <p class="eyebrow">مراحل رشد</p>
+        <h2 id="grow-h" class="h2">هر قدمی که در مسیرتان جلو می‌روید، بذر شما هم رشد می‌کند.</h2>
+        <p class="day" aria-hidden="true"><span class="day-l">روز</span><span class="day-n" data-day>۱</span></p>
+        <span class="day-bar" aria-hidden="true"><i data-bar></i></span>
+        <span class="stage-chip" aria-hidden="true" data-stage-name>ریشه</span>
+      </div>
+      <div class="grow-art grow-live" aria-hidden="true">
+        <img class="plant on" data-plant="0" src="../assets/looks/story/plant-1.webp" width="480" height="720" alt="" decoding="async">
+        <img class="plant" data-plant="1" src="../assets/looks/story/plant-2.webp" width="480" height="720" alt="" loading="lazy" decoding="async">
+        <img class="plant" data-plant="2" src="../assets/looks/story/plant-3.webp" width="480" height="720" alt="" loading="lazy" decoding="async">
+        <img class="plant" data-plant="3" src="../assets/looks/story/plant-4.webp" width="480" height="720" alt="" loading="lazy" decoding="async">
+        <img class="plant" data-plant="4" src="../assets/looks/story/plant-5.webp" width="480" height="720" alt="" loading="lazy" decoding="async">
+        <div class="seed-host" data-seed='{"size":130,"mood":"happy"}' data-tap data-grow-seed></div>
+        <div class="worm-host" data-worm></div>
+      </div>
+      <div class="grow-static">
+        <ol class="strip">
+          <li><img src="../assets/looks/story/plant-1.webp" width="480" height="720" alt="" loading="lazy" decoding="async"><b>ریشه</b><small>روز ۱</small></li>
+          <li><img src="../assets/looks/story/plant-3.webp" width="480" height="720" alt="" loading="lazy" decoding="async"><b>ساقه</b><small>روز ۲۹</small></li>
+          <li><img src="../assets/looks/story/plant-5.webp" width="480" height="720" alt="" loading="lazy" decoding="async"><b>گل</b><small>روز ۸۳</small></li>
+        </ol>
+        <p class="stages-all">ریشه، جوانه، ساقه، برگ، گل</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3 · Inside Bazr (highlight 4, today's «داخل بذر»): six scenes, never a screen of the app (ADR-0006) ── -->
+<section class="sec inside" id="inside" aria-labelledby="inside-h">
+  <div class="wrap head center rv">
+    <p class="eyebrow">داخل بذر</p>
+    <h2 id="inside-h" class="h2">بذر فقط یک مجموعه محتوای آموزشی نیست.</h2>
+    <p class="lead">ما در حال ساخت یک تجربه‌ی شخصی‌سازی‌شده برای تغییر سبک زندگی هستیم.</p>
+  </div>
+  <div class="car" data-car>
+    <ul class="car-track" tabindex="0" aria-label="داخل بذر، شش تصویر" data-track>
+      <li class="card" data-card="quest">
+        <figure class="frame"><img src="../assets/looks/story/quest-480.webp" srcset="../assets/looks/story/quest-480.webp 480w, ../assets/looks/story/quest-760.webp 760w" sizes="(min-width:1024px) 380px, (min-width:700px) 340px, calc(100vw - 72px)" width="760" height="950" alt="نقاشی باغ بذر: سفره‌خانه‌ای زیر درخت، رو به کوه‌ها" loading="lazy" decoding="async"></figure>
+        <p class="card-eye">شناخت</p>
+        <h3 class="card-h">مسیر با شناخت<br>شروع می‌شود.</h3>
+        <p class="card-p">قبل از اینکه بذر بگوید «چه کار کنید»، سعی می‌کند بفهمد الان کجای مسیرید.</p>
+      </li>
+      <li class="card" data-card="parts">
+        <figure class="frame"><img src="../assets/looks/story/parts-480.webp" srcset="../assets/looks/story/parts-480.webp 480w, ../assets/looks/story/parts-760.webp 760w" sizes="(min-width:1024px) 380px, (min-width:700px) 340px, calc(100vw - 72px)" width="760" height="950" alt="سه برش از نقاشی باغ: خورشید روی کوه‌ها، آبشار و پل، و ماه در شب" loading="lazy" decoding="async"></figure>
+        <p class="card-eye">بخش‌های روز</p>
+        <h3 class="card-h">هر بخش روز،<br>قدم‌های خودش.</h3>
+        <p class="card-p">تسک‌های مسیر در سه بخش روز می‌آیند: صبح، ظهر و عصر، شب.</p>
+      </li>
+      <li class="card" data-card="task">
+        <figure class="frame moment" aria-hidden="true">
+          <img class="sky" src="../assets/looks/story/sky-a-480.webp" srcset="../assets/looks/story/sky-a-480.webp 480w, ../assets/looks/story/sky-a-760.webp 760w" sizes="(min-width:1024px) 380px, (min-width:700px) 340px, calc(100vw - 72px)" width="760" height="570" alt="" loading="lazy" decoding="async">
+          <svg class="trail" viewBox="0 0 380 276" preserveAspectRatio="none"><path d="M380,40 C300,60 250,120 200,150 C150,180 80,200 0,214 L0,276 L380,276Z" fill="#efe3cf"/><path d="M380,86 C320,104 270,150 214,180 C160,208 90,226 0,240 L0,276 L380,276Z" fill="#e9dcc4"/><path d="M380,40 C300,60 250,120 200,150 C150,180 80,200 0,214" fill="none" stroke="#d9c6a4" stroke-width="2" stroke-dasharray="1 9" stroke-linecap="round"/></svg>
+          <span class="stone" style="left:36%;top:57%"><span class="stone-fill"></span><svg class="ic-task" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.4 6 10.6a6 6 0 0 1-12 0C6 9.4 12 3 12 3z"/><path d="M9.3 14.2a2.8 2.8 0 0 0 2.4 2.6"/></svg><svg class="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.6l4.4 4.4L19 7.4"/></svg></span>
+          <span class="patch" style="left:9%;top:72%"><span class="sprout"><svg viewBox="0 0 44 56"><path d="M22 55 V30" stroke="#4f7a45" stroke-width="3" stroke-linecap="round"/><path d="M22 35 C20 25 13 21 5 22.5 C6.5 30 13 35 22 35Z" fill="#7ea65c"/><path d="M22 31 C24 20 31.5 15 40 16 C38.6 25 31.5 31 22 31Z" fill="#a3c473"/><path d="M22 34 C17 29 13 26 8.6 24.6 M22 30.4 C27 25 31.6 21 37 18.4" stroke="#4f7a45" stroke-width="1" fill="none" opacity=".6"/></svg></span><svg viewBox="0 0 72 30"><ellipse cx="37" cy="19.5" rx="33" ry="9" fill="#4e3727" opacity=".22"/><ellipse cx="36" cy="16.5" rx="31" ry="9" fill="#7b5b44"/><ellipse cx="34" cy="14.6" rx="25" ry="6" fill="#a07a5c" opacity=".6"/><path d="M16,15.5 Q25,12.6 33,14.4 M39,18.6 Q48,20.4 56,17.6 M20,19.6 Q27,21.2 33,20.6" stroke="#4e3727" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".45"/><path d="M5,17 q-1,-5 -3,-7 M7,18 q0,-5 2,-8 M66,18 q1,-5 3,-7 M64,19 q-1,-4 -3,-6" stroke="#86a06a" stroke-width="1.6" fill="none" stroke-linecap="round"/><g class="spark"><ellipse cx="36" cy="15.4" rx="5.6" ry="2.2" fill="#4e3727" opacity=".8"/><path d="M36,3.5 l1.2,2.6 2.6,1.2 -2.6,1.2 -1.2,2.6 -1.2,-2.6 -2.6,-1.2 2.6,-1.2z" fill="#e3a54f"/></g></svg></span>
+          <div class="seed-host" style="right:7%;bottom:7%;width:30%" data-seed='{"size":110,"mood":"happy"}' data-moment-seed></div>
+        </figure>
+        <p class="card-eye">مسیر</p>
+        <h3 class="card-h">قدم‌های کوچک،<br>پیگیری مداوم.</h3>
+        <p class="card-p">هر تسکی که انجام می‌دهید، کنارش جوانه‌ای سبز می‌شود.</p>
+      </li>
+      <li class="card" data-card="vine">
+        <figure class="frame moment" aria-hidden="true">
+          <img class="sky" src="../assets/looks/story/sky-b-480.webp" srcset="../assets/looks/story/sky-b-480.webp 480w, ../assets/looks/story/sky-b-760.webp 760w" sizes="(min-width:1024px) 380px, (min-width:700px) 340px, calc(100vw - 72px)" width="760" height="570" alt="" loading="lazy" decoding="async">
+          <svg class="trail" viewBox="0 0 380 276" preserveAspectRatio="none"><path d="M0,70 C90,40 170,62 240,90 C300,114 340,120 380,112 L380,276 L0,276Z" fill="#efe3cf"/><path d="M0,130 C100,110 180,130 250,156 C310,178 350,182 380,178 L380,276 L0,276Z" fill="#e9dcc4"/></svg>
+          <svg class="vine" viewBox="0 -6 220 64"><g transform="translate(220,0) scale(-1,1)"><path d="M2,34 Q13.8,22 27.5,34 Q41.2,46 55,34 Q68.8,22 82.5,34 Q96.2,46 110,34 Q123.8,22 137.5,34 Q151.2,46 165,34 Q178.8,22 192.5,34 Q206.2,46 220,34" stroke="#7ea65c" stroke-width="3" fill="none" stroke-linecap="round"/><g transform="translate(13.8,28) rotate(-28)"><path d="M0,0 C-7,-6 -7,-17 0,-22 C7,-17 7,-6 0,0Z" fill="#6e9257"/><path d="M0,-2 L0,-18" stroke="#f4e8d6" stroke-width="1" opacity=".55"/></g><g transform="translate(41.2,40) rotate(208)"><path d="M0,0 C-7,-6 -7,-17 0,-22 C7,-17 7,-6 0,0Z" fill="#6e9257"/><path d="M0,-2 L0,-18" stroke="#f4e8d6" stroke-width="1" opacity=".55"/></g><g transform="translate(68.8,28) rotate(-28)"><path d="M0,0 C-7,-6 -7,-17 0,-22 C7,-17 7,-6 0,0Z" fill="#6e9257"/><path d="M0,-2 L0,-18" stroke="#f4e8d6" stroke-width="1" opacity=".55"/></g><g transform="translate(96.2,40) rotate(208)"><path d="M0,0 C-7,-6 -7,-17 0,-22 C7,-17 7,-6 0,0Z" fill="#8db06e"/><path d="M0,-2 L0,-18" stroke="#f4e8d6" stroke-width="1" opacity=".55"/></g><g transform="translate(123.8,28) rotate(-28)"><path d="M0,0 C-7,-6 -7,-17 0,-22 C7,-17 7,-6 0,0Z" fill="#8db06e"/><path d="M0,-2 L0,-18" stroke="#f4e8d6" stroke-width="1" opacity=".55"/></g><g transform="translate(151.2,40) rotate(208)"><path d="M0,0 C-7,-6 -7,-17 0,-22 C7,-17 7,-6 0,0Z" fill="#8db06e"/><path d="M0,-2 L0,-18" stroke="#f4e8d6" stroke-width="1" opacity=".55"/></g><g transform="translate(178.8,28) rotate(-28)"><path d="M0,0 C-7,-6 -7,-17 0,-22 C7,-17 7,-6 0,0Z" fill="#8db06e"/><path d="M0,-2 L0,-18" stroke="#f4e8d6" stroke-width="1" opacity=".55"/></g><g transform="translate(206.2,40) rotate(208)"><path class="today" d="M0,0 C-8,-6 -8,-18 0,-24 C8,-18 8,-6 0,0Z" fill="#e3a54f"/><path class="bud" d="M0,0 C-8,-6 -8,-18 0,-24 C8,-18 8,-6 0,0Z" fill="none" stroke="#e3a54f" stroke-width="1.8" stroke-dasharray="3 3"/></g></g></svg>
+          <div class="seed-host" style="right:12%;bottom:5%;width:29%" data-seed='{"size":110,"face":"happy"}' data-moment-seed></div>
+        </figure>
+        <p class="card-eye">رکورد</p>
+        <h3 class="card-h">رکورد شما،<br>برگ‌به‌برگ.</h3>
+        <p class="card-p">هر روزی که دست‌کم یک تسک مسیر را انجام می‌دهید، یک برگ تازه به رکوردتان اضافه می‌شود.</p>
+      </li>
+      <li class="card" data-card="course">
+        <figure class="frame">
+          <img src="../assets/looks/story/course-480.webp" srcset="../assets/looks/story/course-480.webp 480w, ../assets/looks/story/course-760.webp 760w" sizes="(min-width:1024px) 380px, (min-width:700px) 340px, calc(100vw - 72px)" width="760" height="950" alt="باغ یک دوره در نقاشی: گلدانی سنگی زیر سفره‌خانه، با گیاهی که در آن رشد می‌کند" loading="lazy" decoding="async">
+          <img class="cg-plant" data-cg="0" src="../assets/looks/story/plant-1.webp" width="480" height="720" alt="" loading="lazy" decoding="async">
+          <img class="cg-plant" data-cg="1" src="../assets/looks/story/plant-2.webp" width="480" height="720" alt="" loading="lazy" decoding="async">
+          <img class="cg-plant" data-cg="2" src="../assets/looks/story/plant-3.webp" width="480" height="720" alt="" loading="lazy" decoding="async">
+          <img class="cg-plant" data-cg="3" src="../assets/looks/story/plant-4.webp" width="480" height="720" alt="" loading="lazy" decoding="async">
+          <img class="cg-plant on" data-cg="4" src="../assets/looks/story/plant-5.webp" width="480" height="720" alt="" loading="lazy" decoding="async">
+          <span class="cg-stage" aria-hidden="true" data-cg-name>گل</span>
+        </figure>
+        <p class="card-eye">دوره</p>
+        <h3 class="card-h">هر دوره،<br>باغی که رشد می‌کند.</h3>
+        <p class="card-p">ویس‌های هر دوره مرحله‌به‌مرحله می‌آیند، از ریشه تا گل.</p>
+      </li>
+      <li class="card" data-card="places">
+        <figure class="frame"><img src="../assets/looks/story/places-480.webp" srcset="../assets/looks/story/places-480.webp 480w, ../assets/looks/story/places-760.webp 760w" sizes="(min-width:1024px) 380px, (min-width:700px) 340px, calc(100vw - 72px)" width="760" height="950" alt="نقاشی باغ بذر با چهار جای آن: سفره‌خانه، تخت زیر ماه، حیاط ورزش و آینه‌ی میان گل‌ها" loading="lazy" decoding="async"></figure>
+        <p class="card-eye">باغ بذر</p>
+        <h3 class="card-h">چهار گوشه،<br>یک باغ.</h3>
+        <p class="card-p">سفره‌خانه‌ی زیر درخت، تخت زیر ماه، حیاط ورزش و آینه‌ی میان گل‌ها؛ هر دوره جای خودش را دارد.</p>
+      </li>
+    </ul>
+    <div class="car-nav">
+      <button class="car-arrow" type="button" aria-label="قبلی" data-prev><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="dots" data-dots></div>
+      <button class="car-arrow" type="button" aria-label="بعدی" data-next><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- Know · Be · Become, today's landing (highlight 1) -->
+<div class="words" aria-hidden="true" data-words>
+  <div class="words-track">
+    <div class="words-run"><span>شناختن</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span class="pale">حضور داشتن</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span>تغییر کردن</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span class="pale">بدن، ذهن، روح</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></div>
+    <div class="words-run"><span>شناختن</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span class="pale">حضور داشتن</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span>تغییر کردن</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span class="pale">بدن، ذهن، روح</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></div>
+  </div>
+</div>
+
+<!-- ── 4 · «آب بدهید» (gordol's «feed the fire»): the رکورد as the glossary defines it (BZR-11) ── -->
+<section class="sec water" id="water" aria-labelledby="water-h">
+  <div class="wrap water-grid">
+    <div class="water-text rv">
+      <p class="eyebrow">رکورد</p>
+      <h2 id="water-h" class="h2">هر روز،<br>کمی آب.</h2>
+      <p class="lead">هر روزی که دست‌کم یک تسک مسیر را انجام می‌دهید، رکورد شما یک روز بلندتر می‌شود.</p>
+      <p class="try">امتحان کنید: به بذر آب بدهید.</p>
+    </div>
+    <div class="wcard rv" style="--d:80ms" data-water>
+      <div class="wstage" aria-hidden="true">
+        <img class="sky" src="../assets/looks/story/sky-b-480.webp" srcset="../assets/looks/story/sky-b-480.webp 480w, ../assets/looks/story/sky-b-760.webp 760w" sizes="min(440px, calc(100vw - 32px))" width="760" height="570" alt="" loading="lazy" decoding="async">
+        <svg class="ground" viewBox="0 0 440 130" preserveAspectRatio="none"><path d="M0,34 C110,14 300,10 440,30 L440,130 L0,130Z" fill="#ead7b6"/><path d="M0,60 C120,44 300,42 440,56 L440,130 L0,130Z" fill="#e3cca6"/></svg>
+        <span class="wchip" data-wchip data-empty>ریشه</span>
+        <div class="pot">
+          <svg class="mound" viewBox="0 0 160 40"><ellipse cx="80" cy="30" rx="74" ry="9" fill="#4e3727" opacity=".2"/><path d="M14,30 C24,14 50,8 80,8 C110,8 136,14 146,30Z" fill="#7b5b44"/><path d="M34,20 C50,13 68,12 84,12 C102,12 116,15 126,20" stroke="#a07a5c" stroke-width="4" fill="none" stroke-linecap="round" opacity=".7"/><path d="M8,30 q-1,-7 -4,-10 M12,31 q0,-7 3,-11 M150,31 q1,-7 4,-10 M146,31 q-1,-6 -4,-9" stroke="#86a06a" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>
+          <img class="wplant" data-wp="1" src="../assets/looks/story/plant-1.webp" width="480" height="720" alt="" loading="lazy" decoding="async">
+          <img class="wplant" data-wp="2" src="../assets/looks/story/plant-2.webp" width="480" height="720" alt="" loading="lazy" decoding="async">
+          <img class="wplant" data-wp="3" src="../assets/looks/story/plant-3.webp" width="480" height="720" alt="" loading="lazy" decoding="async">
+          <img class="wplant" data-wp="4" src="../assets/looks/story/plant-4.webp" width="480" height="720" alt="" loading="lazy" decoding="async">
+          <img class="wplant" data-wp="5" src="../assets/looks/story/plant-5.webp" width="480" height="720" alt="" loading="lazy" decoding="async">
+          <div class="drops" data-drops></div>
+        </div>
+        <div class="seed-host" data-seed='{"size":120,"mood":"happy"}' data-water-seed></div>
+      </div>
+      <div class="wfoot">
+        <p class="streak"><b data-streak>۰</b><span>روز پشت هم</span></p>
+        <button class="btn btn-dark" type="button" data-water-btn>آب بدهید</button>
+      </div>
+      <p class="sr" aria-live="polite" data-water-live></p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 5 · The night, the one dark section (the painting at night, its lanterns), and the seed's moods (the sheet's
+     faces that are allowed at rest, and the app's moments for them: docs/looks.md §3.7) ── -->
+<section class="night" id="night" aria-labelledby="night-h">
+  <div class="wrap night-grid">
+    <div class="night-text rv">
+      <p class="eyebrow">شب</p>
+      <h2 id="night-h" class="h2">باغ بذر،<br>شب هم دارد.</h2>
+      <p class="lead">شب‌ها فانوس‌های باغ روشن می‌شوند و بذر هم می‌خوابد.</p>
+    </div>
+    <div class="nframe rv" style="--d:80ms">
+      <figure class="frame"><img src="../assets/looks/story/night-560.webp" srcset="../assets/looks/story/night-560.webp 560w, ../assets/looks/story/night-800.webp 800w" sizes="(min-width:1024px) 400px, min(400px, calc(100vw - 32px))" width="800" height="1422" alt="نقاشی باغ بذر در شب: ماه بالای کوه‌ها و فانوس‌های روشن کنار پله‌ها" loading="lazy" decoding="async"></figure>
+      <div class="seed-host" aria-hidden="true" data-seed='{"size":110,"mood":"sleepy","hold":"خوابیدن"}' data-tap></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="head center moods-head rv">
+      <p class="eyebrow">بذر</p>
+      <h2 class="h2">هر لحظه،<br>یک حال.</h2>
+      <p class="lead">با تسک‌های شما شاد می‌شود، شب‌ها می‌خوابد و برای رکوردتان سربلند است.</p>
+    </div>
+    <ul class="moods">
+      <li class="mood rv"><div class="pose" aria-hidden="true"><div class="seed-host" data-seed='{"size":120,"face":"happy","still":"شاد بودن"}' data-tap></div></div><b>شاد</b><p>یک تسک انجام شد.</p></li>
+      <li class="mood rv" style="--d:70ms"><div class="pose" aria-hidden="true"><div class="seed-host" data-seed='{"size":120,"face":"love","still":"دوست داشتن"}' data-tap></div></div><b>مهربان</b><p>وقتی لمسش می‌کنید.</p></li>
+      <li class="mood rv" style="--d:140ms"><div class="pose" aria-hidden="true"><div class="seed-host" data-seed='{"size":120,"mood":"sleepy","hold":"خوابیدن"}' data-tap></div></div><b>خواب‌آلود</b><p>شب‌ها، وقت خواب.</p></li>
+      <li class="mood rv" style="--d:210ms"><div class="pose" aria-hidden="true"><svg class="gold-leaf" viewBox="0 0 24 30"><path d="M12,29 C3,23 2,10 12,1 C22,10 21,23 12,29Z" fill="#e3a54f"/><path d="M12,27 L12,6" stroke="#fbe3b0" stroke-width="1.4" stroke-linecap="round" opacity=".8"/><path d="M12,29 C3,23 2,10 12,1" fill="none" stroke="#b8823a" stroke-width="1" opacity=".5"/></svg><div class="seed-host" data-seed='{"size":120,"face":"proud","beat":"فشرده و کشیده شدن"}' data-tap></div></div><b>سربلند</b><p>رکورد شما یک روز بلندتر شد.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── 6 · عضویت بذر (ADR-0006: the section is here; plan names, lengths and prices wait to be announced) ── -->
+<section class="sec member" id="membership" aria-labelledby="member-h">
+  <div class="wrap center">
+    <div class="head rv">
+      <p class="eyebrow">قیمت‌ها</p>
+      <h2 id="member-h" class="h2">عضویت بذر</h2>
+      <p class="lead">نام طرح‌ها، مدت و مبلغ هر کدام به‌زودی همین‌جا اعلام می‌شود.</p>
+    </div>
+    <div class="price rv" style="--d:80ms">
+      <ul class="plans">
+        <li><span class="pn">نام طرح</span><span class="ph" aria-hidden="true"></span><span class="soon">به‌زودی</span></li>
+        <li><span class="pn">نام طرح</span><span class="ph" aria-hidden="true"></span><span class="soon">به‌زودی</span></li>
+        <li><span class="pn">نام طرح</span><span class="ph" aria-hidden="true"></span><span class="soon">به‌زودی</span></li>
+      </ul>
+      <a class="btn btn-block" href="https://app.bazrlife.ir/login">شروع</a>
+      <p class="fine">مبلغ‌ها و جزئیات هر طرح بعد از اعلام رسمی اینجا قرار می‌گیرند.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 7 · Install: the web app works on any phone; the Android app exists, its channel is not chosen yet (E1, BZR-109) ── -->
+<section class="sec install" id="install" aria-labelledby="install-h">
+  <div class="wrap">
+    <div class="head center rv">
+      <p class="eyebrow">نصب</p>
+      <h2 id="install-h" class="h2">بذر، روی گوشی شما.</h2>
+    </div>
+    <div class="inst-grid">
+      <article class="inst rv">
+        <span class="inst-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></svg></span>
+        <h3>اپ وب</h3>
+        <p>روی هر گوشی، در مرورگر باز می‌شود.</p>
+        <ul>
+          <li>روی اندروید، از منوی مرورگر «افزودن به صفحه‌ی اصلی» را بزنید.</li>
+          <li>روی آیفون، بذر را از منوی اشتراک‌گذاری به صفحه‌ی اصلی اضافه کنید.</li>
+        </ul>
+        <div class="push"><a class="btn" href="https://app.bazrlife.ir/login">شروع</a></div>
+      </article>
+      <article class="inst rv" style="--d:80ms">
+        <span class="inst-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.6"/><path d="M10.5 18.5h3"/></svg></span>
+        <h3>اپ اندروید</h3>
+        <p>اپ اندروید بذر هم ساخته شده است. نشانی دریافتش به‌زودی همین‌جا قرار می‌گیرد.</p>
+        <div class="push"><span class="soon">به‌زودی</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ── 8 · Questions (highlight 5, today's landing; the AI answer waits for E3, as there) ── -->
+<section class="sec faq" id="faq" aria-labelledby="faq-h">
+  <div class="wrap">
+    <div class="head center rv">
+      <p class="eyebrow">سؤال‌ها</p>
+      <h2 id="faq-h" class="h2">سؤال‌های شما</h2>
+      <p class="lead">چیزهایی که معمولاً می‌پرسند.</p>
+    </div>
+    <div class="qa rv">
+      <details><summary>بذر رژیم غذایی است؟<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></summary><p class="ans">نه. بذر فقط روی غذا یا وزن متمرکز نیست.</p></details>
+      <details><summary>بذر روان‌درمانی است؟<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></summary><p class="ans">نه. بذر جایگزین روان‌درمانی یا خدمات پزشکی نیست. تمرکز بذر روی <i class="term" dir="ltr">Lifestyle Coaching</i>، شناخت رفتار و ایجاد تغییرات قابل اجرا در زندگی روزمره است.</p></details>
+      <!-- AI claim, off the page until Owner پروژه decides E3 (BZR-138), as on today's landing. -->
+      <details hidden data-pending="E3"><summary><i class="term" dir="ltr">AI</i> چه کاری انجام می‌دهد؟<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></summary><p class="ans">کمک می‌کند اطلاعاتی که در طول مسیر ثبت می‌کنید بهتر تحلیل شوند، الگوهای تکرارشونده شناسایی شوند و تجربه‌ی شخصی‌تری داشته باشید.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ── 9 · The last call (brand book 1.1, «اصل بنیادین»; today's landing) ── -->
+<section class="final" aria-labelledby="final-h">
+  <div class="wrap">
+    <div class="fcard rv">
+      <div class="peek" aria-hidden="true"><div class="seed-host" data-seed='{"size":132,"face":"happy","enter":"happy"}' data-tap></div></div>
+      <h2 id="final-h" class="h2">مسیر مناسب خودتان را انتخاب کنید.</h2>
+      <a class="btn btn-lg" href="https://app.bazrlife.ir/login">شروع</a>
+      <p class="motto"><span class="term" dir="ltr">We illuminate. You decide.</span>ما مسیر را روشن‌تر می‌کنیم؛ انتخاب با شماست.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div class="foot-brand"><img src="../assets/looks/story/logo-96.webp" width="48" height="50" alt="" loading="lazy"><div><b>بذر</b><span>مسیری برای آگاهی، حضور و تغییر</span></div></div>
+    <nav aria-label="پیوندها">
+      <a href="https://app.bazrlife.ir/privacy">حریم خصوصی</a>
+      <a href="https://app.bazrlife.ir/terms">قوانین و شرایط</a>
+    </nav>
+    <p class="legal">بذر جایگزین روان‌درمانی یا خدمات پزشکی نیست.<br>© ۱۴۰۵ بذر · پیش‌نمایش داخلی تیم · هنوز منتشر نشده</p>
+  </div>
+</footer>
+</body>
+</html>

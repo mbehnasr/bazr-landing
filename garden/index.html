@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>[پیش‌نویس] بذر · مسیری برای آگاهی، حضور و تغییر</title>
+<!-- «باغ زنده» landing, version 2: a clean cream page with the Owner's painting shown framed (BZR-169; ADR-0022: the
+     landing comes last, ADR-0024: this look follows the Owner's painting). A private preview: noindex stays and the footer
+     says it is an internal preview until Owner پروژه picks a design and says when it goes public (BZR-139, ADR-0005).
+     bazrlife.com keeps today's index.html. Copy: today's landing (index.html at the repo root) and the highlights it
+     carries, addressed with «شما» (ADR-0013). Pictures are never shown larger than half their pixels (sharp at 2×). -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="بذر یک پلتفرم Lifestyle و Behavior Change است که کمک می‌کند الگوهای رفتاری، نیازها، عادت‌ها و سبک زندگی خودتان را بهتر بشناسید و قدم‌به‌قدم مسیر تغییر خودتان را بسازید.">
+<meta name="theme-color" content="#f6efe6">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preload" href="../assets/fonts/vazirmatn.woff2" as="font" type="font/woff2" crossorigin>
+<script>document.documentElement.classList.add("js");</script>
+<style>
+@font-face{ font-family:"Vazirmatn"; src:url("../assets/fonts/vazirmatn.woff2") format("woff2"); font-weight:100 900; font-style:normal; font-display:swap; }
+
+/* ── Tokens: «باغ زنده» (the app's src/styles/looks/garden/base.css, sampled from the Owner's painting) ── */
+:root{
+  --canvas:#f6efe6; --card:#fdf9f3; --band:#f4ece2; --stone:#efe6da; --line:#e6dacb; --line-2:#d6c6b0;
+  --glass:rgb(253 249 243 / .9); --glass-edge:rgb(255 255 255 / .7);
+  --ink:#173e32; --ink-2:#3f4743; --ink-3:#5d625e;
+  --primary:#4c7350; --primary-hi:#567f5a; --on-primary:#fdf9f3; --stage:#557a59;
+  --accent:#e3a54f; --accent-ink:#80520e; --accent-soft:#f8e8cc;
+  --bar:#5b8d58; --track:#e6dfd7;
+  --c-food:#f0a53a; --c-sleep:#8f8ff0; --c-move:#6db57f; --c-care:#ec8a95;
+  --shadow:0 1px 0 rgb(255 255 255 / .7) inset, 0 2px 6px -2px rgb(96 64 32 / .12), 0 14px 30px -16px rgb(96 64 32 / .3);
+  --frame-shadow:0 2px 4px rgb(96 64 32 / .08), 0 22px 44px -22px rgb(96 64 32 / .45);
+  --ease-out:cubic-bezier(.23,1,.32,1);
+  --f:"Vazirmatn", Tahoma, system-ui, sans-serif;
+  /* the grid: 4 columns on a phone, 8 on a tablet, 12 on a desktop, inside one 1200 px column */
+  --max:1200px; --cols:4; --gut:16px; --gap:16px; --sec:80px; --head:32px;
+}
+@media (min-width:700px){ :root{ --cols:8; --gut:32px; --gap:20px; --sec:104px; --head:40px; } }
+@media (min-width:1024px){ :root{ --cols:12; --gut:40px; --gap:24px; --sec:128px; --head:48px; } }
+
+html{ -webkit-text-size-adjust:100%; -webkit-tap-highlight-color:transparent; scroll-padding-top:80px; }
+@media (prefers-reduced-motion:no-preference){ html{ scroll-behavior:smooth; } }
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--canvas); color:var(--ink-2); font-family:var(--f); font-size:1.02rem; line-height:1.95; -webkit-font-smoothing:antialiased; overflow-x:clip; }
+h1,h2,h3,p,ul,ol,figure,blockquote,dl,dd{ margin:0; }
+ul,ol{ padding:0; list-style:none; }
+h1,h2,h3{ text-wrap:balance; color:var(--ink); }
+p{ text-wrap:pretty; }
+img{ display:block; max-width:100%; height:auto; }
+a{ color:inherit; }
+[hidden]{ display:none !important; }
+:focus-visible{ outline:2.5px solid var(--ink); outline-offset:3px; border-radius:10px; }
+.term{ font-weight:600; unicode-bidi:isolate; white-space:nowrap; }
+
+.wrap{ max-width:calc(var(--max) + 2 * var(--gut)); margin-inline:auto; padding-inline:var(--gut); }
+.grid{ display:grid; grid-template-columns:repeat(var(--cols), minmax(0, 1fr)); column-gap:var(--gap); }
+.grid > *{ grid-column:1 / -1; min-width:0; }
+.sec{ padding-top:var(--sec); }
+
+/* ── Type ── */
+.kick{ display:flex; align-items:center; gap:8px; font-weight:700; font-size:.88rem; line-height:1.6; color:var(--accent-ink); }
+.kick svg{ width:18px; height:18px; flex:none; }
+.kick .term{ font-weight:700; letter-spacing:.02em; }
+.h1{ font-weight:900; font-size:clamp(1.85rem, 1.25rem + 2.4vw, 3rem); line-height:1.5; }
+.h2{ font-weight:800; font-size:clamp(1.5rem, 1.15rem + 1.5vw, 2.25rem); line-height:1.55; }
+.h3{ font-weight:700; font-size:1.12rem; line-height:1.7; color:var(--ink); }
+.lead{ font-size:clamp(1.04rem, 1rem + .25vw, 1.16rem); color:var(--ink-2); }
+.muted{ color:var(--ink-3); }
+.small{ font-size:.88rem; }
+.soft{ display:block; font-weight:500; color:var(--ink-3); }
+.head{ display:grid; gap:12px; margin-bottom:var(--head); align-content:start; }
+.stack > * + *{ margin-top:16px; }
+
+/* ── Frames: the painting and its places, rounded, with a soft warm shadow ── */
+.frame{ position:relative; border-radius:22px; overflow:hidden; background:#ead6bf; box-shadow:var(--frame-shadow); }
+.frame::after{ content:""; position:absolute; inset:0; border-radius:inherit; box-shadow:inset 0 0 0 1px rgb(255 255 255 / .35); pointer-events:none; }
+.frame img{ width:100%; height:auto; }
+.frame-sm{ border-radius:18px; }
+
+/* ── Buttons: the painting's sage stage pill, and a quiet outline ── */
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:.5em; min-height:48px; padding-inline:26px; border-radius:999px; border:0; font:inherit; font-weight:700; font-size:1rem; line-height:1.2; text-decoration:none; cursor:pointer; touch-action:manipulation; transition:transform .16s var(--ease-out), background-color .2s ease; }
+.btn:active{ transform:scale(.97); }
+.btn-go{ background:var(--primary); color:var(--on-primary); box-shadow:0 10px 22px -12px rgb(40 70 45 / .7); }
+.btn-line{ background:transparent; color:var(--ink); box-shadow:inset 0 0 0 1.5px var(--line-2); }
+.btn-sm{ min-height:40px; padding-inline:18px; font-size:.94rem; }
+.btn[aria-disabled="true"]{ opacity:.55; cursor:not-allowed; }
+.btn svg{ width:18px; height:18px; }
+@media (hover:hover) and (pointer:fine){ .btn-go:hover{ background:var(--primary-hi); } .btn-line:hover{ background:var(--card); } }
+
+/* ── Top bar ── */
+.top{ position:sticky; top:0; z-index:20; background:rgb(246 239 230 / .95); box-shadow:0 1px 0 transparent; transition:box-shadow .2s ease; padding-top:env(safe-area-inset-top, 0px); }
+.top.stuck{ box-shadow:0 1px 0 var(--line); }
+.top .wrap{ height:64px; display:flex; align-items:center; gap:20px; }
+.mark{ width:42px; height:42px; flex:none; border-radius:50%; display:grid; place-items:center; background:var(--card); box-shadow:0 0 0 1px var(--line); }
+.mark img{ width:26px; height:26px; }
+.top nav{ display:none; gap:4px; }
+.top nav a{ text-decoration:none; color:var(--ink-2); font-size:.94rem; padding:6px 12px; border-radius:999px; }
+.top-end{ margin-inline-start:auto; }
+@media (min-width:1024px){ .top nav{ display:flex; } }
+@media (hover:hover) and (pointer:fine){ .top nav a:hover{ background:rgb(85 122 89 / .12); color:var(--ink); } }
+
+/* ── Hero: the whole painting, framed, beside the title (above it on a phone) ── */
+.hero{ padding-top:16px; }
+.hero-art{ order:-1; }
+.hero-text{ padding-top:24px; display:grid; gap:16px; justify-items:start; }
+.logo{ width:96px; border-radius:50%; box-shadow:0 8px 18px -10px rgb(96 64 32 / .5); }
+@media (max-width:699px){ .hero .logo{ display:none; } }
+.cta{ display:flex; flex-wrap:wrap; gap:10px; }
+.tag{ font-size:.88rem; color:var(--ink-3); }
+.tag .term{ white-space:normal; }
+/* the seed rests on the steps in front of the gate (the painting's own coordinates, so it stays there at any size) */
+.seed{ position:absolute; left:49.3%; bottom:11.2%; width:8%; aspect-ratio:132/150; pointer-events:none; }
+.seed img{ position:absolute; inset:0; width:100%; height:100%; }
+.seed .blink{ opacity:0; }
+.seed.blinking .blink{ opacity:1; } .seed.blinking .rest{ opacity:0; }
+@media (max-width:419px){ .cta .btn{ flex:1 1 100%; } }
+@media (min-width:700px){
+  .hero{ padding-top:40px; }
+  .hero .h1{ font-size:clamp(1.8rem, .9rem + 1.9vw, 3rem); }
+  .hero .lead{ text-wrap:balance; }
+  .hero .grid{ align-items:center; }
+  .hero-text{ grid-column:1 / span 4; padding-top:0; }
+  .hero-art{ grid-column:5 / span 4; order:0; }
+}
+@media (min-width:1024px){
+  .hero{ padding-top:48px; }
+  .hero-text{ grid-column:1 / span 6; gap:22px; }
+  .hero-art{ grid-column:8 / span 5; }
+  /* the whole painting stays in view: as tall as the screen allows, at the grid's outer edge */
+  .hero-art .frame{ width:min(100%, calc((100svh - 160px) * .5625)); min-width:340px; margin-inline-start:auto; }
+}
+
+/* ── Sections ── */
+/* the tension: words, and one small place beside them */
+.split-pic{ margin-top:32px; grid-column:1 / span 3; }
+@media (min-width:700px){ .split-text{ grid-column:1 / span 5; } .split-pic{ grid-column:6 / span 3; margin-top:0; align-self:center; } }
+@media (min-width:1024px){ .split-text{ grid-column:1 / span 7; } .split-pic{ grid-column:10 / span 3; } }
+
+/* knowing and doing */
+.ledger{ border-top:1.5px solid var(--ink); }
+.ledger-row{ display:grid; grid-template-columns:minmax(0, 1fr) 56px 68px; gap:10px; align-items:center; padding-block:14px; border-bottom:1px solid var(--line); line-height:1.8; }
+.ledger-row > :not(:first-child){ justify-self:center; }
+@media (max-width:419px){ .ledger-row{ grid-template-columns:minmax(0, 1fr) 46px 60px; gap:6px; } }
+.ledger-head{ padding-block:8px; font-size:.82rem; color:var(--ink-3); }
+.yes{ width:11px; height:11px; border-radius:50%; background:var(--primary); }
+.q{ font-weight:800; font-size:1.35rem; line-height:1; color:var(--accent-ink); }
+.punch{ margin-top:22px; font-weight:800; font-size:1.14rem; color:var(--ink); }
+.gap-side{ margin-top:40px; }
+.big{ font-weight:900; font-size:clamp(2.8rem, 2rem + 3.4vw, 4.4rem); line-height:1.3; color:var(--ink); }
+.big i{ font-style:normal; color:var(--accent); }
+@media (min-width:700px){ .gap-main{ grid-column:1 / span 5; } .gap-side{ grid-column:6 / span 3; margin-top:0; align-self:end; } }
+@media (min-width:1024px){ .gap-main{ grid-column:1 / span 7; } .gap-side{ grid-column:9 / span 4; } }
+
+/* three columns of short items (Know · Be · Become, the three letters, inside Bazr) */
+.trio{ display:grid; gap:28px var(--gap); }
+.item{ display:grid; gap:10px; align-content:start; padding-top:18px; border-top:1.5px solid var(--ink); }
+.item svg{ width:44px; height:44px; fill:none; stroke:var(--ink); stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+.item svg .seedf{ fill:var(--accent); stroke:none; }
+.item b{ display:flex; gap:10px; align-items:baseline; color:var(--ink); font-size:1.12rem; }
+.item b .term{ color:var(--accent-ink); font-size:.92rem; font-weight:600; }
+@media (min-width:700px){ .trio{ grid-template-columns:repeat(3, minmax(0, 1fr)); } }
+
+.glyph{ font-weight:900; font-size:clamp(3.6rem, 2.6rem + 4vw, 5.4rem); line-height:1.15; color:var(--ink); }
+.together{ margin-top:56px; }
+.want{ margin-top:28px; font-weight:800; font-size:clamp(1.45rem, 1.2rem + 1.1vw, 2rem); line-height:1.6; color:var(--ink); text-decoration:underline; text-decoration-color:var(--accent); text-decoration-thickness:.09em; text-underline-offset:.35em; }
+@media (min-width:700px){ .together-a{ grid-column:1 / span 5; } .want{ grid-column:6 / span 3; margin-top:0; align-self:end; } }
+@media (min-width:1024px){ .together-a{ grid-column:1 / span 7; } .want{ grid-column:9 / span 4; } }
+.flow{ margin-top:40px; display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:20px var(--gap); }
+.flow li{ display:grid; gap:4px; align-content:start; padding-top:14px; border-top:1px solid var(--line-2); }
+.flow .n{ font-weight:700; font-size:.84rem; color:var(--accent-ink); }
+.flow b{ color:var(--ink); font-size:1rem; line-height:1.65; }
+@media (min-width:700px){ .flow{ grid-template-columns:repeat(4, minmax(0, 1fr)); } }
+.after{ margin-top:32px; }
+@media (min-width:1024px){ .after{ grid-column:1 / span 7; } }
+
+/* the head of a section with one small place beside it */
+.head-pic{ grid-column:1 / span 3; margin-bottom:var(--head); }
+@media (min-width:700px){ .head-text{ grid-column:1 / span 5; } .head-pic{ grid-column:6 / span 3; align-self:end; } }
+@media (min-width:1024px){ .head-text{ grid-column:1 / span 7; } .head-pic{ grid-column:10 / span 3; } }
+
+/* your path: the steps */
+.steps{ display:grid; }
+.step{ display:grid; grid-template-columns:40px minmax(0, 1fr); gap:16px; padding-bottom:28px; position:relative; }
+.step::before{ content:""; position:absolute; inset-inline-start:19.5px; top:46px; bottom:6px; width:1.5px; background:var(--line-2); }
+.step:last-child{ padding-bottom:0; } .step:last-child::before{ display:none; }
+.step-n{ width:40px; height:40px; border-radius:50%; display:grid; place-items:center; font-weight:800; color:var(--on-primary); background:var(--stage); }
+.step-b{ display:grid; gap:6px; padding-top:4px; }
+.qs{ display:grid; }
+.qs li{ position:relative; padding-inline-start:18px; }
+.qs li::before{ content:""; position:absolute; inset-inline-start:0; top:.92em; width:8px; height:8px; border-radius:50%; background:var(--accent); }
+.closing{ margin-top:32px; padding:24px; border-radius:22px; background:var(--card); box-shadow:var(--shadow); }
+.closing strong{ display:block; color:var(--ink); font-weight:800; margin-bottom:6px; }
+.path-head{ margin-bottom:var(--head); }
+.path-head .frame{ margin-top:28px; width:calc((100% - 3 * var(--gap)) / 4 * 3 + 2 * var(--gap)); }
+@media (min-width:700px){ .path-head{ grid-column:1 / span 3; margin-bottom:0; } .path-head .frame{ width:100%; } .path-main{ grid-column:4 / span 5; } }
+@media (min-width:1024px){ .path-head{ grid-column:1 / span 5; position:sticky; top:104px; align-self:start; } .path-head .frame{ width:calc((100% - 4 * var(--gap)) / 5 * 3 + 2 * var(--gap)); } .path-main{ grid-column:7 / span 6; } }
+
+/* the method */
+.stages{ display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:var(--gap); margin-top:var(--head); }
+.stage{ background:var(--card); border-radius:20px; padding:18px; display:grid; gap:10px; align-content:start; box-shadow:var(--shadow); }
+.meter{ display:flex; gap:3px; direction:ltr; }
+.meter i{ flex:1; height:5px; border-radius:3px; background:var(--track); }
+.meter i.on{ background:var(--bar); }
+.stage .term{ color:var(--ink); font-size:1.02rem; }
+.stage p{ font-size:.92rem; line-height:1.75; }
+@media (min-width:700px){ .stages{ grid-template-columns:repeat(4, minmax(0, 1fr)); } }
+.m-b{ margin-top:32px; }
+.ways{ display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+.ways li{ padding:5px 14px; border-radius:999px; background:var(--card); box-shadow:inset 0 0 0 1px var(--line); color:var(--ink); font-size:.9rem; font-weight:600; }
+.ask-lead{ margin-top:56px; }
+.ask{ margin-top:16px; }
+.ask li{ display:flex; gap:14px; align-items:baseline; padding-block:14px; border-bottom:1px solid var(--line); font-weight:700; font-size:clamp(1.06rem, 1rem + .4vw, 1.3rem); color:var(--ink); line-height:1.7; }
+.ask li:first-child{ border-top:1px solid var(--line); }
+.ask li::before{ content:""; flex:none; width:8px; height:8px; border-radius:50%; background:var(--bar); transform:translateY(-.15em); }
+.science{ margin-top:28px; }
+.science span{ color:var(--ink-3); }
+@media (min-width:700px){ .m-a, .m-b, .science{ grid-column:1 / span 6; } .ask-lead{ grid-column:1 / span 3; margin-top:64px; } .ask{ grid-column:4 / span 5; margin-top:64px; } }
+@media (min-width:1024px){ .m-a, .m-b, .science{ grid-column:1 / span 7; } .ask-lead{ grid-column:1 / span 4; } .ask{ grid-column:6 / span 7; } }
+
+/* inside Bazr */
+.item svg.f{ width:36px; height:36px; stroke:var(--primary); }
+.note{ margin-top:32px; padding:22px 24px; border-radius:22px; background:var(--card); box-shadow:var(--shadow); }
+@media (min-width:1024px){ .note{ grid-column:1 / span 7; } }
+.sub{ margin-top:var(--sec); }
+
+/* the courses: a card like the painting's own, under its place */
+/* one card a row on a phone, two on a tablet, four on a desktop: the name always fits on one line */
+.courses{ display:grid; gap:28px var(--gap); }
+@media (min-width:560px){ .courses{ grid-template-columns:repeat(2, minmax(0, 1fr)); } }
+@media (min-width:1024px){ .courses{ grid-template-columns:repeat(4, minmax(0, 1fr)); } }
+.course{ display:grid; align-content:start; }
+.course .frame{ border-radius:20px; }
+.pill{ position:relative; z-index:1; margin:-24px 12px 0; display:grid; grid-template-columns:auto minmax(0, 1fr); gap:6px 10px; align-items:center; padding:10px 12px 12px 12px; border-radius:20px; background:var(--card); box-shadow:0 0 0 1px var(--glass-edge) inset, var(--shadow); }
+.pill .ic{ grid-row:span 2; width:42px; height:42px; border-radius:50%; display:grid; place-items:center; color:#fff; background:var(--c); }
+.pill .ic svg{ width:22px; height:22px; }
+.pill b{ color:var(--ink); font-weight:800; font-size:1.02rem; line-height:1.45; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.pill .bar{ display:block; height:5px; border-radius:3px; background:var(--track); overflow:hidden; }
+.pill .bar i{ display:block; height:100%; width:20%; border-radius:inherit; background:var(--bar); }
+@media (min-width:1024px){ .pill{ margin-inline:12px; padding:12px 14px 14px; gap:6px 12px; } .pill .ic{ width:46px; height:46px; } .pill b{ font-size:1.04rem; } }
+
+/* growth: the course garden in its five stages (image 6), a row; a swipeable row on smaller screens */
+.stages-row{ display:grid; grid-auto-flow:column; grid-auto-columns:min(62vw, 248px); gap:var(--gap); overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scroll-padding-inline:var(--gut); margin-inline:calc(var(--gut) * -1); padding:4px var(--gut) 28px; scrollbar-width:none; }
+.stages-row::-webkit-scrollbar{ display:none; }
+.stage-card{ scroll-snap-align:start; border-radius:20px; background:var(--card); box-shadow:var(--frame-shadow); overflow:hidden; }
+.stage-card .frame{ border-radius:0; box-shadow:none; }
+.stage-card .frame::after{ display:none; }
+.stage-band{ display:grid; justify-items:center; gap:6px; padding:14px 10px 16px; }
+.stage-no{ padding:3px 16px; border-radius:999px; background:var(--stage); color:var(--on-primary); font-weight:700; font-size:.86rem; line-height:1.7; }
+.stage-band b{ color:var(--ink); font-weight:800; font-size:1.08rem; }
+@media (min-width:1024px){ .stages-row{ grid-auto-flow:row; grid-template-columns:repeat(5, minmax(0, 1fr)); grid-auto-columns:auto; overflow:visible; margin-inline:0; padding:0 0 4px; } }
+
+/* membership: prices stay empty until they are announced (ADR-0006) */
+.seg{ display:inline-flex; padding:4px; border-radius:999px; background:var(--card); box-shadow:inset 0 0 0 1px var(--line); justify-self:start; margin-bottom:24px; }
+.seg button{ font:inherit; font-size:.92rem; font-weight:600; border:0; background:transparent; color:var(--ink-3); padding:8px 20px; min-height:40px; border-radius:999px; cursor:pointer; touch-action:manipulation; }
+.seg button[aria-pressed="true"]{ background:var(--primary); color:var(--on-primary); }
+@media (min-width:700px){ .mem-head{ grid-column:1 / span 6; } .seg{ grid-column:7 / span 2; justify-self:end; align-self:end; margin-bottom:var(--head); } }
+@media (min-width:1024px){ .mem-head{ grid-column:1 / span 8; } .seg{ grid-column:9 / span 4; } }
+.plans{ display:grid; gap:var(--gap); }
+@media (min-width:700px){ .plans{ grid-template-columns:repeat(3, minmax(0, 1fr)); } }
+.glass{ background:var(--glass); border-radius:22px; box-shadow:0 0 0 1px var(--glass-edge) inset, var(--shadow); }
+.plan{ padding:22px; display:grid; gap:16px; align-content:start; }
+.plan-top{ display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.skel{ display:block; height:10px; border-radius:6px; background:var(--track); }
+.w40{ width:40%; } .w60{ width:60%; } .w80{ width:80%; }
+.price{ font-weight:800; font-size:1.45rem; color:var(--ink); display:flex; gap:8px; align-items:baseline; }
+.per{ font-size:.9rem; font-weight:400; color:var(--ink-3); }
+.lines{ display:grid; gap:10px; padding-block:14px; border-block:1px solid var(--line); }
+.plan .btn{ width:100%; }
+/* on a phone the empty cards stay short: the grey lines only stand in for details nobody has written yet */
+@media (max-width:699px){ .plan .lines{ display:none; } .plan{ gap:12px; } }
+.pricing[data-period="monthly"] .p-y, .pricing[data-period="yearly"] .p-m{ display:none; }
+.after-note{ margin-top:20px; }
+
+/* questions: cream cards in an even grid */
+.faqs{ display:grid; gap:var(--gap); }
+@media (min-width:700px){ .faqs{ grid-template-columns:repeat(2, minmax(0, 1fr)); } }
+.faq{ padding:24px; display:grid; gap:10px; align-content:start; }
+.faq h3{ font-weight:800; font-size:1.12rem; }
+
+/* behind the scenes */
+.quote{ font-weight:700; font-size:clamp(1.25rem, 1.1rem + .8vw, 1.7rem); line-height:1.85; color:var(--ink); }
+.by{ margin-top:20px; display:flex; align-items:center; gap:12px; color:var(--ink-3); font-size:.94rem; }
+.avatar{ width:42px; height:42px; border-radius:50%; display:grid; place-items:center; background:var(--accent-soft); color:var(--accent-ink); font-weight:800; }
+.story-side{ margin-top:36px; }
+.cycle{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.cycle li{ padding:5px 14px; border-radius:999px; background:var(--card); box-shadow:inset 0 0 0 1px var(--line); font-size:.92rem; }
+.cycle li.arr{ background:none; box-shadow:none; padding:0; color:var(--accent-ink); }
+@media (min-width:700px){ .story-q{ grid-column:1 / span 7; } .story-side{ grid-column:1 / span 6; } }
+@media (min-width:1024px){ .story-q{ grid-column:1 / span 7; } .story-side{ grid-column:9 / span 4; margin-top:0; } }
+
+/* the end: the gate at night, framed, beside the closing words */
+.end .grid{ align-items:center; }
+.end-art{ order:-1; margin-bottom:32px; }
+.end-text{ display:grid; gap:16px; justify-items:start; }
+.principle{ font-weight:700; font-size:1.15rem; color:var(--accent-ink); letter-spacing:.01em; }
+@media (min-width:700px){ .end-text{ grid-column:1 / span 4; } .end-art{ grid-column:5 / span 4; order:0; margin-bottom:0; } }
+@media (min-width:1024px){ .end-text{ grid-column:1 / span 6; } .end-art{ grid-column:8 / span 5; } }
+
+/* footer */
+.foot{ margin-top:var(--sec); background:var(--stone); padding-block:56px calc(28px + env(safe-area-inset-bottom, 0px)); }
+.foot .grid{ row-gap:32px; }
+.foot-h{ font-weight:800; color:var(--ink); font-size:.95rem; margin-bottom:4px; }
+.foot ul a{ display:inline-flex; min-height:40px; align-items:center; text-decoration:none; color:var(--ink-2); }
+.biz{ display:grid; gap:8px; }
+.biz dt{ font-size:.8rem; color:var(--ink-3); }
+.biz dd:empty::before{ content:""; display:block; width:70%; height:10px; margin-top:6px; border-radius:6px; background:var(--track); }
+.seal{ margin-top:12px; }
+.seal:empty{ width:80px; height:88px; border:1.5px dashed var(--line-2); border-radius:12px; }
+.legal{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px 20px; padding-top:18px; border-top:1px solid var(--line-2); font-size:.84rem; color:var(--ink-3); }
+.f-brand .logo{ box-shadow:none; }
+.f-a{ grid-column:1 / span 2; } .f-b{ grid-column:3 / span 2; }
+@media (min-width:700px){ .f-brand{ grid-column:1 / span 8; } .f-a{ grid-column:1 / span 2; } .f-b{ grid-column:3 / span 2; } .f-c{ grid-column:5 / span 4; } }
+@media (min-width:1024px){ .f-brand{ grid-column:1 / span 4; } .f-a{ grid-column:6 / span 2; } .f-b{ grid-column:8 / span 2; } .f-c{ grid-column:10 / span 3; } }
+@media (hover:hover) and (pointer:fine){ .foot ul a:hover{ color:var(--ink); text-decoration:underline; } }
+
+/* ── Motion: frames rise and fade in once as they come in; under «کاهش حرکت» everything is simply there ── */
+@media (prefers-reduced-motion:no-preference){
+  .js .rv{ opacity:0; transform:translateY(18px); transition:opacity .7s ease-out, transform .8s var(--ease-out); transition-delay:var(--d, 0ms); }
+  .js .rv.in{ opacity:1; transform:none; }
+}
+@media (prefers-reduced-motion:reduce){ .btn, .top{ transition:none; } }
+</style>
+</head>
+<body>
+
+<header class="top" id="top-bar">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="بالای صفحه"><img src="../assets/looks/brand/sprout-80.webp" width="26" height="26" alt=""></a>
+    <nav aria-label="بخش‌های صفحه">
+      <a href="#what">بذر چیست؟</a><a href="#path">مسیر</a><a href="#method">متد</a><a href="#inside">داخل بذر</a><a href="#membership">عضویت بذر</a><a href="#faq">سؤال‌ها</a>
+    </nav>
+    <div class="top-end"><a class="btn btn-go btn-sm" href="https://app.bazrlife.ir/login">شروع</a></div>
+  </div>
+</header>
+
+<main>
+<!-- ── First view: the Owner's whole painting, framed, and the title (brand book 1.1: «Messaging Architecture», «Purpose») ── -->
+<section class="hero" id="top">
+  <div class="wrap grid">
+    <div class="hero-text">
+      <img class="logo" src="../assets/looks/brand/logo-208.webp" width="208" height="216" alt="نشان بذر">
+      <h1 class="h1">خودتان را بهتر بشناسید تا بتوانید آگاهانه‌تر انتخاب کنید.</h1>
+      <p class="lead">بذر برای کم کردن فاصله‌ی میان دانستن و زندگی کردن آنچه می‌دانیم به وجود آمده است.</p>
+      <div class="cta">
+        <a class="btn btn-go" href="https://app.bazrlife.ir/login">شروع</a>
+        <a class="btn btn-line" href="#signal">مسیرتون رو بشناسید <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></a>
+      </div>
+      <p class="tag"><span class="term" dir="ltr">Health × Self-Knowledge × Behavior Change</span></p>
+    </div>
+    <figure class="hero-art">
+      <div class="frame">
+        <img src="../assets/looks/garden/hero-day-780.webp" srcset="../assets/looks/garden/hero-day-780.webp 780w, ../assets/looks/garden/hero-day-1120.webp 1120w" sizes="(min-width: 1024px) 486px, (min-width: 700px) 364px, calc(100vw - 32px)" width="780" height="1387" alt="باغ بذر: نقاشی باغی پلکانی با سفره‌خانه، تخت زیر ماه، حیاط ورزش و آینه‌ی میان گل‌ها، و دروازه‌ی سنگی با فانوس‌ها" fetchpriority="high">
+        <!-- the seed rests on the path by the gate, small, over the painting only -->
+        <span class="seed" id="seed" aria-hidden="true"><img class="rest" src="../assets/looks/garden/seed-love.webp" width="132" height="150" alt=""><img class="blink" src="../assets/looks/garden/seed-calm.webp" width="132" height="150" alt=""></span>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- ── The familiar tension (brand book 1.1) ── -->
+<section class="sec" id="signal">
+  <div class="wrap grid">
+    <div class="split-text stack">
+      <p class="kick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>تنش آشنا</p>
+      <h2 class="h2">می‌دونم باید چی کار کنم.<span class="soft">پس چرا انجامش نمی‌دم؟</span></h2>
+      <p class="lead">بذر یک پلتفرم <span class="term" dir="ltr">Lifestyle</span> و <span class="term" dir="ltr">Behavior Change</span> هست که کمک می‌کنه الگوهای رفتاری، نیازها، عادت‌ها و سبک زندگی خودتون رو بهتر بشناسید و قدم‌به‌قدم مسیر تغییر مخصوص خودتون رو بسازید.</p>
+      <p><a class="btn btn-line btn-sm" href="#path">مسیر بذر</a></p>
+    </div>
+    <div class="split-pic"><div class="frame frame-sm rv"><img loading="lazy" src="../assets/looks/garden/crop-lotus.webp" width="640" height="480" alt=""></div></div>
+  </div>
+</section>
+
+<!-- ── Knowing vs doing (highlight 1, slides 1–2) ── -->
+<section class="sec" id="gap">
+  <div class="wrap grid">
+    <div class="gap-main">
+      <div class="head">
+        <p class="kick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>فاصله‌ی دونستن تا انجام دادن</p>
+        <h2 class="h2">همه‌ی ما چیزهایی درباره‌ی خودمون و زندگی می‌دونیم.</h2>
+      </div>
+      <div class="ledger" role="table" aria-label="دونستن و انجام دادن">
+        <div class="ledger-row ledger-head" role="row"><span role="columnheader"></span><span role="columnheader">دونستن</span><span role="columnheader">انجام دادن</span></div>
+        <div class="ledger-row" role="row"><span role="cell">می‌دونیم ورزش برامون خوبه.</span><span role="cell" class="yes" aria-label="بله"></span><span role="cell" class="q">؟</span></div>
+        <div class="ledger-row" role="row"><span role="cell">می‌دونیم باید بهتر غذا بخوریم.</span><span role="cell" class="yes" aria-label="بله"></span><span role="cell" class="q">؟</span></div>
+        <div class="ledger-row" role="row"><span role="cell">می‌دونیم بعضی آدم‌ها، رابطه‌ها یا عادت‌ها دیگه جایی توی زندگی‌ای که می‌خوایم ندارن.</span><span role="cell" class="yes" aria-label="بله"></span><span role="cell" class="q">؟</span></div>
+      </div>
+      <p class="punch">ولی صرف دونستن، همیشه باعث تغییر نمی‌شه.</p>
+    </div>
+    <div class="gap-side stack">
+      <p class="lead">چون خیلی وقت‌ها قبل از اینکه بدونیم «چه کاری باید انجام بدیم»، باید بفهمیم چرا الان اینطوری رفتار می‌کنیم.</p>
+      <p class="muted">و بذر از همین نقطه شروع می‌شه:</p>
+      <p class="big">شناخت<i>.</i></p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Know · Be · Become (highlight 1, slides 4–5) ── -->
+<section class="sec" id="what">
+  <div class="wrap grid">
+    <div class="head head-text">
+      <p class="kick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span class="term" dir="ltr">Know · Be · Become</span></p>
+      <h2 class="h2">اینجا یک نسخه‌ی یکسان برای همه وجود نداره.</h2>
+      <p class="lead">مسیر هر فرد بر اساس شرایط، رفتارها، نیازها و مرحله‌ای که در تغییر قرار داره متفاوت طراحی می‌شه.</p>
+    </div>
+    <ul class="trio">
+      <li class="item"><svg viewBox="0 0 48 48" aria-hidden="true"><ellipse class="seedf" cx="24" cy="30" rx="9" ry="6" transform="rotate(-20 24 30)"/><path d="M8 38h32"/></svg><b>شناختن <span class="term" dir="ltr">Know</span></b><p>خودتان و الگوهایتان را بشناسید.</p></li>
+      <li class="item"><svg viewBox="0 0 48 48" aria-hidden="true"><ellipse class="seedf" cx="24" cy="36" rx="7" ry="4.5" transform="rotate(-20 24 36)"/><path d="M24 32V20"/><path d="M24 22c-2-5-7-7-11-5 2 4 6 6 11 5z"/><path d="M24 20c2-5 7-7 11-5-2 4-6 6-11 5z"/><path d="M8 40h32"/></svg><b>حضور داشتن <span class="term" dir="ltr">Be</span></b><p>آگاهانه‌تر در زندگی‌تان حضور داشته باشید.</p></li>
+      <li class="item"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 40V8"/><path d="M24 32c-3-5-9-6-13-3 3 4 9 5 13 3z"/><path d="M24 24c3-5 9-6 13-3-3 4-9 5-13 3z"/><path d="M24 17c-3-4-7-5-10-3 2 3 6 4 10 3z"/><circle class="seedf" cx="24" cy="7" r="3.5"/><path d="M8 40h32"/></svg><b>تغییر کردن <span class="term" dir="ltr">Become</span></b><p>در مسیر تغییر قدم بردارید.</p></li>
+    </ul>
+    <p class="after small muted"><span class="term" dir="ltr">A place to know, to be, to become.</span></p>
+  </div>
+</section>
+
+<!-- ── ب ذ ر = بدن ذهن روح (Owner's note + «هایلایت مسیر بذر») ── -->
+<section class="sec" id="path">
+  <div class="wrap grid">
+    <div class="head head-text">
+      <p class="kick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span class="term" dir="ltr">Body · Mind · Soul</span></p>
+      <h2 class="h2">بذر یعنی بدن، ذهن، روح.</h2>
+    </div>
+    <div class="head-pic"><div class="frame frame-sm rv"><img loading="lazy" src="../assets/looks/garden/crop-bridge.webp" width="640" height="480" alt=""></div></div>
+    <ul class="trio">
+      <li class="item"><p class="glyph" aria-hidden="true">ب</p><b>بدن <span class="term" dir="ltr">Body</span></b><p>مسیر بذر از بدن شروع می‌شه. از جایی که هر روز باهاش زندگی می‌کنید: خوابتون، تغذیه‌تون، حرکتتون، انرژیتون و عادت‌های روزمره‌تون.</p><p class="muted">اول باید ببینیم بدنتون الان کجای مسیر ایستاده.</p></li>
+      <li class="item"><p class="glyph" aria-hidden="true">ذ</p><b>ذهن <span class="term" dir="ltr">Mind</span></b><p>بعد می‌ریم سراغ ذهن. الگوهایی که تکرار می‌کنید. نیازهایی که پشت رفتارهاتون هستن.</p><p class="muted">باورها، تصمیم‌ها و عادت‌هایی که شاید سال‌هاست بدون اینکه متوجه باشید، دارن مسیرتون رو شکل می‌دن.</p></li>
+      <li class="item"><p class="glyph" aria-hidden="true">ر</p><b>روح <span class="term" dir="ltr">Soul</span></b><p>و بعد می‌رسیم به روح. به چیزی که برای شما معنا داره. ارزش‌هاتون. رابطه‌تون با خودتون و زندگی.</p><p class="muted">و اینکه واقعاً می‌خواید چه جور آدمی باشید و چه جور زندگی‌ای بسازید.</p></li>
+    </ul>
+    <div class="together-a together stack">
+      <p class="h3">در بذر، بدن، ذهن و روح سه مسیر جدا از هم نیستن. روی هم اثر می‌ذارن.</p>
+      <p class="muted">گاهی تغییر از خواب و حرکت شروع می‌شه. گاهی از شناخت یک الگوی قدیمی. و گاهی از این سؤال ساده:</p>
+    </div>
+    <p class="want">«من واقعاً چی می‌خوام؟»</p>
+    <ol class="flow">
+      <li><span class="n">۱ · بدن</span><b>شناخت وضعیت فعلی</b></li>
+      <li><span class="n">۲ · ذهن</span><b>شناخت الگوها و رفتارها</b></li>
+      <li><span class="n">۳ · روح</span><b>شناخت معنا و ارزش‌ها</b></li>
+      <li><span class="n">۴ · تغییر</span><b>انتخاب چند قدم واقعی و قابل ادامه</b></li>
+    </ol>
+    <p class="after">قرار نیست همه‌چیز رو یک‌باره تغییر بدید. اول خودتون رو می‌شناسید. بعد چیزی رو انتخاب می‌کنید که واقعاً برای شما مهمه. و از همون‌جا، قدم‌به‌قدم مسیرتون رو می‌سازید.</p>
+  </div>
+</section>
+
+<!-- ── Your path (highlight 2) ── -->
+<section class="sec" id="your-path">
+  <div class="wrap grid">
+    <div class="path-head">
+      <div class="head" style="margin-bottom:0">
+        <p class="kick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>مسیر شما</p>
+        <h2 class="h2">تغییر از انتخاب یک هدف شروع نمی‌شه.</h2>
+        <p class="lead">برای ما، تغییر از شناخت نقطه‌ای شروع می‌شه که الان در اون ایستادید.</p>
+      </div>
+      <div class="frame frame-sm rv"><img loading="lazy" src="../assets/looks/garden/crop-stairs.webp" width="640" height="480" alt=""></div>
+    </div>
+    <div class="path-main">
+      <ol class="steps">
+        <li class="step"><span class="step-n">۱</span><div class="step-b"><h3 class="h3">دیدن الگوها</h3><p>در مرحله‌ی اول، بذر کمک می‌کنه الگوهای تکرارشونده‌ی خودتون رو ببینید:</p><ul class="qs"><li>چه چیزهایی شما رو جلو می‌برن؟</li><li>چه چیزهایی متوقفتون می‌کنن؟</li><li>چه نیازهایی پشت رفتارهای شما قرار دارن؟</li></ul></div></li>
+        <li class="step"><span class="step-n">۲</span><div class="step-b"><h3 class="h3">تصویر واضح‌تر</h3><p>با ویس‌های آموزشی، تمرین‌های کوتاه و ثبت تجربه‌های روزانه، کم‌کم تصویر واضح‌تری از خودتون ساخته می‌شه.</p></div></li>
+        <li class="step"><span class="step-n">۳</span><div class="step-b"><h3 class="h3">چند اولویت مشخص</h3><p>بعد از شناخت، قرار نیست ده چیز رو با هم تغییر بدید. از بین مهم‌ترین الگوهای زندگی‌تون، چند اولویت مشخص انتخاب می‌شن و تغییر از همون‌ها شروع می‌شه.</p></div></li>
+        <li class="step"><span class="step-n">۴</span><div class="step-b"><h3 class="h3">قدم‌های کوچک</h3><p>قدم‌های کوچک. پیگیری مداوم. اصلاح مسیر بر اساس چیزی که واقعاً در زندگی شما اتفاق می‌افته.</p></div></li>
+      </ol>
+      <div class="closing"><strong>هدف بذر ساختن یک «برنامه‌ی ایده‌آل» نیست.</strong><p>هدف، ساختن مسیریه که با توجه به نیازها، دغدغه‌ها و شرایط زندگی شما طراحی شده؛ تا بتونید تو روزمره‌تون بیاریدش و آروم‌آروم سبک زندگی خودتون رو بسازید.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Method: TTM (highlight 3; CBT and ACT wait for مرجع تغذیه) ── -->
+<section class="sec" id="method">
+  <div class="wrap grid">
+    <div class="head m-a" style="margin-bottom:0">
+      <p class="kick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span class="term" dir="ltr">TTM · Stages of Change</span></p>
+      <h2 class="h2">تغییر فقط با انگیزه اتفاق نمی‌افته.</h2>
+      <p class="lead">برای اینکه یک تغییر ماندگار بشه، باید بفهمیم هر آدم الان دقیقاً کجای مسیر تغییر ایستاده.</p>
+      <p>یکی از مدل‌هایی که در بذر ازش استفاده می‌کنیم، مدل علمی <span class="term" dir="ltr">TTM</span> یا «مراحل تغییر»ه. این مدل می‌گه همه‌ی آدم‌ها برای تغییر یک رفتار، در یک مرحله نیستن.</p>
+    </div>
+    <div class="stages">
+      <div class="stage"><div class="meter" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div><p class="term" dir="ltr">Contemplation</p><p>ممکنه یک نفر هنوز مطمئن نباشه اصلاً می‌خواد تغییر کنه.</p></div>
+      <div class="stage"><div class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i><i></i></div><p class="term" dir="ltr">Preparation</p><p>یک نفر آماده‌ی شروع باشه.</p></div>
+      <div class="stage"><div class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div><p class="term" dir="ltr">Action</p><p>یک نفر شروع کرده باشه ولی نتونه ادامه بده.</p></div>
+      <div class="stage"><div class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div><p class="term" dir="ltr">Maintenance</p><p>و یک نفر درگیر حفظ تغییری باشه که ساخته.</p></div>
+    </div>
+    <div class="m-b">
+      <p>پس منطقی نیست به همه یک توصیه‌ی یکسان بدیم. بذر سعی می‌کنه مسیر، تمرین‌ها و قدم‌های بعدی رو متناسب با مرحله‌ای که فرد در اون قرار داره طراحی کنه.</p>
+      <p class="muted" style="margin-top:28px">در کنار <span class="term" dir="ltr">TTM</span>، مسیر بذر با استفاده از دانش و رویکردهایی مثل این‌ها طراحی می‌شه:</p>
+      <ul class="ways"><li dir="ltr">Behavior Change</li><li dir="ltr">Lifestyle &amp; Health Coaching</li><li dir="ltr">Motivational Interviewing</li><li dir="ltr">Habit Formation</li><li dir="ltr">Self-Compassion</li></ul>
+    </div>
+    <p class="lead ask-lead">یعنی قبل از اینکه بذر بهتون بگه «چی کار کنید»، سعی می‌کنه بفهمه:</p>
+    <ul class="ask"><li>الان کجای مسیرید؟</li><li>چه چیزی جلوی تغییرتون رو گرفته؟</li><li>چه چیزی واقعاً براتون مهمه؟</li><li>و قدم بعدی‌ای که واقعاً می‌تونید انجام بدید چیه؟</li></ul>
+    <p class="science">علم در بذر قرار نیست تبدیل به اصطلاحات پیچیده بشه. <span>قراره نتیجه‌ش رو در یک مسیر ساده، شخصی و قابل اجرا ببینید.</span></p>
+  </div>
+</section>
+
+<!-- ── Inside Bazr (highlight 4; no app screens, ADR-0006) and the courses, each under its place in the painting ── -->
+<section class="sec" id="inside">
+  <div class="wrap grid">
+    <div class="head head-text">
+      <p class="kick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>داخل بذر</p>
+      <h2 class="h2">بذر فقط یک مجموعه محتوای آموزشی نیست.</h2>
+      <p class="lead">ما در حال ساخت یک تجربه‌ی شخصی‌سازی‌شده برای تغییر سبک زندگی هستیم. داخل اپ، مسیر با شناخت شروع می‌شه.</p>
+    </div>
+    <ul class="trio">
+      <li class="item"><svg class="f" viewBox="0 0 40 40" aria-hidden="true"><path d="M6 18v4M11 14v12M16 8v24M21 12v16M26 5v30M31 13v14M36 17v6"/></svg><p class="h3">ویس گوش می‌دید.</p></li>
+      <li class="item"><svg class="f" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="14"/><path d="M13.5 20.5l4.5 4.5 8.5-9"/></svg><p class="h3">تمرین انجام می‌دید.</p></li>
+      <li class="item"><svg class="f" viewBox="0 0 40 40" aria-hidden="true"><rect x="9" y="5" width="22" height="30" rx="3"/><path d="M14 13h12M14 19h12M14 25h7"/></svg><p class="h3">احساسات و موقعیت‌های مهم رو ثبت می‌کنید.</p></li>
+    </ul>
+    <div class="note"><p class="kick">الگوها</p><p class="h3" style="margin-top:6px">و به مرور، بذر از این داده‌ها برای پیدا کردن الگوهای تکرارشونده‌ی شما استفاده می‌کنه.</p></div>
+    <!-- AI claim, off the page until Owner پروژه decides E3 (BZR-138), as on today's landing. -->
+    <div class="note" hidden data-pending="E3"><p><span class="term" dir="ltr">AI</span> در بذر قرار نیست جای انسان تصمیم بگیره. وظیفه‌ش کمک به تحلیل اطلاعات، پیدا کردن الگوها و شخصی‌تر کردن تجربه‌ی هر کاربره.</p><p class="term" dir="ltr">We illuminate. You decide.</p></div>
+  </div>
+  <div class="wrap grid sub">
+    <div class="head head-text">
+      <p class="kick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>دوره‌ها</p>
+      <h2 class="h2">هر دوره، جایی در باغ بذر</h2>
+    </div>
+    <ul class="courses">
+      <li class="course rv"><div class="frame"><img loading="lazy" src="../assets/looks/garden/place-food-560.webp" srcset="../assets/looks/garden/place-food-560.webp 560w, ../assets/looks/garden/place-food-780.webp 780w" sizes="(min-width: 1024px) 282px, (min-width: 560px) calc(50vw - 42px), calc(100vw - 32px)" width="560" height="373" alt=""></div>
+        <div class="pill" style="--c:var(--c-food)"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.5 3v5.6a2.5 2.5 0 0 0 5 0V3M9 3v18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.6 21V3c-2.2 1.4-3.4 4.2-3.4 7.8 0 1.6.9 2.7 3.4 2.7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>تغذیه و کوچینگ</b><span class="bar" aria-hidden="true"><i></i></span></div></li>
+      <li class="course rv" style="--d:80ms"><div class="frame"><img loading="lazy" src="../assets/looks/garden/place-sleep-560.webp" srcset="../assets/looks/garden/place-sleep-560.webp 560w, ../assets/looks/garden/place-sleep-780.webp 780w" sizes="(min-width: 1024px) 282px, (min-width: 560px) calc(50vw - 42px), calc(100vw - 32px)" width="560" height="373" alt=""></div>
+        <div class="pill" style="--c:var(--c-sleep)"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19.6 14.8A8 8 0 1 1 9.2 4.4a6.4 6.4 0 0 0 10.4 10.4z" fill="currentColor"/><path d="M16.6 3.6l.6 1.5 1.5.6-1.5.6-.6 1.5-.6-1.5-1.5-.6 1.5-.6zM20.2 8.4l.4 1 1 .4-1 .4-.4 1-.4-1-1-.4 1-.4z" fill="currentColor"/></svg></span><b>خواب آرام</b><span class="bar" aria-hidden="true"><i></i></span></div></li>
+      <li class="course rv" style="--d:160ms"><div class="frame"><img loading="lazy" src="../assets/looks/garden/place-move-560.webp" srcset="../assets/looks/garden/place-move-560.webp 560w, ../assets/looks/garden/place-move-780.webp 780w" sizes="(min-width: 1024px) 282px, (min-width: 560px) calc(50vw - 42px), calc(100vw - 32px)" width="560" height="373" alt=""></div>
+        <div class="pill" style="--c:var(--c-move)"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="15.2" cy="4.3" r="2.2" fill="currentColor"/><path d="M7.6 10l3.6-2.2 3.6 1.4 1.4 3.4 3 1.2M14.6 9.2l-2.4 5 3.4 2.6-1 4.6M12.2 14.2 9.6 17.8l-4.2.6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>فعالیت بدنی</b><span class="bar" aria-hidden="true"><i></i></span></div></li>
+      <li class="course rv" style="--d:240ms"><div class="frame"><img loading="lazy" src="../assets/looks/garden/place-care-560.webp" srcset="../assets/looks/garden/place-care-560.webp 560w, ../assets/looks/garden/place-care-780.webp 780w" sizes="(min-width: 1024px) 282px, (min-width: 560px) calc(50vw - 42px), calc(100vw - 32px)" width="560" height="373" alt=""></div>
+        <div class="pill" style="--c:var(--c-care)"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10.5 5l1.7 4.6 4.6 1.7-4.6 1.7-1.7 4.6-1.7-4.6-4.6-1.7 4.6-1.7z" fill="currentColor"/><path d="M18 2.8l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8zM18.2 15.4l.7 1.7 1.7.7-1.7.7-.7 1.7-.7-1.7-1.7-.7 1.7-.7z" fill="currentColor"/></svg></span><b>سلامت پوست و مو</b><span class="bar" aria-hidden="true"><i></i></span></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── Growth stages (highlight 4; the names from the glossary and ADR-0020): the course garden, as in image 6 ── -->
+<section class="sec" id="grow">
+  <div class="wrap grid">
+    <div class="head head-text">
+      <p class="kick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>مراحل رشد</p>
+      <h2 class="h2">هر قدمی که در مسیرتون جلو می‌رید، بذر شما هم رشد می‌کنه.</h2>
+    </div>
+    <ol class="stages-row" id="stages-row">
+      <li class="stage-card rv"><div class="frame"><img loading="lazy" src="../assets/looks/garden/stage-1.webp" width="560" height="700" alt=""></div><div class="stage-band"><span class="stage-no">مرحله‌ی ۱</span><b>ریشه</b></div></li>
+      <li class="stage-card rv" style="--d:110ms"><div class="frame"><img loading="lazy" src="../assets/looks/garden/stage-2.webp" width="560" height="700" alt=""></div><div class="stage-band"><span class="stage-no">مرحله‌ی ۲</span><b>جوانه</b></div></li>
+      <li class="stage-card rv" style="--d:220ms"><div class="frame"><img loading="lazy" src="../assets/looks/garden/stage-3.webp" width="560" height="700" alt=""></div><div class="stage-band"><span class="stage-no">مرحله‌ی ۳</span><b>ساقه</b></div></li>
+      <li class="stage-card rv" style="--d:330ms"><div class="frame"><img loading="lazy" src="../assets/looks/garden/stage-4.webp" width="560" height="700" alt=""></div><div class="stage-band"><span class="stage-no">مرحله‌ی ۴</span><b>برگ</b></div></li>
+      <li class="stage-card rv" style="--d:440ms"><div class="frame"><img loading="lazy" src="../assets/looks/garden/stage-5.webp" width="560" height="700" alt=""></div><div class="stage-band"><span class="stage-no">مرحله‌ی ۵</span><b>گل</b></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ── Membership (ADR-0006: the section is here, the amounts stay empty until announced) ── -->
+<section class="sec pricing" id="membership" data-period="monthly">
+  <div class="wrap grid">
+    <div class="head mem-head">
+      <p class="kick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>قیمت‌ها</p>
+      <h2 class="h2">عضویت بذر</h2>
+      <p class="lead">نام طرح‌ها، مدت و مبلغ هر کدوم به‌زودی همین‌جا اعلام می‌شه.</p>
+    </div>
+    <div class="seg" role="group" aria-label="دوره‌ی پرداخت">
+      <button type="button" data-period="monthly" aria-pressed="true">ماهانه</button>
+      <button type="button" data-period="yearly" aria-pressed="false">سالانه</button>
+    </div>
+    <div class="plans">
+      <div class="glass plan"><div class="plan-top"><span class="small muted">نام طرح</span><span class="skel w40"></span></div><p class="price">به‌زودی <span class="per"><span class="p-m">/ ماه</span><span class="p-y">/ سال</span></span></p><div class="lines" aria-hidden="true"><span class="skel w80"></span><span class="skel w60"></span></div><a class="btn btn-line btn-sm" role="button" aria-disabled="true">به‌زودی</a></div>
+      <div class="glass plan"><div class="plan-top"><span class="small muted">نام طرح</span><span class="skel w40"></span></div><p class="price">به‌زودی <span class="per"><span class="p-m">/ ماه</span><span class="p-y">/ سال</span></span></p><div class="lines" aria-hidden="true"><span class="skel w80"></span><span class="skel w60"></span></div><a class="btn btn-line btn-sm" role="button" aria-disabled="true">به‌زودی</a></div>
+      <div class="glass plan"><div class="plan-top"><span class="small muted">نام طرح</span><span class="skel w40"></span></div><p class="price">به‌زودی <span class="per"><span class="p-m">/ ماه</span><span class="p-y">/ سال</span></span></p><div class="lines" aria-hidden="true"><span class="skel w80"></span><span class="skel w60"></span></div><a class="btn btn-line btn-sm" role="button" aria-disabled="true">به‌زودی</a></div>
+    </div>
+    <p class="small muted after-note">مبلغ‌ها و جزئیات هر طرح بعد از اعلام رسمی اینجا قرار می‌گیرن.</p>
+  </div>
+</section>
+
+<!-- ── FAQ (highlight 5; the weight-loss answer and the diet clause wait for مرجع تغذیه) ── -->
+<section class="sec" id="faq">
+  <div class="wrap grid">
+    <div class="head head-text">
+      <p class="kick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>سؤال‌های شما</p>
+      <h2 class="h2">چیزهایی که معمولاً می‌پرسن.</h2>
+    </div>
+    <div class="faqs">
+      <article class="glass faq"><h3>بذر رژیم غذاییه؟</h3><p>نه. بذر فقط روی غذا یا وزن متمرکز نیست.</p></article>
+      <article class="glass faq"><h3>بذر روان‌درمانیه؟</h3><p>نه. بذر جایگزین روان‌درمانی یا خدمات پزشکی نیست. تمرکز بذر روی <span class="term" dir="ltr">Lifestyle Coaching</span>، شناخت رفتار و ایجاد تغییرات قابل اجرا در زندگی روزمره است.</p></article>
+      <!-- AI question, off the page until Owner پروژه decides E3 (BZR-138). -->
+      <article class="glass faq" hidden data-pending="E3"><h3><span class="term" dir="ltr">AI</span> چه کاری انجام می‌ده؟</h3><p>کمک می‌کنه اطلاعاتی که در طول مسیر ثبت می‌کنید بهتر تحلیل بشن، الگوهای تکرارشونده شناسایی بشن و تجربه‌ی شخصی‌تری داشته باشید.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ── Behind the scenes (highlight 6, slides 1–4) ── -->
+<section class="sec" id="story">
+  <div class="wrap grid">
+    <div class="story-q">
+      <p class="kick" style="margin-bottom:20px"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>پشت صحنه‌ی بذر</p>
+      <blockquote class="quote">«بذر از یک سؤال برای من شروع شد: چرا ما خیلی وقت‌ها می‌دونیم چه چیزی برای ما بهتره، اما باز هم نمی‌تونیم تغییرش بدیم؟»</blockquote>
+      <p class="by"><span class="avatar" aria-hidden="true">آ</span>آیناز، بنیان‌گذار بذر</p>
+    </div>
+    <div class="story-side stack">
+      <p>همین سؤال باعث شد وارد دنیای <span class="term" dir="ltr">Behavior Change</span>، <span class="term" dir="ltr">Lifestyle Coaching</span> و علوم مرتبط با تغییر رفتار بشیم.</p>
+      <p class="muted">امروز بذر توسط یک تیم چندتخصصی در حال ساخته شدنه؛ از سلامت و علوم رفتاری تا محصول، فناوری و <span class="term" dir="ltr">AI</span>.</p>
+      <p class="h3">ما هنوز در حال ساختیم.</p>
+      <ul class="cycle"><li>تحقیق می‌کنیم.</li><li class="arr" aria-hidden="true">←</li><li>تست می‌کنیم.</li><li class="arr" aria-hidden="true">←</li><li>اشتباه می‌کنیم.</li><li class="arr" aria-hidden="true">←</li><li>دوباره طراحی می‌کنیم.</li><li class="arr" aria-hidden="true">↻</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── The closing (brand book 1.1, «اصل بنیادین»): the gate at night, framed ── -->
+<section class="sec end" id="start">
+  <div class="wrap grid">
+    <div class="end-text">
+      <p class="principle" dir="ltr">We illuminate. You decide.</p>
+      <h2 class="h2">ما مسیر را روشن‌تر می‌کنیم؛ انتخاب با شماست.</h2>
+      <a class="btn btn-go" href="https://app.bazrlife.ir/login">شروع</a>
+    </div>
+    <figure class="end-art"><div class="frame rv"><img loading="lazy" src="../assets/looks/garden/gate-night.webp" width="960" height="720" alt="دروازه‌ی سنگی باغ بذر در شب، با فانوس‌های روشن"></div></figure>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap grid">
+    <div class="f-brand stack">
+      <img class="logo" src="../assets/looks/brand/logo-208.webp" width="208" height="216" alt="نشان بذر" loading="lazy">
+      <p><span class="term" dir="ltr">A place to know, to be, to become.</span></p>
+      <p class="small muted" style="margin-top:4px">مسیری برای آگاهی، حضور و تغییر</p>
+      <p class="small muted" style="margin-top:4px">بذر جایگزین روان‌درمانی یا خدمات پزشکی نیست.</p>
+    </div>
+    <div class="f-a">
+      <p class="foot-h">بذر</p>
+      <ul><li><a href="#what">بذر چیست؟</a></li><li><a href="#path">مسیر</a></li><li><a href="#method">متد</a></li><li><a href="#inside">داخل بذر</a></li></ul>
+    </div>
+    <div class="f-b">
+      <p class="foot-h">بیشتر</p>
+      <ul><li><a href="#membership">عضویت بذر</a></li><li><a href="#faq">سؤال‌های شما</a></li><li><a href="#story">پشت صحنه</a></li><li><a href="https://app.bazrlife.ir/privacy">حریم خصوصی</a></li></ul>
+    </div>
+    <!-- Contact and business identity (BZR-138, BZR-67): empty until Owner پروژه gives the facts, as on today's landing. -->
+    <div class="f-c" id="contact">
+      <p class="foot-h">تماس با ما</p>
+      <dl class="biz">
+        <div><dt>مالک کسب‌وکار</dt><dd data-fact="owner"></dd></div>
+        <div><dt>نشانی</dt><dd data-fact="address"></dd></div>
+        <div><dt>تلفن</dt><dd data-fact="phone"></dd></div>
+        <div><dt>ایمیل</dt><dd data-fact="email"></dd></div>
+      </dl>
+      <div class="seal" id="enamad"></div>
+    </div>
+    <div class="legal"><span>© ۱۴۰۵ بذر</span><span>پیش‌نمایش داخلی تیم · هنوز منتشر نشده</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var RM = matchMedia("(prefers-reduced-motion: reduce)");
+  var $ = function(s){ return document.querySelector(s); }, $$ = function(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); };
+
+  /* the top bar gets its hairline once the page moves */
+  var bar = $("#top-bar"), raf = 0;
+  addEventListener("scroll", function(){ if (!raf) raf = requestAnimationFrame(function(){ raf = 0; bar.classList.toggle("stuck", scrollY > 4); }); }, { passive:true });
+
+  /* Billing period (placeholder cards, as today's landing) */
+  var pricing = $("#membership"), segs = pricing.querySelectorAll(".seg button");
+  segs.forEach(function(b){ b.addEventListener("click", function(){
+    pricing.setAttribute("data-period", b.dataset.period);
+    segs.forEach(function(x){ x.setAttribute("aria-pressed", String(x === b)); });
+  }); });
+
+  /* Frames rise and fade in once as they come in (the CSS does none of it under «کاهش حرکت») */
+  var rv = $$(".rv");
+  if (!RM.matches && "IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }); }, { rootMargin:"0px 0px -8% 0px", threshold:.15 });
+    rv.forEach(function(el){ io.observe(el); });
+    /* in the swipeable row a card comes in sideways, not from below: once the row moves, all of it is there */
+    $("#stages-row").addEventListener("scroll", function(){ rv.forEach(function(el){ if (el.closest("#stages-row")) el.classList.add("in"); }); }, { passive:true, once:true });
+  } else rv.forEach(function(el){ el.classList.add("in"); });
+
+  /* the seed blinks now and then while it can be seen; under «کاهش حرکت» it simply rests */
+  var seed = $("#seed"), seen = true;
+  if ("IntersectionObserver" in window) new IntersectionObserver(function(es){ seen = es[0].isIntersecting; }).observe(seed);
+  (function blink(){
+    setTimeout(function(){
+      if (!RM.matches && seen && !document.hidden){ seed.classList.add("blinking"); setTimeout(function(){ seed.classList.remove("blinking"); }, 140); }
+      blink();
+    }, 3800 + Math.random() * 3200);
+  })();
+})();
+</script>
+</body>
+</html>
