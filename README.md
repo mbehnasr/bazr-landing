@@ -2,7 +2,8 @@
 
 > **[پیش‌نویس]** پیش‌نمایش داخلی تیم. هنوز منتشر نشده و تأیید طراحی Owner پروژه (ADR-0005) را ندارد.
 
-- نشانی: https://bazrlife.com/ ، روی سرور آروان (ADR-0019). نسخه‌ی انگلیسی: `#en` ته لینک. کپی GitHub Pages (https://mbehnasr.github.io/bazr-landing/) فعلاً بالا می‌ماند ولی نسخه‌ی اصلی نیست؛ `canonical` آن هم به `bazrlife.com` اشاره می‌کند.
+- **از ۱۴۰۵/۰۸/۱۷ صفحه‌ی اول «داستان بذر» است** (`index.html`، BZR-175)، به انتخاب مسئول اپلیکیشن. لندینگ قبلی (نسخه‌ی ۴، جهت Levels) در `old/` است: https://bazrlife.com/old/ . «باغ قاب‌شده» در https://bazrlife.com/garden/ است (BZR-169). `story/` به صفحه‌ی اول می‌رود. هر سه هنوز `noindex` و پیش‌نویس‌اند تا Owner پروژه تصمیم بگیرد. توضیح‌های پایین درباره‌ی نسخه‌ی ۴ است.
+- نشانی نسخه‌ی ۴: https://bazrlife.com/old/ ، روی سرور آروان (ADR-0019). نسخه‌ی انگلیسی: `#en` ته لینک. کپی GitHub Pages (https://mbehnasr.github.io/bazr-landing/) فعلاً بالا می‌ماند ولی نسخه‌ی اصلی نیست؛ `canonical` آن هم به `bazrlife.com` اشاره می‌کند.
 - مرجع ساختار: [levels.com](https://www.levels.com/)
 - قانون‌ها و تصمیم‌ها: مخزن `bazr-workspace` (`AGENTS.md`، `decisions/`)
 - صفحه هنوز `noindex` دارد. جا و دامنه روشن است (ADR-0019)، ولی اینکه کدام طرح منتشر شود و کی `noindex` و برچسب پیش‌نویس برداشته شوند با Owner پروژه است (BZR-139، ADR-0005). فهرست کامل در بخش «پیش از انتشار عمومی».
