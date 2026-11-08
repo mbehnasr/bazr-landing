@@ -5,13 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>[پیش‌نویس] بذر · هر قدم کوچک، رشد بزرگ‌تری می‌سازد</title>
 <!-- «داستان بذر» (BZR-175): a character-led landing whose structure and rhythm follow gordol.app (a huge headline over a
-     big character, a scroll story where the character grows, a snap carousel of scenes, one dark section, a playful
-     tap, a gallery of the character's moods, pricing, install, questions, a last call), told with Bazr's own seed, the
-     Owner's painting and the course-garden stage art. A private preview: noindex stays and the footer says it is an
-     internal preview until Owner پروژه picks a design and says when it goes public (BZR-139, ADR-0005).
+     big character, a scroll story where the character grows, a snap carousel of scenes, a playful tap, pricing,
+     install, questions, a last call), told with Bazr's own seed, the Owner's painting and the course-garden stage art.
+     BZR-180 (the team meeting of 1405/08/14, the Owner's choices of 1405/08/17): the night section and the seed's moods
+     on it are gone, the page is light throughout; «بذر چیست» and «متد بذر» (the TTM text) come after the growth story,
+     and a draft section of Instagram posts comes before عضویت بذر. A private preview: noindex stays and the footer says
+     it is an internal preview until Owner پروژه picks a design and says when it goes public (BZR-139, ADR-0005).
      No app screens (ADR-0006): each carousel card is a framed piece of the painting or a moment with the seed.
-     Copy: today's landing (index.html at the repo root) and its highlights, addressed with «شما» (ADR-0013); the new
-     lines are listed in the BZR-175 report. Prices stay empty until they are announced. Pictures are shown at most at
+     Copy: the previous landing (old/index.html) and its highlights, addressed with «شما» (ADR-0013); the new lines are
+     listed in the BZR-175 and BZR-180 reports. Prices stay empty until they are announced. Pictures are shown at most at
      half their pixels, so they stay sharp on a 2× screen. Characters: assets/looks/story/characters.js, the seed and the
      earthworm of bazr-design-directions/characters.js (the Owner's sheets), never over words or buttons, the worm once. -->
 <meta name="robots" content="noindex, nofollow">
@@ -31,8 +33,7 @@
   --ink:#173e32; --ink-2:#3f4743; --ink-3:#5d625e;
   --primary:#4c7350; --primary-hi:#567f5a; --primary-lo:#3f6343; --on-primary:#fdf9f3; --stage:#557a59; --on-stage:#fbf6ec;
   --accent:#e3a54f; --accent-ink:#80520e; --accent-soft:#f8e8cc;
-  --bar:#5b8d58; --track:#e6dfd7;
-  --night:#121a30; --night-2:#1b2440; --night-card:#1e2742; --night-line:#2f3a5a; --on-night:#f7efe2; --on-night-2:#cbc4d4; --lamp:#ffcf86;
+  --bar:#5b8d58; --track:#e6dfd7; --soft:#6f7d73;
   --stone-a:#f4e8d6; --stone-b:#e2cfb2; --stone-c:#c9b08c; --stone-lip:#ad946f; --shade:rgb(70 44 20 / .28);
   --done-a:#a3c785; --done-b:#6f9a5c; --done-c:#507a45; --done-lip:#3d5e35;
   --leaf:#7ea65c; --leaf-hi:#a3c473; --leaf-dk:#4f7a45; --vine-old:#6e9257; --vine-new:#8db06e; --gold:#e3a54f;
@@ -106,14 +107,11 @@ a,button{ touch-action:manipulation; }
 .bar-in{ pointer-events:auto; max-width:1120px; margin-inline:auto; height:60px; display:flex; align-items:center; gap:8px; padding-inline:10px 8px; border-radius:999px; background:rgb(253 249 243 / .84); -webkit-backdrop-filter:blur(14px) saturate(1.15); backdrop-filter:blur(14px) saturate(1.15); box-shadow:0 0 0 1px rgb(255 255 255 / .75) inset, 0 0 0 1px rgb(214 198 176 / .45), 0 10px 26px -18px rgb(70 44 20 / .55); }
 .brand{ display:flex; align-items:center; gap:8px; min-height:44px; padding-inline:2px 8px; text-decoration:none; font-weight:900; font-size:1.25rem; color:var(--ink); border-radius:999px; }
 .brand img{ width:40px; height:42px; }
-.bar-in{ transition:background-color 260ms ease, box-shadow 260ms ease; }
-.brand,.bar-links a{ transition:color 260ms ease, background-color 140ms ease; }
-.bar[data-dark] .bar-in{ background:rgb(30 39 66 / .78); box-shadow:0 0 0 1px rgb(255 255 255 / .08) inset, 0 10px 26px -18px rgb(0 0 0 / .8); }
-.bar[data-dark] .brand,.bar[data-dark] .bar-links a{ color:var(--on-night); }
-.bar-links{ display:none; margin-inline:auto; gap:2px; }
-.bar-links a{ display:inline-flex; align-items:center; min-height:44px; padding:0 14px; border-radius:999px; text-decoration:none; font-weight:700; font-size:.9375rem; color:var(--ink-2); transition:background-color 140ms ease, color 140ms ease; }
+.bar-links{ display:none; margin-inline:auto; gap:0; }
+.bar-links a{ display:inline-flex; align-items:center; min-height:44px; padding:0 12px; border-radius:999px; text-decoration:none; font-weight:700; font-size:.9375rem; color:var(--ink-2); white-space:nowrap; transition:background-color 140ms ease, color 140ms ease; }
 .bar .btn{ margin-inline-start:auto; }
 @media (min-width:900px){ .bar-links{ display:flex; } .bar .btn{ margin-inline-start:0; } }
+@media (min-width:1120px){ .bar-links a{ padding:0 14px; } }
 
 /* ── The seed and the earthworm (characters.js): sized by their host, never in the tab order ── */
 .seed-host,.worm-host{ position:absolute; line-height:0; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; }
@@ -199,7 +197,75 @@ a,button{ touch-action:manipulation; }
   .grow-grid > .strip{ grid-column:1 / -1; justify-self:center; }
 }
 
-/* ── 3 · Inside Bazr: a snap carousel of painted scenes and moments with the seed ── */
+/* ── 3 · بذر چیست (the «بذر چیست» highlight): knowing is not changing, so Bazr starts with شناخت; Know · Be · Become ── */
+.what-top{ max-width:900px; margin-inline:auto; text-align:center; }
+.what-h{ font-size:clamp(1.875rem, 7.2vw, 3.75rem); line-height:1.36; }
+.what-h .soft{ display:block; margin-top:.3em; color:var(--soft); }
+.what .lead{ max-width:38rem; margin:22px auto 0; }
+.what-from{ margin-top:clamp(36px, 6vw, 56px); font-weight:800; color:var(--ink-3); }
+.know-word{ display:flex; align-items:flex-end; justify-content:center; gap:clamp(4px, 1.6vw, 16px); margin-top:4px; }
+.bigword{ font-size:clamp(3.75rem, 19.5vw, 10.5rem); font-weight:900; line-height:1.18; color:var(--ink); letter-spacing:-.01em; }
+.bigword i{ font-style:normal; color:var(--accent); }
+.know-seed{ position:relative; flex:none; width:clamp(60px, 17vw, 138px); aspect-ratio:1 / 1.12; margin-bottom:clamp(14px, 3vw, 30px); }
+.know-seed .seed-host{ inset:auto 0 0; width:100%; }
+/* the word is written in, right to left, as it comes into view */
+.anim .ready .know-word .bigword{ clip-path:inset(-20% 0 -20% 100%); transition:clip-path 1100ms var(--ease-out) 180ms; }
+.anim .ready .know-word.in .bigword{ clip-path:inset(-20% 0 -20% 0); }
+.kbb{ margin-top:clamp(96px, 13vw, 150px); }
+.kbb .h2{ font-size:clamp(1.625rem, 5.4vw, 2.75rem); }
+.trio{ display:grid; gap:18px; margin-top:36px; }
+.trio li{ display:grid; grid-template-columns:minmax(0, 38%) minmax(0, 1fr); align-items:center; gap:18px; }
+.trio .frame{ border-radius:22px; }
+.trio-k{ display:flex; flex-wrap:wrap; align-items:baseline; gap:2px 10px; }
+.trio-k b{ font-size:clamp(1.375rem, 5.2vw, 1.75rem); font-weight:900; line-height:1.45; color:var(--ink); }
+.trio-k .term{ font-size:.9375rem; color:var(--primary); }
+.trio li p:last-child{ margin-top:4px; font-size:1rem; line-height:1.85; }
+.tagline{ display:flex; align-items:center; justify-content:center; gap:8px; margin-top:32px; color:var(--ink-3); font-size:.9375rem; }
+.tagline svg{ width:18px; height:18px; flex:none; }
+@media (min-width:700px){
+  .trio{ grid-template-columns:repeat(3, minmax(0, 1fr)); gap:24px; max-width:1000px; margin:44px auto 0; }
+  .trio li{ grid-template-columns:1fr; align-content:start; gap:0; text-align:center; }
+  .trio .frame{ border-radius:28px; margin-bottom:22px; }
+  .trio-k{ justify-content:center; }
+  .trio li p:last-child{ max-width:18rem; margin-inline:auto; }
+}
+
+/* ── 4 · متد بذر (the TTM text, highlight «متد بذر»): five stages on the painting's steps up to the gate ── */
+.method-grid{ display:grid; gap:44px; justify-items:center; text-align:center; }
+.method-text{ max-width:600px; }
+.method .lead{ margin-top:14px; }
+.method-p{ margin-top:14px; color:var(--ink-2); }
+.steps-art{ position:relative; width:min(100%, 330px); }
+.steps-art .frame{ background:#e9dcc6; }
+.ttm{ position:absolute; inset:0; z-index:6; }
+.ttm li{ position:absolute; left:46%; translate:-50% -50%; display:flex; align-items:center; gap:8px; min-height:34px; padding-inline:5px 14px; border-radius:999px; background:rgb(253 249 243 / .92); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); box-shadow:0 0 0 1px rgb(255 255 255 / .75) inset, 0 8px 18px -10px rgb(70 44 20 / .6); white-space:nowrap; }
+.ttm .n{ display:grid; place-items:center; width:24px; height:24px; border-radius:50%; background:var(--stage); color:var(--on-stage); font-size:.8125rem; font-weight:800; line-height:1; }
+.ttm .term{ font-size:.875rem; font-weight:700; color:var(--ink); }
+.ttm li:nth-child(1){ top:91%; } .ttm li:nth-child(2){ top:79%; } .ttm li:nth-child(3){ top:67%; } .ttm li:nth-child(4){ top:55%; } .ttm li:nth-child(5){ top:37%; }
+.ttm li:nth-child(5){ background:var(--stage); box-shadow:0 0 0 1px rgb(255 255 255 / .25) inset, 0 10px 20px -10px rgb(30 60 36 / .7); }
+.ttm li:nth-child(5) .n{ background:var(--on-stage); color:var(--stage); }
+.ttm li:nth-child(5) .term{ color:var(--on-stage); }
+.steps-tag{ position:absolute; z-index:6; top:14px; inset-inline:0; text-align:center; }
+.steps-tag .term{ display:inline-flex; align-items:center; min-height:28px; padding:0 12px; border-radius:999px; background:rgb(23 62 50 / .72); color:#fbf6ec; font-size:.8125rem; font-weight:700; letter-spacing:.02em; }
+.steps-art .seed-host{ right:-5%; bottom:-7%; width:28%; z-index:7; }
+/* the stages come up the steps one after another, from the first to the fifth */
+.anim .ready .steps-art .ttm li{ opacity:0; transform:translateY(10px) scale(.96); transition:opacity 380ms var(--ease-out), transform 560ms var(--spring); }
+.anim .ready .steps-art.in .ttm li{ opacity:1; transform:none; transition-delay:calc(420ms + var(--i, 0) * 130ms); }
+.voices{ display:grid; gap:clamp(14px, 2.4vw, 22px); max-width:920px; margin:clamp(72px, 10vw, 120px) auto 0; text-align:center; }
+.voices li{ font-size:clamp(1.4375rem, 5.2vw, 2.625rem); font-weight:900; line-height:1.45; color:var(--ink); text-wrap:balance; }
+/* each line lights as it rises into the upper part of the screen (only with motion and the script) */
+.anim .voices[data-live] li{ opacity:.3; transition:opacity 520ms var(--ease-out); }
+.anim .voices[data-live] li.lit{ opacity:1; }
+.method .method-fit{ max-width:40rem; margin:clamp(56px, 8vw, 80px) auto 0; text-align:center; }
+.science{ display:flex; flex-direction:column; gap:4px; max-width:40rem; margin:28px auto 0; padding:22px 24px; border-radius:28px; background:var(--card); box-shadow:var(--shadow); text-align:center; color:var(--ink-3); font-size:1rem; line-height:1.85; }
+.science b{ color:var(--ink); font-weight:800; font-size:1.0625rem; }
+@media (min-width:1024px){
+  .method-grid{ grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); align-items:center; justify-items:stretch; text-align:start; gap:64px; }
+  .steps-art{ justify-self:center; }
+  .method .h2{ font-size:clamp(2.25rem, 3.6vw, 3.25rem); }
+}
+
+/* ── 5 · Inside Bazr: a snap carousel of painted scenes and moments with the seed ── */
 .car{ position:relative; margin-top:40px; }
 .car-track{ display:flex; gap:16px; overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; padding:12px max(var(--gut), calc((100% - var(--max)) / 2)) 16px; scroll-padding-inline:max(var(--gut), calc((100% - var(--max)) / 2)); scrollbar-width:none; }
 .car-track::-webkit-scrollbar{ display:none; }
@@ -261,7 +327,7 @@ a,button{ touch-action:manipulation; }
 .cg-plant.on{ opacity:1; transform:none; }
 .cg-stage{ position:absolute; z-index:3; right:5%; top:5%; display:inline-flex; align-items:center; min-height:32px; padding:0 14px; border-radius:999px; background:rgb(253 249 243 / .9); color:var(--ink); font-weight:800; font-size:.875rem; box-shadow:0 0 0 1px rgb(255 255 255 / .7) inset, 0 6px 14px -8px rgb(70 44 20 / .5); }
 
-/* ── Words, big and slow, between the scenes (Know · Be · Become, today's landing) ── */
+/* ── Words, big and slow, after «بذر چیست» (Know · Be · Become) ── */
 .words{ overflow:hidden; padding-block:calc(var(--sec) * .6) 0; }
 .words-track{ display:flex; width:max-content; }
 .words-run{ display:flex; align-items:center; gap:clamp(18px, 3vw, 34px); padding-inline-end:clamp(18px, 3vw, 34px); flex:none; }
@@ -272,7 +338,7 @@ a,button{ touch-action:manipulation; }
 .words[data-paused] .words-track{ animation-play-state:paused; }
 @keyframes drift{ from{ transform:translateX(0); } to{ transform:translateX(50%); } }
 
-/* ── 4 · «آب بدهید»: a tap waters the seed's sprout and the رکورد grows a day ── */
+/* ── 6 · «آب بدهید»: a tap waters the seed's sprout and the رکورد grows a day ── */
 .water-grid{ display:grid; gap:32px; justify-items:center; text-align:center; }
 .water-text{ max-width:560px; }
 .water .lead{ margin-top:14px; }
@@ -300,34 +366,26 @@ html:not(.js) .try, html:not(.js) [data-water-btn]{ display:none; }
   .wcard{ justify-self:center; }
 }
 
-/* ── 5 · The night (the one dark section): the painting at night, the lanterns lit, the seed asleep ── */
-.night{ --bz-glyph:#f7efe2; position:relative; margin-top:var(--sec); padding-block:var(--sec); background:radial-gradient(120% 60% at 50% 0%, #1d2850 0%, var(--night) 60%); color:var(--on-night-2); border-radius:36px; }
-@media (min-width:1024px){ .night{ border-radius:48px; margin-inline:max(0px, calc((100% - 1440px) / 2)); } }
-.night h2,.night h3,.night .h2{ color:var(--on-night); }
-.night .eyebrow{ color:var(--lamp); }
-.night .lead{ color:var(--on-night-2); }
-.night-grid{ display:grid; gap:40px; justify-items:center; text-align:center; }
-.night-text{ max-width:560px; }
-.night .lead{ margin-top:14px; }
-.nframe{ position:relative; width:min(100%, 400px); }
-.nframe .frame{ aspect-ratio:9/16; max-height:78svh; margin-inline:auto; background:#0c1224; box-shadow:0 0 0 1px rgb(255 207 134 / .08), 0 30px 80px -30px rgb(255 207 134 / .28), 0 30px 60px -30px rgb(0 0 0 / .8); }
-.nframe .seed-host{ right:3%; bottom:-5%; width:28%; z-index:6; }
-@media (min-width:1024px){
-  .night-grid{ grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); align-items:center; justify-items:stretch; text-align:start; gap:64px; }
-  .nframe{ justify-self:center; }
+/* ── 7 · Instagram: a few posts the content agent made for Bazr's page (BZR-176, not yet approved: a draft here too) ── */
+.draft{ display:inline-flex; align-items:center; vertical-align:middle; min-height:26px; margin-inline-start:8px; padding:0 10px; border-radius:999px; background:var(--accent-soft); color:var(--accent-ink); font-size:.8125rem; font-weight:800; }
+.ig{ display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); align-items:start; gap:26px 12px; margin-top:36px; padding-bottom:36px; }
+.ig li:nth-child(even){ margin-top:36px; }
+.ig figure{ text-align:center; }
+.ig-img{ position:relative; aspect-ratio:4/5; border-radius:20px; overflow:hidden; background:#e8e1d3; box-shadow:var(--frame-shadow); isolation:isolate; }
+.ig-img img{ width:100%; height:100%; object-fit:cover; transition:transform 600ms var(--ease-out); }
+.ig-img::after{ content:""; position:absolute; inset:0; border-radius:inherit; box-shadow:inset 0 0 0 1px rgb(255 255 255 / .4); pointer-events:none; }
+.ig-many{ position:absolute; z-index:2; top:10px; left:10px; width:28px; height:28px; display:grid; place-items:center; border-radius:50%; background:rgb(23 62 50 / .62); color:#fbf6ec; }
+.ig-many svg{ width:15px; height:15px; }
+.ig figcaption{ margin-top:14px; padding-inline:4px; font-size:clamp(.9375rem, 2.4vw, 1.0625rem); font-weight:800; line-height:1.75; color:var(--ink); text-wrap:balance; }
+@media (min-width:700px){
+  .ig{ grid-template-columns:repeat(3, minmax(0, 300px)); justify-content:center; gap:36px 22px; padding-bottom:56px; margin-top:44px; }
+  .ig li:nth-child(even){ margin-top:0; }
+  .ig li:nth-child(3n+2){ margin-top:56px; }
+  .ig-img{ border-radius:26px; }
 }
-.moods-head{ margin-top:clamp(88px, 12vw, 140px); }
-.moods{ display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:12px; margin-top:36px; }
-@media (min-width:900px){ .moods{ grid-template-columns:repeat(4, minmax(0, 1fr)); gap:20px; } }
-.mood{ position:relative; display:flex; flex-direction:column; align-items:center; text-align:center; padding:18px 12px 20px; border-radius:28px; background:linear-gradient(180deg, #232d4c, var(--night-card)); box-shadow:inset 0 0 0 1px var(--night-line); }
-.mood .pose{ position:relative; width:min(62%, 124px); aspect-ratio:1 / 1.25; margin:10px auto 14px; }
-.mood .pose::before{ content:""; position:absolute; inset:-14% -24% -4%; border-radius:50%; background:radial-gradient(closest-side, rgb(255 207 134 / .2), rgb(255 207 134 / 0)); }
-.mood .seed-host{ inset:auto 0 0; width:100%; }
-.mood .gold-leaf{ position:absolute; z-index:2; left:-12%; top:0; width:26%; height:auto; transform:rotate(-18deg); filter:drop-shadow(0 4px 8px rgb(227 165 79 / .35)); }
-.mood b{ color:var(--on-night); font-weight:900; font-size:1.125rem; }
-.mood p{ margin-top:2px; font-size:.9375rem; line-height:1.7; color:var(--on-night-2); }
+@media (hover:hover) and (pointer:fine){ .ig figure:hover .ig-img img{ transform:scale(1.03); } }
 
-/* ── 6 · عضویت بذر: the section is here, its prices wait to be announced (ADR-0006) ── */
+/* ── 8 · عضویت بذر: the section is here, its prices wait to be announced (ADR-0006) ── */
 .price{ width:min(100%, 520px); margin:36px auto 0; padding:10px 22px 24px; border-radius:32px; background:var(--card); box-shadow:var(--frame-shadow); text-align:start; }
 .plans li{ display:flex; align-items:center; gap:12px; min-height:72px; padding-block:14px; border-bottom:1px solid var(--line); }
 .plans .pn{ font-weight:800; color:var(--ink-3); }
@@ -336,7 +394,7 @@ html:not(.js) .try, html:not(.js) [data-water-btn]{ display:none; }
 .price .btn{ margin-top:22px; }
 .fine{ margin-top:14px; font-size:.875rem; line-height:1.8; color:var(--ink-3); text-align:center; }
 
-/* ── 7 · Install ── */
+/* ── 9 · Install ── */
 .inst-grid{ display:grid; gap:16px; margin-top:36px; }
 @media (min-width:760px){ .inst-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); gap:24px; max-width:960px; margin-inline:auto; } }
 .inst{ display:flex; flex-direction:column; align-items:flex-start; gap:10px; padding:26px 24px 26px; border-radius:32px; background:var(--card); box-shadow:var(--shadow); }
@@ -351,7 +409,7 @@ html:not(.js) .try, html:not(.js) [data-water-btn]{ display:none; }
 .inst .btn{ margin-top:12px; }
 .inst .push{ margin-top:auto; padding-top:12px; }
 
-/* ── 8 · Questions ── */
+/* ── 10 · Questions ── */
 .qa{ max-width:760px; margin:32px auto 0; display:grid; gap:12px; }
 .qa details{ border-radius:24px; background:var(--card); box-shadow:var(--shadow); }
 .qa summary{ display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:64px; padding:14px 22px; list-style:none; cursor:pointer; font-weight:800; font-size:1.0625rem; color:var(--ink); border-radius:24px; transition:color 140ms ease; }
@@ -360,7 +418,7 @@ html:not(.js) .try, html:not(.js) [data-water-btn]{ display:none; }
 .qa details[open] summary svg{ transform:rotate(45deg); }
 .qa .ans{ padding:0 22px 20px; color:var(--ink-2); }
 
-/* ── 9 · The last call: the seed peeks over the card ── */
+/* ── 11 · The last call: the seed peeks over the card ── */
 .final{ padding-bottom:var(--sec); }
 .fcard{ position:relative; max-width:880px; margin:calc(var(--sec) + 80px) auto 0; padding:clamp(44px, 8vw, 72px) clamp(22px, 6vw, 64px) clamp(36px, 6vw, 56px); border-radius:40px; background:var(--card); box-shadow:var(--frame-shadow); text-align:center; }
 .fcard .peek{ position:absolute; z-index:0; left:50%; top:0; width:180px; height:160px; margin-left:-90px; transform:translateY(-100%); overflow:hidden; pointer-events:none; }
@@ -392,6 +450,9 @@ html:not(.js) .try, html:not(.js) [data-water-btn]{ display:none; }
 @media (min-width:1024px) and (max-resolution:1.4dppx){
   .hero-art{ max-width:520px; height:min(367px, calc(100svh - 300px)); }
   .hero-art .plant,.grow-art .plant{ max-height:540px; }
+  .steps-art{ width:420px; }
+  .ttm li{ left:50%; min-height:38px; }
+  .ttm .term{ font-size:.9375rem; }
   .live .grow-art{ max-width:520px; height:min(367px, calc(100svh - 280px)); }
 }
 
@@ -410,6 +471,8 @@ html:not(.js) .try, html:not(.js) [data-water-btn]{ display:none; }
     <a class="brand" href="#top"><img src="assets/looks/story/logo-96.webp" width="40" height="42" alt="">بذر</a>
     <nav class="bar-links" aria-label="بخش‌های صفحه">
       <a href="#grow">مراحل رشد</a>
+      <a href="#what">بذر چیست؟</a>
+      <a href="#method">متد بذر</a>
       <a href="#inside">داخل بذر</a>
       <a href="#membership">عضویت بذر</a>
       <a href="#faq">سؤال‌ها</a>
@@ -475,7 +538,92 @@ html:not(.js) .try, html:not(.js) [data-water-btn]{ display:none; }
   </div>
 </section>
 
-<!-- ── 3 · Inside Bazr (highlight 4, today's «داخل بذر»): six scenes, never a screen of the app (ADR-0006) ── -->
+<!-- ── 3 · بذر چیست (the «بذر چیست» highlight, today's landing at /old/: its «فاصله‌ی دونستن تا انجام دادن» and
+     «Know · Be · Become»), addressed with «شما» where it speaks to the reader; the lines about all of us stay «ما».
+     Two of its examples are left out, NEEDS-REVIEW: مرجع تغذیه (BZR-180 report). Pictures: three crops of the painting. ── -->
+<section class="sec what" id="what" aria-labelledby="what-h">
+  <div class="wrap what-top">
+    <div class="rv">
+      <p class="eyebrow">بذر چیست؟</p>
+      <h2 id="what-h" class="h2 what-h">همه‌ی ما چیزهایی درباره‌ی خودمان و زندگی می‌دانیم.<span class="soft">ولی صرفِ دانستن، همیشه باعث تغییر نمی‌شود.</span></h2>
+      <p class="lead">چون خیلی وقت‌ها پیش از اینکه بدانیم «چه کاری باید انجام دهیم»، باید بفهمیم چرا الان این‌طور رفتار می‌کنیم.</p>
+      <p class="what-from">و بذر از همین نقطه شروع می‌شود:</p>
+    </div>
+    <div class="know-word rv">
+      <p class="bigword">شناخت<i>.</i></p>
+      <div class="know-seed" aria-hidden="true"><div class="seed-host" data-seed='{"size":130,"face":"happy","enter":"happy"}' data-tap></div></div>
+    </div>
+  </div>
+  <div class="wrap kbb">
+    <div class="head center rv">
+      <h3 class="h2">اینجا یک نسخه‌ی یکسان برای همه وجود ندارد.</h3>
+      <p class="lead">مسیر هر کس بر اساس شرایط، رفتارها، نیازها و مرحله‌ای که در تغییر در آن قرار دارد، متفاوت طراحی می‌شود.</p>
+    </div>
+    <ul class="trio">
+      <li class="rv">
+        <figure class="frame"><img src="assets/looks/story/know-320.webp" srcset="assets/looks/story/know-320.webp 320w, assets/looks/story/know-640.webp 640w" sizes="(min-width:1024px) 317px, (min-width:700px) 30vw, 38vw" width="640" height="800" alt="نقاشی باغ بذر: آینه‌ای میان گل‌ها" loading="lazy" decoding="async"></figure>
+        <div><p class="trio-k"><b>شناختن</b><i class="term" dir="ltr">Know</i></p><p>خودتان و الگوهایتان را بشناسید.</p></div>
+      </li>
+      <li class="rv" style="--d:90ms">
+        <figure class="frame"><img src="assets/looks/story/be-320.webp" srcset="assets/looks/story/be-320.webp 320w, assets/looks/story/be-640.webp 640w" sizes="(min-width:1024px) 317px, (min-width:700px) 30vw, 38vw" width="640" height="800" alt="نقاشی باغ بذر: خورشید بالای کوه‌ها و دره" loading="lazy" decoding="async"></figure>
+        <div><p class="trio-k"><b>حضور داشتن</b><i class="term" dir="ltr">Be</i></p><p>آگاهانه‌تر در زندگی‌تان حضور داشته باشید.</p></div>
+      </li>
+      <li class="rv" style="--d:180ms">
+        <figure class="frame"><img src="assets/looks/story/become-320.webp" srcset="assets/looks/story/become-320.webp 320w, assets/looks/story/become-640.webp 640w" sizes="(min-width:1024px) 317px, (min-width:700px) 30vw, 38vw" width="640" height="800" alt="نقاشی باغ بذر: پلی چوبی روی آب، میان آبشارها" loading="lazy" decoding="async"></figure>
+        <div><p class="trio-k"><b>تغییر کردن</b><i class="term" dir="ltr">Become</i></p><p>در مسیر تغییر قدم بردارید.</p></div>
+      </li>
+    </ul>
+    <p class="tagline"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><i class="term" dir="ltr">A place to know, to be, to become.</i></p>
+  </div>
+</section>
+
+<!-- Know · Be · Become, the «بذر چیست» highlight, as slow big words after it -->
+<div class="words" aria-hidden="true" data-words>
+  <div class="words-track">
+    <div class="words-run"><span>شناختن</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span class="pale">حضور داشتن</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span>تغییر کردن</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span class="pale">بدن، ذهن، روح</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></div>
+    <div class="words-run"><span>شناختن</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span class="pale">حضور داشتن</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span>تغییر کردن</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span class="pale">بدن، ذهن، روح</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></div>
+  </div>
+</div>
+
+<!-- ── 4 · متد بذر (the TTM text, highlight «متد بذر», today's landing at /old/), addressed with «شما». The five names
+     are the model's own (ADR-0007); the highlight's four sentences say that people stand at different stages and are
+     not tied to a name here (the BZR-180 report says why). The approaches list after TTM is not on this page. ── -->
+<section class="sec method" id="method" aria-labelledby="method-h">
+  <div class="wrap method-grid">
+    <div class="method-text rv">
+      <p class="eyebrow">متد بذر</p>
+      <h2 id="method-h" class="h2">تغییر فقط با انگیزه<br>اتفاق نمی‌افتد.</h2>
+      <p class="lead">برای اینکه یک تغییر ماندگار شود، باید بفهمیم هر کس الان دقیقاً کجای مسیر تغییر ایستاده است.</p>
+      <p class="method-p">یکی از مدل‌هایی که در بذر از آن استفاده می‌کنیم، مدل علمی <i class="term" dir="ltr">TTM</i> یا «مراحل تغییر» است. این مدل می‌گوید همه‌ی آدم‌ها برای تغییر یک رفتار، در یک مرحله نیستند.</p>
+    </div>
+    <div class="steps-art rv" style="--d:80ms">
+      <figure class="frame">
+        <img src="assets/looks/story/steps-400.webp" srcset="assets/looks/story/steps-400.webp 400w, assets/looks/story/steps-664.webp 664w" sizes="(min-width:1024px) and (max-resolution:1.4dppx) 420px, 330px" width="664" height="830" alt="نقاشی باغ بذر: پله‌های سنگی که به دروازه‌ای از گل می‌رسند" loading="lazy" decoding="async">
+        <figcaption class="steps-tag"><i class="term" dir="ltr">TTM · Stages of Change</i></figcaption>
+        <ol class="ttm" aria-label="پنج مرحله‌ی مدل TTM">
+          <li style="--i:0"><span class="n">۱</span><i class="term" dir="ltr">Precontemplation</i></li>
+          <li style="--i:1"><span class="n">۲</span><i class="term" dir="ltr">Contemplation</i></li>
+          <li style="--i:2"><span class="n">۳</span><i class="term" dir="ltr">Preparation</i></li>
+          <li style="--i:3"><span class="n">۴</span><i class="term" dir="ltr">Action</i></li>
+          <li style="--i:4"><span class="n">۵</span><i class="term" dir="ltr">Maintenance</i></li>
+        </ol>
+      </figure>
+      <div class="seed-host" aria-hidden="true" data-seed='{"size":110,"mood":"happy"}' data-tap></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <ul class="voices" data-voices>
+      <li>ممکن است یک نفر هنوز مطمئن نباشد اصلاً می‌خواهد تغییر کند.</li>
+      <li>یک نفر آماده‌ی شروع باشد.</li>
+      <li>یک نفر شروع کرده باشد، ولی نتواند ادامه دهد.</li>
+      <li>و یک نفر درگیر حفظ تغییری باشد که ساخته است.</li>
+    </ul>
+    <p class="lead method-fit rv">پس منطقی نیست به همه یک توصیه‌ی یکسان بدهیم. بذر سعی می‌کند مسیر، تمرین‌ها و قدم‌های بعدی را متناسب با مرحله‌ای طراحی کند که شما در آن هستید.</p>
+    <p class="science rv">علم در بذر قرار نیست به اصطلاحات پیچیده تبدیل شود.<b>قرار است نتیجه‌اش را در یک مسیر ساده، شخصی و قابل اجرا ببینید.</b></p>
+  </div>
+</section>
+
+<!-- ── 5 · Inside Bazr (highlight 4, today's «داخل بذر»): six scenes, never a screen of the app (ADR-0006) ── -->
 <section class="sec inside" id="inside" aria-labelledby="inside-h">
   <div class="wrap head center rv">
     <p class="eyebrow">داخل بذر</p>
@@ -548,15 +696,7 @@ html:not(.js) .try, html:not(.js) [data-water-btn]{ display:none; }
   </div>
 </section>
 
-<!-- Know · Be · Become, today's landing (highlight 1) -->
-<div class="words" aria-hidden="true" data-words>
-  <div class="words-track">
-    <div class="words-run"><span>شناختن</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span class="pale">حضور داشتن</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span>تغییر کردن</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span class="pale">بدن، ذهن، روح</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></div>
-    <div class="words-run"><span>شناختن</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span class="pale">حضور داشتن</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span>تغییر کردن</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg><span class="pale">بدن، ذهن، روح</span><svg viewBox="0 0 24 24"><path d="M5 19C5 10.5 10 5.3 20 4c-.9 9.8-6.2 15-15 15z" fill="#7ea65c"/><path d="M5 19l8.2-8.2" stroke="#4f7a45" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></div>
-  </div>
-</div>
-
-<!-- ── 4 · «آب بدهید» (gordol's «feed the fire»): the رکورد as the glossary defines it (BZR-11) ── -->
+<!-- ── 6 · «آب بدهید» (gordol's «feed the fire»): the رکورد as the glossary defines it (BZR-11) ── -->
 <section class="sec water" id="water" aria-labelledby="water-h">
   <div class="wrap water-grid">
     <div class="water-text rv">
@@ -590,36 +730,30 @@ html:not(.js) .try, html:not(.js) [data-water-btn]{ display:none; }
   </div>
 </section>
 
-<!-- ── 5 · The night, the one dark section (the painting at night, its lanterns), and the seed's moods (the sheet's
-     faces that are allowed at rest, and the app's moments for them: docs/looks.md §3.7) ── -->
-<section class="night" id="night" aria-labelledby="night-h">
-  <div class="wrap night-grid">
-    <div class="night-text rv">
-      <p class="eyebrow">شب</p>
-      <h2 id="night-h" class="h2">باغ بذر،<br>شب هم دارد.</h2>
-      <p class="lead">شب‌ها فانوس‌های باغ روشن می‌شوند و بذر هم می‌خوابد.</p>
-    </div>
-    <div class="nframe rv" style="--d:80ms">
-      <figure class="frame"><img src="assets/looks/story/night-560.webp" srcset="assets/looks/story/night-560.webp 560w, assets/looks/story/night-800.webp 800w" sizes="(min-width:1024px) 400px, min(400px, calc(100vw - 32px))" width="800" height="1422" alt="نقاشی باغ بذر در شب: ماه بالای کوه‌ها و فانوس‌های روشن کنار پله‌ها" loading="lazy" decoding="async"></figure>
-      <div class="seed-host" aria-hidden="true" data-seed='{"size":110,"mood":"sleepy","hold":"خوابیدن"}' data-tap></div>
-    </div>
-  </div>
+<!-- ── 7 · Instagram: six posts the content agent made for Bazr's page (~/workstation/bazr-instagram/posts/:
+     1405-08-17-talangor, idea-16-before-after slide 2, idea-14-inner-map, 1405-08-18-talangor, idea-13-comic slide 3,
+     1405-09-09-typography). Not yet approved by Owner پروژه (BZR-176), so this section is a draft like the page. Each
+     line is the post's own, in the post's own voice; none carries a health or nutrition claim. No link: the account's
+     public address is not in the posts' files. ── -->
+<section class="sec insta" id="insta" aria-labelledby="insta-h">
   <div class="wrap">
-    <div class="head center moods-head rv">
-      <p class="eyebrow">بذر</p>
-      <h2 class="h2">هر لحظه،<br>یک حال.</h2>
-      <p class="lead">با تسک‌های شما شاد می‌شود، شب‌ها می‌خوابد و برای رکوردتان سربلند است.</p>
+    <div class="head center rv">
+      <p class="eyebrow">اینستاگرام بذر<span class="draft">پیش‌نویس</span></p>
+      <h2 id="insta-h" class="h2">جمله‌هایی برای<br>یک لحظه مکث.</h2>
+      <p class="lead">چند پست کوتاه که برای صفحه‌ی اینستاگرام بذر آماده شده‌اند.</p>
     </div>
-    <ul class="moods">
-      <li class="mood rv"><div class="pose" aria-hidden="true"><div class="seed-host" data-seed='{"size":120,"face":"happy","still":"شاد بودن"}' data-tap></div></div><b>شاد</b><p>یک تسک انجام شد.</p></li>
-      <li class="mood rv" style="--d:70ms"><div class="pose" aria-hidden="true"><div class="seed-host" data-seed='{"size":120,"face":"love","still":"دوست داشتن"}' data-tap></div></div><b>مهربان</b><p>وقتی لمسش می‌کنید.</p></li>
-      <li class="mood rv" style="--d:140ms"><div class="pose" aria-hidden="true"><div class="seed-host" data-seed='{"size":120,"mood":"sleepy","hold":"خوابیدن"}' data-tap></div></div><b>خواب‌آلود</b><p>شب‌ها، وقت خواب.</p></li>
-      <li class="mood rv" style="--d:210ms"><div class="pose" aria-hidden="true"><svg class="gold-leaf" viewBox="0 0 24 30"><path d="M12,29 C3,23 2,10 12,1 C22,10 21,23 12,29Z" fill="#e3a54f"/><path d="M12,27 L12,6" stroke="#fbe3b0" stroke-width="1.4" stroke-linecap="round" opacity=".8"/><path d="M12,29 C3,23 2,10 12,1" fill="none" stroke="#b8823a" stroke-width="1" opacity=".5"/></svg><div class="seed-host" data-seed='{"size":120,"face":"proud","beat":"فشرده و کشیده شدن"}' data-tap></div></div><b>سربلند</b><p>رکورد شما یک روز بلندتر شد.</p></li>
+    <ul class="ig">
+      <li class="rv"><figure><div class="ig-img"><img src="assets/looks/story/insta/slow-360.webp" srcset="assets/looks/story/insta/slow-360.webp 360w, assets/looks/story/insta/slow-600.webp 600w" sizes="(min-width:1024px) 300px, (min-width:700px) calc((100vw - 108px) / 3), calc(50vw - 22px)" width="600" height="750" alt="لاک‌پشتی که گلدانی روی لاکش دارد" loading="lazy" decoding="async"></div><figcaption>آهسته رفتن، ایستادن نیست</figcaption></figure></li>
+      <li class="rv" style="--d:80ms"><figure><div class="ig-img"><span class="ig-many" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="8" y="3" width="13" height="13" rx="2.5"/><path d="M16 19.5a1.5 1.5 0 0 1-1.5 1.5H5.5A2.5 2.5 0 0 1 3 18.5v-9A1.5 1.5 0 0 1 4.5 8"/></svg></span><img src="assets/looks/story/insta/small-step-360.webp" srcset="assets/looks/story/insta/small-step-360.webp 360w, assets/looks/story/insta/small-step-600.webp 600w" sizes="(min-width:1024px) 300px, (min-width:700px) calc((100vw - 108px) / 3), calc(50vw - 22px)" width="600" height="750" alt="" loading="lazy" decoding="async"></div><figcaption>همین قدم کوچیک هم ارزش داره</figcaption></figure></li>
+      <li class="rv" style="--d:160ms"><figure><div class="ig-img"><img src="assets/looks/story/insta/map-360.webp" srcset="assets/looks/story/insta/map-360.webp 360w, assets/looks/story/insta/map-600.webp 600w" sizes="(min-width:1024px) 300px, (min-width:700px) calc((100vw - 108px) / 3), calc(50vw - 22px)" width="600" height="750" alt="نقشه‌ای نقاشی‌شده از کوه و رود، با راهی از «روستای شروع» تا «قله‌ی خودِ واقعی»" loading="lazy" decoding="async"></div><figcaption>تو الان کجای این نقشه‌ای؟</figcaption></figure></li>
+      <li class="rv"><figure><div class="ig-img"><img src="assets/looks/story/insta/seasons-360.webp" srcset="assets/looks/story/insta/seasons-360.webp 360w, assets/looks/story/insta/seasons-600.webp 600w" sizes="(min-width:1024px) 300px, (min-width:700px) calc((100vw - 108px) / 3), calc(50vw - 22px)" width="600" height="750" alt="دو گلدان: یکی گل داده و دیگری هنوز غنچه است" loading="lazy" decoding="async"></div><figcaption>هر گلی فصل خودش رو داره</figcaption></figure></li>
+      <li class="rv" style="--d:80ms"><figure><div class="ig-img"><span class="ig-many" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="8" y="3" width="13" height="13" rx="2.5"/><path d="M16 19.5a1.5 1.5 0 0 1-1.5 1.5H5.5A2.5 2.5 0 0 1 3 18.5v-9A1.5 1.5 0 0 1 4.5 8"/></svg></span><img src="assets/looks/story/insta/mountain-360.webp" srcset="assets/looks/story/insta/mountain-360.webp 360w, assets/looks/story/insta/mountain-600.webp 600w" sizes="(min-width:1024px) 300px, (min-width:700px) calc((100vw - 108px) / 3), calc(50vw - 22px)" width="600" height="750" alt="آدمکی گرد که آسوده روی چند جعبه نشسته است" loading="lazy" decoding="async"></div><figcaption>کوه، یکی‌یکی کوچیک می‌شه</figcaption></figure></li>
+      <li class="rv" style="--d:160ms"><figure><div class="ig-img"><img src="assets/looks/story/insta/growth-360.webp" srcset="assets/looks/story/insta/growth-360.webp 360w, assets/looks/story/insta/growth-600.webp 600w" sizes="(min-width:1024px) 300px, (min-width:700px) calc((100vw - 108px) / 3), calc(50vw - 22px)" width="600" height="750" alt="" loading="lazy" decoding="async"></div><figcaption>رشد همیشه پرسروصدا نیست؛ گاهی فقط یه نفس عمیق‌تره</figcaption></figure></li>
     </ul>
   </div>
 </section>
 
-<!-- ── 6 · عضویت بذر (ADR-0006: the section is here; plan names, lengths and prices wait to be announced) ── -->
+<!-- ── 8 · عضویت بذر (ADR-0006: the section is here; plan names, lengths and prices wait to be announced) ── -->
 <section class="sec member" id="membership" aria-labelledby="member-h">
   <div class="wrap center">
     <div class="head rv">
@@ -639,7 +773,7 @@ html:not(.js) .try, html:not(.js) [data-water-btn]{ display:none; }
   </div>
 </section>
 
-<!-- ── 7 · Install: the web app works on any phone; the Android app exists, its channel is not chosen yet (E1, BZR-109) ── -->
+<!-- ── 9 · Install: the web app works on any phone; the Android app exists, its channel is not chosen yet (E1, BZR-109) ── -->
 <section class="sec install" id="install" aria-labelledby="install-h">
   <div class="wrap">
     <div class="head center rv">
@@ -667,7 +801,7 @@ html:not(.js) .try, html:not(.js) [data-water-btn]{ display:none; }
   </div>
 </section>
 
-<!-- ── 8 · Questions (highlight 5, today's landing; the AI answer waits for E3, as there) ── -->
+<!-- ── 10 · Questions (highlight 5, today's landing; the AI answer waits for E3, as there) ── -->
 <section class="sec faq" id="faq" aria-labelledby="faq-h">
   <div class="wrap">
     <div class="head center rv">
@@ -684,7 +818,7 @@ html:not(.js) .try, html:not(.js) [data-water-btn]{ display:none; }
   </div>
 </section>
 
-<!-- ── 9 · The last call (brand book 1.1, «اصل بنیادین»; today's landing) ── -->
+<!-- ── 11 · The last call (brand book 1.1, «اصل بنیادین»; today's landing) ── -->
 <section class="final" aria-labelledby="final-h">
   <div class="wrap">
     <div class="fcard rv">
