@@ -1,4 +1,4 @@
-/* «داستان بذر» (story/index.html, BZR-175): what the page does. No dependencies; the seed and the earthworm come from
+/* «داستان بذر» (index.html, BZR-175, BZR-180): what the page does. No dependencies; the seed and the earthworm come from
    characters.js (window.BazrCharacters) and the page reads and works without them.
    - The characters: made when they come near the screen, their idle motion paused while they are off it; a tap on a
      seed plays the app's tap reaction (a happy jump and «دوست داشتن» in turn; a sleeping one wakes for a moment).
@@ -6,6 +6,7 @@
      comes up once, briefly, beside the flowering plant.
    - The carousel: dots and arrows over a native snap scroller; each moment plays once when its card is in view.
    - «آب بدهید»: each tap waters the sprout, the رکورد grows a day, the seed is happy; five taps reach گل.
+   - «متد بذر»: the four sentences light one by one as they rise into the upper part of the screen.
    Motion is transform and opacity, from the scroll or a tap, and interruptible. Under «کاهش حرکت» nothing moves: the
    story is three still pictures, the moments show their end, and characters.js shows its key poses. */
 (function () {
@@ -67,13 +68,13 @@
       r.paused = [];
     }
   }
-  function enter(r, host) {
+  function enter(r) {
     if (r.entered) return;
     r.entered = true;
     if (RM()) return; // without motion the characters keep their resting faces until tapped
-    var o = r.o, i = $$(".moods .seed-host").indexOf(host);
+    var o = r.o;
     if (o.enter) later(function () { act(r, o.enter === "happy" ? "شاد بودن" : o.enter); }, 700);
-    else if ((o.beat || o.still) && i >= 0) later(function () { act(r, o.still || o.beat); }, 500 + i * 380);
+    else if (o.beat || o.still) later(function () { act(r, o.still || o.beat); }, 500);
   }
   var hosts = $$("[data-seed]");
   if (C && IO) {
@@ -86,7 +87,7 @@
         if (!r) r = e.isIntersecting ? seedOf(e.target) : null;
         if (!r) return;
         pauseHost(e.target, !e.isIntersecting);
-        if (e.isIntersecting && e.intersectionRatio >= 0.6) enter(r, e.target);
+        if (e.isIntersecting && e.intersectionRatio >= 0.6) enter(r);
       });
     }, { threshold: [0, 0.6] });
     hosts.forEach(function (h) { near.observe(h); seen.observe(h); });
@@ -149,14 +150,7 @@
       later(function () { w.dispose(); host.style.opacity = ""; }, 340);
     });
   }
-  // the bar turns to night glass while the night section is under it
-  var bar = $(".bar"), night = $("#night"), dark = false;
-  function barUpdate() {
-    if (!bar || !night) return;
-    var r = night.getBoundingClientRect(), d = r.top <= 40 && r.bottom >= 40;
-    if (d !== dark) { dark = d; if (d) bar.setAttribute("data-dark", ""); else bar.removeAttribute("data-dark"); }
-  }
-  function onScroll() { if (!ticking) { ticking = true; W.requestAnimationFrame(function () { growUpdate(); barUpdate(); }); } }
+  function onScroll() { if (!ticking) { ticking = true; W.requestAnimationFrame(growUpdate); } }
   function setLive() {
     var live = !RM() && !!grow;
     root.classList.toggle("live", live);
@@ -294,6 +288,16 @@
       n++;
       render(true);
     });
+  }
+
+  /* ───────── «متد بذر»: each sentence lights as it rises past the lower part of the screen, and dims below it ───────── */
+  var voices = $("[data-voices]");
+  if (voices && IO) {
+    voices.setAttribute("data-live", "");
+    var vio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { e.target.classList.toggle("lit", e.isIntersecting && e.intersectionRatio >= 0.8); });
+    }, { rootMargin: "0px 0px -26% 0px", threshold: [0, 0.8, 1] });
+    $$("li", voices).forEach(function (li) { vio.observe(li); });
   }
 
   /* ───────── the slow words: they drift only while they can be seen ───────── */
