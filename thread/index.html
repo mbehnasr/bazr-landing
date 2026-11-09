@@ -1,55 +1,56 @@
 <!doctype html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" data-theme="paper">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>[پیش‌نویس] بذر · بدن، ذهن، روح</title>
-<!-- «رشته» (BZR-182): a second preview beside /bzr/. One long wire, generated in code (thread.js), loops around the
-     volume of a standing person; as you scroll it moves from a tangle to a clear figure, and then into three threads,
-     ب ذ ر = بدن، ذهن، روح. The idea only (a person emerging from a tangle of looping line) came from a photo of someone
-     else's sculpture; nothing is traced, sampled or embedded, and the photo is not in this repo. Ink on paper; a world's
-     colour shows only when it is chosen. A private preview: noindex stays and the footer says it is an internal preview
-     until Owner پروژه picks a design (BZR-139, ADR-0005). Copy as /bzr/; ADR-0006: no app screens, prices still empty. -->
+<!-- «رشته» v2 (BZR-183): one long wire, generated in code (thread.js), loops around the volume of a standing person.
+     One large figure stays fixed behind the whole page and changes with each part: a tangle at the top, clear in the
+     three worlds (each thread coloured in turn), loosening in the method, clear with its three threads at the end.
+     Story screens snap (proximity: they settle only when you stop near one, so the long parts are never forced); four
+     themes on <html data-theme>. The idea only (a person emerging from a tangle of looping line) came from a photo of
+     someone else's sculpture; nothing is traced, sampled or embedded, and the photo is not in this repo. A private
+     preview: noindex stays and the footer says it is an internal preview until Owner پروژه picks a design (BZR-139,
+     ADR-0005). Copy as /bzr/; ADR-0006: no app screens, prices still empty. -->
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="بذر یعنی بدن، ذهن، روح. بذر یک پلتفرم Lifestyle و Behavior Change است که کمک می‌کند الگوهای رفتاری، نیازها، عادت‌ها و سبک زندگی خودتان را بهتر بشناسید و قدم‌به‌قدم مسیر تغییر خودتان را بسازید.">
 <meta name="theme-color" content="#f3f1ec">
-<meta name="color-scheme" content="light">
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="preload" href="../assets/fonts/vazirmatn.woff2" as="font" type="font/woff2" crossorigin>
-<script>document.documentElement.classList.add("js");</script>
+<script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("bazr-thread-theme");if(/^(paper|chalk|sand|green)$/.test(t))d.setAttribute("data-theme",t)}catch(e){}})(document.documentElement);</script>
 <style>
 @font-face{ font-family:"Vazirmatn"; src:url("../assets/fonts/vazirmatn.woff2") format("woff2"); font-weight:100 900; font-style:normal; font-display:swap; }
 
-/* ── Tokens. Ink and the main button are brand book 1.1's deep digital green (ADR-0008) on a pale paper, with a dark
-      wire; each world has its own colour (terracotta, teal, violet), shown only when that world is chosen. «-ink» is for text (≥ 5.7:1 on every
-      background here), the plain tone for large letters and lines only. ── */
+/* ── Tokens: four themes on <html data-theme>. Every text/background pair passes WCAG AA (tools/themes.py checks 220
+      pairs, text over the faint figure included). «-ink» is for text; the plain tones are for large letters and lines. ── */
+:root, :root[data-theme="paper"]{ --canvas:#f3f1ec; --card:#fbfaf7; --band:#ebe5da; --stone:#e9e4da; --line:#e1ddd4; --line-2:#cfc8bb; --ink:#14302a; --ink-2:#3e4a45; --ink-3:#4f5954; --primary:#214d3b; --primary-hi:#2a5c47; --on-primary:#fbfaf7; --wire:#1c2420; --body:#b4642e; --body-ink:#8c4618; --mind:#1f7c7b; --mind-ink:#155a5c; --soul:#7a5ca4; --soul-ink:#574083; --body-tint:#f5eee6; --mind-tint:#edf2ef; --soul-tint:#f1eef2; --soon-bg:#f3e5cc; --soon-ink:#6f460b; --focus:#14302a; --shade:60 44 24; --track:#e6e1d8; --glow:transparent; --fig-free:.12; --fig-fade:.14; color-scheme:light;}
+:root[data-theme="chalk"]{ --canvas:#171b1a; --card:#202624; --band:#1d2220; --stone:#121514; --line:#2b322f; --line-2:#3b4440; --ink:#f2eee5; --ink-2:#d5d1c8; --ink-3:#a8a59e; --primary:#55a37e; --primary-hi:#62b08b; --on-primary:#0b1711; --wire:#ebe6da; --body:#e08f57; --body-ink:#f0ad80; --mind:#4cb8b0; --mind-ink:#7fd2cb; --soul:#a98ae0; --soul-ink:#c4adf2; --body-tint:#1c1c19; --mind-tint:#161c1b; --soul-tint:#1a1a1e; --soon-bg:#3a2f1c; --soon-ink:#f2cf8f; --focus:#f2eee5; --shade:0 0 0; --track:#2c3330; --glow:transparent; --fig-free:.14; --fig-fade:.24; color-scheme:dark;}
+:root[data-theme="sand"]{ --canvas:#f0e3cf; --card:#f8f0e4; --band:#e8d7bd; --stone:#e6d5bc; --line:#dccab0; --line-2:#c6ae8c; --ink:#2b2016; --ink-2:#4a3b2d; --ink-3:#5c4b3c; --primary:#214d3b; --primary-hi:#2a5c47; --on-primary:#f8f0e4; --wire:#3a2a1d; --body:#a3501c; --body-ink:#843d10; --mind:#16706e; --mind-ink:#0e5553; --soul:#6d4d9a; --soul-ink:#523780; --body-tint:#f1dfcb; --mind-tint:#e8e2cf; --soul-tint:#ece0d2; --soon-bg:#ecd3a9; --soon-ink:#5e3a06; --focus:#2b2016; --shade:92 58 24; --track:#e3d2b8; --glow:rgb(247 196 150 / .55); --fig-free:.12; --fig-fade:.15; color-scheme:light;}
+:root[data-theme="green"]{ --canvas:#1f4a39; --card:#265644; --band:#1b4233; --stone:#183b2e; --line:#2f6150; --line-2:#447a65; --ink:#f4f0e5; --ink-2:#dfe2d6; --ink-3:#cad6cb; --primary:#f4f0e5; --primary-hi:#ffffff; --on-primary:#1f4a39; --wire:#f1ebdc; --body:#f3a571; --body-ink:#f7c19c; --mind:#8fdccf; --mind-ink:#b0e8df; --soul:#cbb4f4; --soul-ink:#ddcdfa; --body-tint:#25493a; --mind-tint:#1f4b3e; --soul-tint:#24493f; --soon-bg:#3e5a3c; --soon-ink:#f4dca6; --focus:#f4f0e5; --shade:4 20 14; --track:#2d5e4c; --glow:transparent; --fig-free:.13; --fig-fade:.24; color-scheme:dark;}
+
 :root{
-  --canvas:#f3f1ec; --card:#fbfaf7; --stone:#ebe7df; --line:#e1ddd4; --line-2:#cfc8bb; --wire:#1c2420;
-  --ink:#14302a; --ink-2:#3e4a45; --ink-3:#5c6661;
-  --primary:#214d3b; --primary-hi:#2a5c47; --on-primary:#fdfaf5; --accent:#d99a4e; --track:#e7e0d6;
-  --body:#b86a35; --body-ink:#8c4618; --body-soft:#f3e2cf; --body-tint:#f5efe8;
-  --mind:#23807f; --mind-ink:#155a5c; --mind-soft:#d9ebe7; --mind-tint:#eef2ef;
-  --soul:#7d5fa6; --soul-ink:#574083; --soul-soft:#e7e0f0; --soul-tint:#f2eff2;
-  --shadow:0 1px 0 rgb(255 255 255 / .7) inset, 0 2px 6px -2px rgb(60 44 24 / .1), 0 16px 32px -20px rgb(60 44 24 / .3);
-  --frame-shadow:0 2px 4px rgb(60 44 24 / .06), 0 24px 48px -28px rgb(60 44 24 / .45);
-  --ease-out:cubic-bezier(.23,1,.32,1); --ease-io:cubic-bezier(.77,0,.175,1);
+  --ease-out:cubic-bezier(.23,1,.32,1); --ease-io:cubic-bezier(.77,0,.175,1); --ease-soft:cubic-bezier(.2,.7,.2,1);
+  --shadow:0 1px 0 rgb(255 255 255 / .06) inset, 0 2px 6px -2px rgb(var(--shade) / .12), 0 16px 32px -20px rgb(var(--shade) / .34);
   --f:"Vazirmatn", Tahoma, system-ui, sans-serif;
-  /* the grid: 4 columns on a phone, 8 on a tablet, 12 on a desktop, inside one 1200 px column */
   --max:1200px; --cols:4; --gut:16px; --gap:16px; --sec:88px; --head:32px; --top:60px;
 }
 @media (min-width:700px){ :root{ --cols:8; --gut:32px; --gap:20px; --sec:112px; --head:40px; } }
 @media (min-width:1024px){ :root{ --cols:12; --gut:40px; --gap:24px; --sec:144px; --head:48px; --top:68px; } }
-[data-w="body"]{ --w:var(--body); --wi:var(--body-ink); --ws:var(--body-soft); }
-[data-w="mind"]{ --w:var(--mind); --wi:var(--mind-ink); --ws:var(--mind-soft); }
-[data-w="soul"]{ --w:var(--soul); --wi:var(--soul-ink); --ws:var(--soul-soft); }
-[data-w="change"]{ --w:var(--primary); --wi:var(--ink); --ws:#e3ebdf; }
-.l-b{ color:var(--body); } .l-m{ color:var(--mind); } .l-s{ color:var(--soul); }
+[data-w="body"]{ --w:var(--body); --wi:var(--body-ink); }
+[data-w="mind"]{ --w:var(--mind); --wi:var(--mind-ink); }
+[data-w="soul"]{ --w:var(--soul); --wi:var(--soul-ink); }
+[data-w="change"]{ --w:var(--primary); --wi:var(--ink); }
 
-html{ -webkit-text-size-adjust:100%; -webkit-tap-highlight-color:transparent; scroll-padding-top:calc(var(--top) + 16px); }
+/* ── Base ── */
+html{ -webkit-text-size-adjust:100%; -webkit-tap-highlight-color:transparent; background:var(--canvas); }
+/* snapping, in the direction of travel only: thread.js turns on (data-snap) at most one story screen at a time, the one
+   you are moving into, once enough of it is in view; the long parts have no snap points at all, and without the script
+   nothing snaps. So a small nudge never pulls you back, and nothing is out of reach. */
+html.js{ scroll-snap-type:y mandatory; }
 @media (prefers-reduced-motion:no-preference){ html{ scroll-behavior:smooth; } }
 *,*::before,*::after{ box-sizing:border-box; }
-body{ --page:var(--canvas); margin:0; background:var(--page); transition:background-color .9s ease; color:var(--ink-2); font-family:var(--f); font-size:1.0625rem; line-height:2; -webkit-font-smoothing:antialiased; overflow-x:clip; }
+body{ --page:var(--canvas); margin:0; background:var(--page); background-image:radial-gradient(120vmax 80vmax at 85% -10%, var(--glow), transparent 60%); background-attachment:fixed; transition:background-color .9s ease; color:var(--ink-2); font-family:var(--f); font-size:1.0625rem; line-height:2; -webkit-font-smoothing:antialiased; overflow-x:clip; }
 h1,h2,h3,p,ul,ol,figure,blockquote,dl,dd{ margin:0; }
 ul,ol{ padding:0; list-style:none; }
 h1,h2,h3{ color:var(--ink); text-wrap:balance; }
@@ -58,24 +59,27 @@ img{ display:block; max-width:100%; height:auto; }
 a{ color:inherit; }
 button{ font:inherit; color:inherit; }
 [hidden]{ display:none !important; }
-:focus-visible{ outline:2.5px solid var(--ink); outline-offset:3px; border-radius:10px; }
+::selection{ background:var(--ink); color:var(--canvas); }
+:focus-visible{ outline:2.5px solid var(--focus); outline-offset:3px; border-radius:10px; }
 .term{ font-weight:600; unicode-bidi:isolate; }
-.skip{ position:absolute; inset-inline-start:12px; top:-60px; z-index:50; background:var(--ink); color:var(--card); padding:10px 16px; border-radius:12px; text-decoration:none; }
+.skip{ position:absolute; inset-inline-start:12px; top:-60px; z-index:60; background:var(--ink); color:var(--canvas); padding:10px 16px; border-radius:12px; text-decoration:none; }
 .skip:focus{ top:12px; }
-
 .wrap{ max-width:calc(var(--max) + 2 * var(--gut)); margin-inline:auto; padding-inline:var(--gut); }
 .grid{ display:grid; grid-template-columns:repeat(var(--cols), minmax(0, 1fr)); column-gap:var(--gap); }
 .grid > *{ grid-column:1 / -1; min-width:0; }
-.sec{ padding-top:var(--sec); }
-.rule{ border-top:1px solid var(--line-2); padding-top:20px; }
+.sec{ padding-top:var(--sec); position:relative; }
+main, .foot{ position:relative; z-index:1; }
+/* loose loops may reach past the sides: clip them sideways, never vertically */
+main, .foot, .snap, .sec{ overflow-x:clip; }
 
-/* ── Type: one family, a wide range of weights; Latin terms set in Vazirmatn's own Latin (brand book 1.1) ── */
+/* ── Type ── */
 .kick{ display:flex; align-items:center; gap:10px; font-weight:700; font-size:.86rem; line-height:1.6; color:var(--ink-3); }
 .kick .term{ font-weight:600; letter-spacing:.12em; text-transform:uppercase; font-size:.76rem; }
 .kick::before{ content:""; width:22px; height:1.5px; background:currentColor; flex:none; }
-.kick.plain::before{ display:none; }
-.display{ font-weight:900; font-size:clamp(2.4rem, 14cqi, 4.7rem); line-height:1.32; color:var(--ink); text-wrap:initial; }
-.display .line{ display:block; }
+.display{ font-weight:900; font-size:clamp(2.5rem, 1.2rem + 4.4vw, 4.6rem); line-height:1.3; color:var(--ink); text-wrap:initial; }
+/* each line of the title is its own mask; the padding keeps the dots above and below the letters inside it */
+.display .line{ display:block; overflow:hidden; padding-block:.16em; margin-block:-.16em; }
+.display .line > span{ display:inline-block; }
 .h2{ font-weight:800; font-size:clamp(1.6rem, 1.18rem + 1.6vw, 2.5rem); line-height:1.5; }
 .h3{ font-weight:800; font-size:1.14rem; line-height:1.7; }
 .lead{ font-size:clamp(1.06rem, 1rem + .3vw, 1.2rem); line-height:2; color:var(--ink-2); }
@@ -85,132 +89,144 @@ button{ font:inherit; color:inherit; }
 .head{ display:grid; gap:14px; margin-bottom:var(--head); align-content:start; }
 .stack > * + *{ margin-top:16px; }
 .latin{ font-weight:600; letter-spacing:.14em; text-transform:uppercase; font-size:.74rem; unicode-bidi:isolate; }
+.w{ display:inline-block; }
 
-/* ── Buttons: the painting's sage pill, and a quiet outline ── */
-.btn{ display:inline-flex; align-items:center; justify-content:center; gap:.55em; min-height:50px; padding-inline:28px; border-radius:999px; border:0; font:inherit; font-weight:700; font-size:1rem; line-height:1.2; text-decoration:none; cursor:pointer; touch-action:manipulation; user-select:none; -webkit-user-select:none; transition:transform .16s var(--ease-out), background-color .2s ease, box-shadow .2s ease; }
+/* ── Buttons ── */
+.btn{ position:relative; display:inline-flex; align-items:center; justify-content:center; gap:.55em; min-height:50px; padding-inline:28px; border-radius:999px; border:0; font:inherit; font-weight:700; font-size:1rem; line-height:1.2; text-decoration:none; cursor:pointer; touch-action:manipulation; user-select:none; -webkit-user-select:none; transition:transform .2s var(--ease-out), background-color .2s ease, box-shadow .25s ease, color .2s ease; }
 .btn:active{ transform:scale(.97); }
-.btn-go{ background:var(--primary); color:var(--on-primary); box-shadow:0 12px 24px -14px rgb(20 48 36 / .85); }
+.btn-go{ background:var(--primary); color:var(--on-primary); box-shadow:0 12px 24px -14px rgb(var(--shade) / .7); }
 .btn-line{ background:transparent; color:var(--ink); box-shadow:inset 0 0 0 1.5px var(--line-2); }
 .btn-sm{ min-height:44px; padding-inline:20px; font-size:.95rem; }
-.btn svg{ width:18px; height:18px; flex:none; }
-@media (hover:hover) and (pointer:fine){ .btn-go:hover{ background:var(--primary-hi); } .btn-line:hover{ background:var(--card); box-shadow:inset 0 0 0 1.5px var(--ink-3); } }
+.btn svg{ width:18px; height:18px; flex:none; transition:transform .3s var(--ease-out); }
+@media (hover:hover) and (pointer:fine){
+  .btn-go:hover{ background:var(--primary-hi); transform:translateY(-1px); box-shadow:0 16px 28px -14px rgb(var(--shade) / .8); }
+  .btn-line:hover{ box-shadow:inset 0 0 0 1.5px var(--ink); }
+  .btn-line:hover svg{ transform:translateY(2px); }
+  .btn:active{ transform:scale(.97); }
+}
 
-/* ── Top bar ── */
-.top{ position:sticky; top:0; z-index:30; background:color-mix(in srgb, var(--page) 97%, transparent); padding-top:env(safe-area-inset-top, 0px); transition:box-shadow .25s ease, background-color .6s ease; }
-.top.stuck{ box-shadow:0 1px 0 var(--line); }
-.top-in{ height:var(--top); display:flex; align-items:center; gap:16px; }
-.mark{ width:44px; height:44px; flex:none; border-radius:50%; display:grid; place-items:center; background:var(--card); box-shadow:0 0 0 1px var(--line); }
+/* ── Header: fixed over the screens; its paper and hairline come in, and it tightens, as the page moves ── */
+.top{ position:fixed; inset:0 0 auto; z-index:40; padding-top:env(safe-area-inset-top, 0px); }
+.top::before{ content:""; position:absolute; inset:0; background:color-mix(in srgb, var(--canvas) 95%, transparent); box-shadow:0 1px 0 var(--line); opacity:0; transform-origin:50% 0; }
+.top-in{ position:relative; height:var(--top); display:flex; align-items:center; gap:14px; }
+.mark{ width:44px; height:44px; flex:none; border-radius:50%; display:grid; place-items:center; background:var(--card); box-shadow:0 0 0 1px var(--line); transition:transform .3s var(--ease-out); }
 .mark img{ width:26px; height:26px; }
 .top nav{ display:none; align-items:center; gap:2px; }
-.top nav a{ position:relative; display:inline-flex; align-items:center; min-height:44px; text-decoration:none; color:var(--ink-2); font-size:.94rem; padding:0 12px; border-radius:999px; line-height:1.5; }
-.top nav a[data-w]::after{ content:""; position:absolute; inset-inline:12px; bottom:6px; height:2px; border-radius:2px; background:var(--w); transform:scaleX(0); transition:transform .5s var(--ease-out); }
+.top nav a{ position:relative; display:inline-flex; align-items:center; justify-content:center; min-height:44px; min-width:44px; text-decoration:none; color:var(--ink-2); font-size:.94rem; padding:0 11px; border-radius:999px; line-height:1.5; transition:color .2s ease; }
+.top nav a::after{ content:""; position:absolute; inset-inline:11px; bottom:7px; height:1.5px; border-radius:2px; background:var(--w, var(--ink)); transform:scaleX(0); transform-origin:100% 50%; transition:transform .45s var(--ease-out); }
 .top nav a[aria-current="true"]{ color:var(--ink); font-weight:700; }
 .top nav a[aria-current="true"]::after{ transform:scaleX(1); }
-.top nav i{ width:1px; height:18px; background:var(--line-2); margin-inline:8px; }
-.top-end{ margin-inline-start:auto; }
+.top nav i{ width:1px; height:18px; background:var(--line-2); margin-inline:6px; }
+.top-end{ margin-inline-start:auto; display:flex; align-items:center; gap:8px; }
 @media (min-width:1024px){ .top nav{ display:flex; } }
-@media (hover:hover) and (pointer:fine){ .top nav a:hover{ color:var(--ink); background:rgb(33 77 59 / .08); } }
+@media (hover:hover) and (pointer:fine){ .top nav a:hover{ color:var(--ink); } .top nav a:hover::after{ transform:scaleX(1); } .mark:hover{ transform:rotate(-8deg); } }
 
-/* ════ The three worlds ════
-   Phone: the title, then the three worlds stacked as bands, then each world in turn.
-   Desktop: the three panels stay in view on the left while the words scroll on the right; each world opens as its
-   words reach the middle of the screen, and they all come back together at the end. */
-.worlds{ padding-top:28px; }
-.w-hero{ display:grid; gap:18px; justify-items:start; align-content:start; container-type:inline-size; padding-bottom:32px; }
+/* the scroll progress: a wire along the header's lower edge, drawn from the right as you read */
+.prog{ position:absolute; inset:auto 0 -4px; height:8px; overflow:hidden; pointer-events:none; }
+.prog-clip{ position:absolute; inset:0; overflow:hidden; transform:translateX(100%); }
+.prog-wire{ position:absolute; inset:0; width:100%; height:100%; transform:translateX(-100%); }
+.prog-wire path{ fill:none; stroke:var(--wire); stroke-width:1.3; stroke-linecap:round; vector-effect:non-scaling-stroke; opacity:.7; }
+
+/* the page's colours: a small menu of four, behind one round button */
+.theme-pick{ position:relative; display:none; }
+.js .theme-pick{ display:block; }
+.tp-btn{ width:44px; height:44px; border-radius:50%; border:0; background:var(--card); box-shadow:0 0 0 1px var(--line); display:grid; place-items:center; cursor:pointer; touch-action:manipulation; transition:transform .3s var(--ease-out), box-shadow .2s ease; }
+.tp-btn svg{ width:20px; height:20px; }
+.tp-btn[aria-expanded="true"]{ box-shadow:0 0 0 1.5px var(--ink); }
+@media (hover:hover) and (pointer:fine){ .tp-btn:hover{ transform:rotate(-20deg); } }
+.tp-menu{ position:absolute; top:calc(100% + 10px); inset-inline-end:-6px; z-index:5; min-width:196px; padding:8px; border-radius:20px; background:var(--card); box-shadow:0 0 0 1px var(--line), 0 24px 48px -20px rgb(var(--shade) / .5); display:grid; gap:2px; transform-origin:12% 0; }
+.tp-menu:not([hidden]){ animation:menu-in .22s var(--ease-out); }
+@keyframes menu-in{ from{ opacity:0; transform:translateY(-4px) scale(.97); } }
+.tp-menu button{ display:flex; align-items:center; gap:12px; min-height:44px; padding:0 10px; border:0; border-radius:14px; background:none; cursor:pointer; color:var(--ink-2); font-weight:600; text-align:start; touch-action:manipulation; }
+.tp-menu button[aria-checked="true"]{ color:var(--ink); font-weight:800; background:color-mix(in srgb, var(--ink) 7%, transparent); }
+.tp-menu button[aria-checked="true"]::after{ content:""; margin-inline-start:auto; width:8px; height:8px; border-radius:50%; background:var(--ink); }
+@media (hover:hover) and (pointer:fine){ .tp-menu button:hover{ background:color-mix(in srgb, var(--ink) 5%, transparent); color:var(--ink); } }
+/* each swatch shows its own theme: paper, wire and the three threads */
+.sw{ width:26px; height:26px; border-radius:50%; flex:none; position:relative; box-shadow:0 0 0 1px rgb(var(--shade) / .25); background:var(--a); }
+.sw::before{ content:""; position:absolute; inset:7px; border-radius:50%; border:1.6px solid var(--b); }
+.sw::after{ content:""; position:absolute; inset:-3px; border-radius:50%; background:conic-gradient(from 200deg, var(--c1) 0 60deg, transparent 0 120deg, var(--c2) 0 180deg, transparent 0 240deg, var(--c3) 0 300deg, transparent 0); -webkit-mask:radial-gradient(closest-side, transparent 86%, #000 88%); mask:radial-gradient(closest-side, transparent 86%, #000 88%); }
+.sw-paper{ --a:#f3f1ec; --b:#1c2420; --c1:#b4642e; --c2:#1f7c7b; --c3:#7a5ca4; } .sw-chalk{ --a:#171b1a; --b:#ebe6da; --c1:#e08f57; --c2:#4cb8b0; --c3:#a98ae0; } .sw-sand{ --a:#f0e3cf; --b:#3a2a1d; --c1:#a3501c; --c2:#16706e; --c3:#6d4d9a; } .sw-green{ --a:#1f4a39; --b:#f1ebdc; --c1:#f3a571; --c2:#8fdccf; --c3:#cbb4f4; } 
+
+/* ── The figure: one fixed canvas behind the whole page. thread.js moves it with transform and opacity only. ── */
+.bgfig{ position:fixed; left:0; top:0; width:10px; height:10px; z-index:0; pointer-events:none; transform-origin:0 0; opacity:0; will-change:transform, opacity; }
+/* before the script runs (or without it) a faint tangle stands in, in the hero */
+.fig-css{ position:absolute; inset:8% 6%; width:88%; height:84%; fill:none; stroke:var(--wire); stroke-width:1.1; opacity:.28; }
+.art .fig-css{ display:none; }
+
+/* mid-depth: a few loose loops drift past slower than the words */
+.drift{ position:absolute; z-index:0; width:min(34vw, 300px); height:auto; fill:none; stroke:var(--wire); stroke-width:1.1; stroke-linecap:round; opacity:.13; pointer-events:none; }
+.drift.d1{ inset-inline-start:-4vw; top:18%; } .drift.d2{ inset-inline-end:-6vw; top:40%; } .drift.d3{ inset-inline-start:52%; bottom:6%; width:min(26vw, 220px); }
+@media (max-width:699px){ .drift{ display:none; } }
+
+/* ── Section index (desktop): where you are among the story screens ── */
+.rail{ display:none; }
+@media (min-width:1024px) and (min-height:600px){
+  .rail{ position:fixed; z-index:30; left:14px; top:50%; transform:translateY(-50%); display:grid; gap:0; padding-block:6px; }
+  .rail::before{ content:""; position:absolute; left:21px; top:24px; bottom:24px; width:1px; background:var(--line-2); }
+  .rail a{ position:relative; display:flex; align-items:center; gap:10px; min-height:44px; min-width:44px; padding-left:14px; text-decoration:none; color:var(--ink-3); font-size:.86rem; font-weight:700; }
+  .rail i{ position:relative; width:15px; height:15px; flex:none; border-radius:50%; background:var(--canvas); box-shadow:inset 0 0 0 1.5px var(--line-2); transition:transform .4s var(--ease-out), box-shadow .3s ease, background-color .3s ease; }
+  .rail span{ opacity:0; transform:translateX(-6px); transition:opacity .25s ease, transform .35s var(--ease-out); white-space:nowrap; padding:2px 10px; border-radius:999px; background:color-mix(in srgb, var(--canvas) 88%, transparent); }
+  .rail a[aria-current="true"] i{ transform:scale(1.25); background:var(--w, var(--ink)); box-shadow:0 0 0 4px color-mix(in srgb, var(--w, var(--ink)) 18%, transparent); }
+  .rail a[aria-current="true"] span, .rail a:hover span, .rail a:focus-visible span{ opacity:1; transform:none; color:var(--ink); }
+}
+
+/* ════ Story screens: one screen each, snapped ════ */
+.snap{ position:relative; min-height:100svh; scroll-snap-align:none; display:flex; flex-direction:column; justify-content:center; padding-block:calc(var(--top) + env(safe-area-inset-top, 0px) + 16px) 28px; }
+.st{ position:relative; z-index:1; width:100%; }
+.st .grid{ min-height:calc(100svh - var(--top) - 72px); align-items:center; }
+.st-text{ display:grid; gap:16px; align-content:center; justify-items:start; }
+/* only the screen thread.js names */
+.js .snap[data-snap="1"]{ scroll-snap-align:start; }
+/* the figure zone: an empty place the figure moves into; dragging in it turns the figure */
+.fz{ position:relative; min-height:32svh; touch-action:pan-y; -webkit-user-select:none; user-select:none; cursor:grab; }
+.fz:active{ cursor:grabbing; }
+@media (max-width:1023px){
+  .st .grid{ display:flex; flex-direction:column; align-items:stretch; }
+  .st .fz{ flex:1 1 auto; order:-1; }
+  #top .fz{ order:0; }
+}
+@media (min-width:1024px){
+  .st-text{ grid-column:1 / span 5; grid-row:1; }
+  #top .st-text, #start .st-text{ grid-column:1 / span 6; }
+  .fz{ grid-column:7 / span 6; grid-row:1; align-self:stretch; min-height:0; }
+}
 .eyebrow{ display:flex; align-items:center; gap:12px; color:var(--ink-3); }
-.thread-mark{ width:34px; height:12px; background:no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 12'%3E%3Cpath d='M1 8c5 0 6-6 10-6s3 8 7 8 4-8 8-8 4 5 7 5' fill='none' stroke='%231c2420' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E"); }
-.w-hero .lead{ max-width:34em; }
+.thread-mark{ width:34px; height:12px; flex:none; }
+.thread-mark path{ fill:none; stroke:var(--wire); stroke-width:1.4; stroke-linecap:round; }
 .cta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:6px; }
 @media (max-width:419px){ .cta .btn{ flex:1 1 auto; } }
-
-/* the figure: one wire drawn on a canvas by thread.js; before the script runs (or without it) a faint tangle stands in */
-.w-stage{ display:grid; justify-items:center; }
-.fig{ position:relative; width:min(100%, 380px); aspect-ratio:4 / 5; cursor:grab; }
-.fig:active{ cursor:grabbing; }
-.fig-css{ position:absolute; inset:0; width:100%; height:100%; fill:none; stroke:var(--wire); stroke-width:1.1; opacity:.3; }
-.art .fig-css{ display:none; }
-.figure{ position:absolute; inset:0; width:100%; height:100%; display:block; touch-action:pan-y; user-select:none; -webkit-user-select:none; -webkit-tap-highlight-color:transparent; }
-@media (min-width:700px){ .fig{ width:min(100%, 440px); } }
-
-/* the legend under the sphere: the three words, each under its world, and a line in each world's colour */
-.legend{ display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); margin-top:10px; width:min(100%, 340px); }
-@media (min-width:700px){ .legend{ width:min(100%, 400px); } }
-.legend button{ position:relative; display:flex; align-items:center; justify-content:center; gap:8px; min-width:0; min-height:48px; padding:6px 2px 12px; white-space:nowrap; border:0; background:none; cursor:pointer; touch-action:manipulation; color:var(--ink-3); font-size:.98rem; font-weight:600; border-radius:10px; transition:color .3s ease; }
-.legend button b{ font-weight:800; font-size:1.1rem; color:var(--ink); transition:color .3s ease; }
-.legend button[aria-selected="true"] b, .tri-three .legend button b{ color:var(--wi); }
-.legend button::after{ content:""; position:absolute; inset-inline:0; bottom:0; height:2px; border-radius:2px; background:var(--line-2); transition:background-color .4s ease; }
-.legend button[aria-selected="true"]{ color:var(--ink); font-weight:700; }
-.legend button[aria-selected="true"]::after, .tri-three .legend button::after{ background:var(--w); height:3px; }
-.tri-cap{ justify-self:stretch; margin-top:14px; min-height:1.9em; font-size:.98rem; line-height:1.9; color:var(--ink-2); padding-inline-start:14px; border-inline-start:3px solid var(--w, var(--line-2)); transition:border-color .4s ease; }
-.tri-cap b{ color:var(--wi, var(--ink)); font-weight:800; margin-inline-end:2px; }
-
 .hint{ display:none; }
-@media (min-width:1024px){
-  .hint{ display:flex; align-items:center; gap:10px; margin-top:22px; color:var(--ink-3); font-size:.9rem; line-height:1.6; }
-  .hint svg{ width:18px; height:18px; }
-}
-@media (min-width:1024px) and (prefers-reduced-motion:no-preference){ .hint svg{ animation:nudge 2.4s var(--ease-io) 1.6s 3; } }
-@keyframes nudge{ 0%, 100%{ transform:none; } 50%{ transform:translateY(4px); } }
+@media (min-width:1024px){ .hint{ display:flex; align-items:center; gap:10px; margin-top:18px; color:var(--ink-3); font-size:.9rem; line-height:1.6; } .hint svg{ width:18px; height:18px; } }
 
 /* each world */
-.chapter{ display:grid; align-content:start; padding-block:var(--sec) 0; container-type:inline-size; }
-@media (max-width:1023px){ #body{ padding-top:calc(var(--sec) * .6); } }
-.ch-fig{ position:relative; border-radius:18px; overflow:hidden; aspect-ratio:5 / 4; margin-bottom:28px; }
-.ch-fig{ background:var(--card); box-shadow:0 0 0 1px var(--line) inset; }
-.ch-fig canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
 .ch-no{ display:flex; align-items:center; gap:10px; color:var(--wi); font-weight:700; font-size:.95rem; line-height:1.6; }
 .ch-no .num{ width:28px; height:28px; flex:none; border-radius:50%; display:grid; place-items:center; font-size:.88rem; font-weight:800; line-height:1; box-shadow:inset 0 0 0 1.5px var(--w); }
 .ch-no .latin{ color:var(--ink-3); margin-inline-start:6px; }
-.ch-word{ margin-top:6px; font-weight:900; font-size:clamp(4.2rem, 26cqi, 7.4rem); line-height:1.25; color:var(--ink); }
+.ch-word{ font-weight:900; font-size:clamp(4rem, 2.4rem + 7vw, 8.2rem); line-height:1.2; color:var(--ink); }
 .ch-word span{ color:var(--w); }
-.chapter .lead{ margin-top:14px; }
-.chapter .lead + p{ margin-top:12px; }
-.echo{ margin-top:28px; padding-top:18px; border-top:1px solid var(--line-2); font-weight:700; font-size:1.12rem; line-height:1.9; color:var(--wi); }
-.echo strong{ display:block; margin-top:6px; font-weight:900; font-size:clamp(1.6rem, 1.3rem + 1.4vw, 2.3rem); line-height:1.5; color:var(--ink); }
+.echo{ margin-top:12px; padding-top:16px; border-top:1px solid var(--line-2); font-weight:700; font-size:1.1rem; line-height:1.9; color:var(--wi); justify-self:stretch; }
+.echo strong{ display:block; margin-top:4px; font-weight:900; font-size:clamp(1.5rem, 1.25rem + 1.3vw, 2.3rem); line-height:1.5; color:var(--ink); }
+@media (max-width:699px){ .world .lead{ font-size:1rem; line-height:1.95; } .world .st-text{ gap:12px; } }
 
 /* together: the three, and a fourth step after them */
-.together{ padding-block:var(--sec) 0; display:grid; align-content:start; }
-.flow{ margin-top:28px; display:grid; }
-.flow li{ position:relative; display:grid; grid-template-columns:48px minmax(0, 1fr); gap:16px; padding-bottom:20px; }
+.flow{ display:grid; justify-self:stretch; }
+.flow li{ position:relative; display:grid; grid-template-columns:48px minmax(0, 1fr); gap:16px; padding-bottom:18px; }
 .flow li:last-child{ padding-bottom:0; }
-.flow li::before{ content:""; position:absolute; inset-inline-start:23px; top:52px; bottom:4px; width:2px; border-radius:2px; background:linear-gradient(var(--w), var(--nw, var(--line-2))); }
+.flow li::before{ content:""; position:absolute; inset-inline-start:23px; top:52px; bottom:4px; width:2px; border-radius:2px; background:linear-gradient(var(--w), var(--nw, var(--line-2))); transform-origin:50% 0; }
 .flow li:last-child::before{ display:none; }
 .flow li[data-w="body"]{ --nw:var(--mind); } .flow li[data-w="mind"]{ --nw:var(--soul); } .flow li[data-w="soul"]{ --nw:var(--primary); }
-.flow .node{ width:48px; height:48px; border-radius:50%; display:grid; place-items:center; font-weight:800; font-size:1.2rem; line-height:1; color:var(--card); background:var(--wi); }
+.flow .node{ width:48px; height:48px; border-radius:50%; display:grid; place-items:center; font-weight:800; font-size:1.2rem; line-height:1; color:var(--canvas); background:var(--wi); }
 .flow li[data-w="change"] .node, .ask li[data-w="change"] .tag-w{ background:var(--card); box-shadow:inset 0 0 0 1.5px var(--primary); }
 .node svg, .tag-w svg{ width:58%; height:58%; fill:none; stroke:var(--primary); stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
 .flow b{ display:block; color:var(--ink); font-weight:800; font-size:1.08rem; line-height:1.6; padding-top:1px; }
 .flow div > span{ display:block; color:var(--ink-3); font-size:.98rem; line-height:1.8; }
-.together .h2{ font-size:clamp(1.45rem, 1.2rem + 1vw, 2.05rem); line-height:1.6; }
-.together .close{ margin-top:32px; padding-top:20px; border-top:1px solid var(--line-2); }
+#together .h2{ font-size:clamp(1.4rem, 1.15rem + 1vw, 2.05rem); line-height:1.6; }
+#together .close{ padding-top:16px; border-top:1px solid var(--line-2); justify-self:stretch; }
+@media (max-width:1023px){ #together .fz{ min-height:24svh; } }
 
-@media (min-width:700px){
-  .w-hero{ padding-bottom:40px; }
-  .chapter{ grid-template-columns:repeat(8, minmax(0, 1fr)); column-gap:var(--gap); }
-  .chapter > *{ grid-column:1 / span 5; }
-  .ch-fig{ grid-column:6 / span 3; grid-row:1 / span 6; aspect-ratio:4 / 5; margin:0; align-self:start; }
-  .ch-word{ font-size:clamp(4.2rem, 20cqi, 7rem); }
-}
-@media (min-width:1024px){
-  .worlds{ padding-top:0; }
-  .w-grid{ align-items:start; }
-  .w-hero{ grid-column:1 / span 5; grid-row:1; min-height:calc(100svh - var(--top)); align-content:center; padding-block:40px; }
-  .chapter{ grid-column:1 / span 5; display:grid; grid-template-columns:none; min-height:96svh; align-content:center; padding-block:48px; }
-  .chapter > *{ grid-column:auto; }
-  .ch-fig{ display:none; }
-  #body{ grid-row:2; } #mind{ grid-row:3; } #soul{ grid-row:4; }
-  .ch-word{ font-size:clamp(5rem, 28cqi, 8.2rem); }
-  .together{ grid-column:1 / span 5; grid-row:5; min-height:100svh; align-content:center; padding-block:48px 64px; }
-  .w-stage{ grid-column:7 / span 6; grid-row:1 / span 5; position:sticky; top:max(calc(var(--top) + 8px), calc(var(--top) + (100svh - var(--top) - 640px) / 2)); }
-  .fig{ width:min(100%, 470px, (100svh - var(--top) - 120px) * .8); }
-  .legend{ width:min(100%, 470px, (100svh - var(--top) - 120px) * .8); }
-  .tri-cap{ display:none; }
-  /* the page takes on a whisper of the open world's colour */
-  body[data-state="body"]{ --page:var(--body-tint); }
-  body[data-state="mind"]{ --page:var(--mind-tint); }
-  body[data-state="soul"]{ --page:var(--soul-tint); }
-}
-@media (min-width:1024px) and (max-height:599px){ .w-stage{ position:relative; top:auto; } }
+/* the end */
+.principle{ color:var(--ink-3); }
+#start .h2{ font-size:clamp(1.9rem, 1.3rem + 2.4vw, 3.2rem); line-height:1.5; }
 
 /* ════ The rest of the page ════ */
 /* knowing and doing */
@@ -260,7 +276,7 @@ button{ font:inherit; color:inherit; }
 }
 
 /* the method sits on a band of warm stone, a change of pace in the long middle of the page */
-.band{ --line:#e0d2bf; margin-top:var(--sec); padding-block:calc(var(--sec) * .72); background:#f1e8dc; }
+.band{ margin-top:var(--sec); padding-block:calc(var(--sec) * .72); border-block:1px solid var(--line); }
 .m-text{ display:grid; gap:16px; }
 .stages{ display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:var(--gap); margin-top:var(--head); }
 .stage{ background:var(--card); border-radius:20px; padding:20px; display:grid; gap:12px; align-content:start; box-shadow:var(--shadow); }
@@ -304,7 +320,7 @@ button{ font:inherit; color:inherit; }
 .plan{ padding:24px; display:grid; gap:18px; align-content:start; border-radius:22px; background:var(--card); box-shadow:var(--shadow); }
 .plan-top{ display:flex; justify-content:space-between; align-items:center; gap:12px; }
 .plan-top b{ color:var(--ink); font-weight:800; font-size:1.08rem; }
-.soon{ padding:3px 14px; border-radius:999px; background:#f6e7cc; color:#7a4e0c; font-weight:700; font-size:.84rem; line-height:1.8; }
+.soon{ padding:3px 14px; border-radius:999px; background:var(--soon-bg); color:var(--soon-ink); font-weight:700; font-size:.84rem; line-height:1.8; }
 .skel{ display:block; height:10px; border-radius:6px; background:var(--track); }
 .w40{ width:40%; } .w60{ width:60%; } .w80{ width:80%; }
 .lines{ display:grid; gap:12px; padding-block:16px; border-block:1px solid var(--line); }
@@ -328,14 +344,6 @@ button{ font:inherit; color:inherit; }
 @media (min-width:700px){ .story-q{ grid-column:1 / span 7; } .story-side{ grid-column:1 / span 6; } }
 @media (min-width:1024px){ .story-q{ grid-column:1 / span 7; } .story-side{ grid-column:9 / span 4; margin-top:0; } }
 
-/* the end: the gate at night, its lanterns lit */
-.end .grid{ align-items:center; row-gap:32px; }
-.end-text{ display:grid; gap:18px; justify-items:start; }
-.principle{ color:var(--ink-3); }
-.end-art{ position:relative; border-radius:20px; overflow:hidden; aspect-ratio:5 / 4; background:var(--card); box-shadow:0 0 0 1px var(--line) inset; }
-.end-art canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
-@media (min-width:700px){ .end-text{ grid-column:1 / span 4; } .end-art{ grid-column:5 / span 4; } }
-@media (min-width:1024px){ .end-text{ grid-column:1 / span 5; } .end-art{ grid-column:7 / span 6; } }
 
 /* footer */
 .foot{ margin-top:var(--sec); background:var(--stone); padding-block:56px calc(28px + env(safe-area-inset-bottom, 0px)); }
@@ -354,20 +362,89 @@ button{ font:inherit; color:inherit; }
 @media (min-width:1024px){ .f-brand{ grid-column:1 / span 4; } .f-a{ grid-column:6 / span 2; } .f-b{ grid-column:8 / span 2; } .f-c{ grid-column:10 / span 3; } }
 @media (hover:hover) and (pointer:fine){ .foot ul a:hover{ color:var(--ink); text-decoration:underline; } }
 
-/* ── Motion: words rise into place once; frames open from the bottom. Under «کاهش حرکت» everything is simply there. ── */
+
+.foot{ z-index:2; background:var(--stone); }
+/* the stage row snaps sideways inside its own scroller on a phone; where it is not a scroller it must not snap the page */
+@media (min-width:700px){ .plants li{ scroll-snap-align:none; } }
+.ask li .tag-w, .tag-w{ color:var(--ink); }
+
+/* ════ Motion ════
+   Hero: the title's lines rise out of their masks on load. Other story screens: each has its own entrance, scrubbed by
+   the scroll (CSS scroll-driven animations where supported; thread.js writes --e and --x where not), and the screen you
+   leave drifts up and fades a little. Under «کاهش حرکت» none of it runs: the words are simply there. */
+[data-in]{ --k:clamp(0, (var(--e, 1) - var(--a, 0)) / (var(--b, 1) - var(--a, 0)), 1); --q:calc(1 - (1 - var(--k)) * (1 - var(--k))); }
+@media (prefers-reduced-motion:no-preference){
+  .js #top .line > span{ animation:line-up 1.05s var(--ease-out) both; animation-delay:var(--d, 0ms); }
+  .js #top .lift{ animation:lift .9s var(--ease-out) both; animation-delay:var(--d, 0ms); }
+  .js .hint svg{ animation:nudge 2.4s var(--ease-io) 2.2s 3; }
+
+  @supports (animation-timeline: view()){
+    .snap{ view-timeline:--st block; }
+    [data-in]{ animation-duration:1ms; animation-timing-function:var(--ease-soft); animation-fill-mode:both; animation-timeline:--st; animation-range:entry calc(var(--a, 0) * 100%) entry calc(var(--b, 1) * 100%); }
+    [data-in="rise"]{ animation-name:in-rise; }
+    [data-in="focus"]{ animation-name:in-focus; transform-origin:100% 50%; }
+    [data-in="fall"]{ animation-name:in-fall; }
+    [data-in="slide"]{ animation-name:in-slide; }
+    [data-in="word"]{ animation-name:in-word; }
+    [data-in="pop"]{ animation-name:in-pop; }
+    [data-in="slide"]::before{ animation:in-line linear both; animation-timeline:--st; animation-range:entry calc(var(--b, 1) * 100%) entry 100%; }
+    @media (min-height:640px){ .snap .st{ animation:st-out linear both; animation-timeline:--st; animation-range:exit 0% exit 100%; } }
+    .drift{ animation:drift linear both; animation-timeline:view(); animation-range:cover 0% cover 100%; }
+    .prog-clip{ animation:prog-a linear both; animation-timeline:scroll(root); }
+    .prog-wire{ animation:prog-b linear both; animation-timeline:scroll(root); }
+    .top::before{ animation:bar-in linear both; animation-timeline:scroll(root); animation-range:0 120px; }
+    .top-in{ animation:bar-tight linear both; animation-timeline:scroll(root); animation-range:0 120px; }
+  }
+  /* the same, from the variables thread.js writes where scroll-driven animations are missing */
+  .sd-fb [data-in="rise"]{ opacity:var(--q); transform:translateY(calc((1 - var(--q)) * var(--dy, 48px))); }
+  .sd-fb [data-in="focus"]{ opacity:var(--q); transform:scale(calc(1 - (1 - var(--q)) * var(--ds, .12))); transform-origin:100% 50%; }
+  .sd-fb [data-in="fall"]{ opacity:var(--q); transform:translateY(calc((1 - var(--q)) * -36px)); }
+  .sd-fb [data-in="slide"]{ opacity:var(--q); transform:translateX(calc((1 - var(--q)) * 44px)); }
+  .sd-fb [data-in="word"]{ opacity:var(--q); transform:translateY(calc((1 - var(--q)) * .5em)); }
+  .sd-fb [data-in="pop"]{ opacity:var(--q); transform:scale(calc(.9 + var(--q) * .1)); }
+  @media (min-height:640px){ .sd-fb .snap .st{ opacity:calc(1 - min(1, var(--x, 0) / .6) * .85); transform:translateY(calc(min(1, var(--x, 0) / .6) * -7vh)); } }
+  .sd-fb .drift{ transform:translateY(calc((.5 - var(--p, .5)) * 160px)) rotate(calc((var(--p, .5) - .5) * 14deg)); }
+  .sd-fb .prog-clip{ transform:translateX(calc((1 - var(--sp, 0)) * 100%)); }
+  .sd-fb .prog-wire{ transform:translateX(calc((var(--sp, 0) - 1) * 100%)); }
+  .sd-fb .top::before{ opacity:var(--hp, 0); transform:scaleY(calc(1 - var(--hp, 0) * .12)); }
+  .sd-fb .top-in{ transform:translateY(calc(var(--hp, 0) * -4px)); }
+}
+@media (prefers-reduced-motion:reduce){
+  .top::before{ opacity:1; }
+  .prog{ display:none; }
+  body, .btn, .rail i, .rail span, .top nav a::after{ transition:none; }
+}
+@keyframes line-up{ from{ transform:translateY(108%); } }
+@keyframes lift{ from{ opacity:0; transform:translateY(16px); } }
+@keyframes nudge{ 0%, 100%{ transform:none; } 50%{ transform:translateY(4px); } }
+@keyframes in-rise{ from{ opacity:0; transform:translateY(var(--dy, 48px)); } to{ opacity:1; transform:none; } }
+@keyframes in-focus{ from{ opacity:0; transform:scale(calc(1 - var(--ds, .12))); } to{ opacity:1; transform:none; } }
+@keyframes in-fall{ from{ opacity:0; transform:translateY(-36px); } to{ opacity:1; transform:none; } }
+@keyframes in-slide{ from{ opacity:0; transform:translateX(44px); } to{ opacity:1; transform:none; } }
+@keyframes in-line{ from{ transform:scaleY(0); } to{ transform:none; } }
+@keyframes in-word{ from{ opacity:0; transform:translateY(.5em); } to{ opacity:1; transform:none; } }
+@keyframes in-pop{ from{ opacity:0; transform:scale(.9); } to{ opacity:1; transform:none; } }
+@keyframes st-out{ 0%{ opacity:1; transform:none; } 60%, 100%{ opacity:.15; transform:translateY(-7vh); } }
+@keyframes drift{ from{ transform:translateY(80px) rotate(-7deg); } to{ transform:translateY(-80px) rotate(7deg); } }
+@keyframes prog-a{ from{ transform:translateX(100%); } to{ transform:none; } }
+@keyframes prog-b{ from{ transform:translateX(-100%); } to{ transform:none; } }
+@keyframes bar-in{ from{ opacity:0; transform:none; } to{ opacity:1; transform:scaleY(.88); } }
+@keyframes bar-tight{ to{ transform:translateY(-4px); } }
+
+/* free sections: words rise into place once, as they come in */
 @media (prefers-reduced-motion:no-preference){
   .js .rv{ opacity:0; transform:translateY(16px); transition:opacity .7s ease-out, transform .9s var(--ease-out); transition-delay:var(--d, 0ms); }
   .js .rv.in{ opacity:1; transform:none; }
-  .js .rv-frame{ clip-path:inset(14% 0 0 0 round 20px); opacity:0; transition:clip-path 1.1s var(--ease-io), opacity .6s ease-out; }
-  .js .rv-frame.in{ clip-path:inset(0 0 0 0 round 20px); opacity:1; }
-  .js .w-hero > *{ animation:rise .8s var(--ease-out) both; animation-delay:var(--d, 0ms); }
 }
-@keyframes rise{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
-@media (prefers-reduced-motion:reduce){ body, .btn, .top, .worlds, .legend button, .legend button::after, .tri-cap, .top nav a[data-w]::after{ transition:none; } }
+/* the theme switch: the new colours open as a circle from the button (where view transitions exist); nothing else
+   eases during the swap, so the new snapshot is already in its final colours */
+.theme-swap, .theme-swap *, .theme-swap *::before, .theme-swap *::after{ transition:none !important; }
+::view-transition-old(root), ::view-transition-new(root){ animation:none; mix-blend-mode:normal; }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">رفتن به متن اصلی</a>
+<canvas class="bgfig" id="bgfig" aria-hidden="true"></canvas>
 
 <header class="top" id="top-bar">
   <div class="wrap top-in">
@@ -375,85 +452,106 @@ button{ font:inherit; color:inherit; }
     <nav aria-label="بخش‌های صفحه">
       <a href="#body" data-w="body">بدن</a><a href="#mind" data-w="mind">ذهن</a><a href="#soul" data-w="soul">روح</a><i aria-hidden="true"></i><a href="#path">مسیر</a><a href="#method">متد</a><a href="#inside">داخل بذر</a><a href="#membership">عضویت بذر</a><a href="#faq">سؤال‌ها</a>
     </nav>
-    <div class="top-end"><a class="btn btn-go btn-sm" href="https://app.bazrlife.ir/login">شروع</a></div>
+    <div class="top-end">
+      <div class="theme-pick">
+        <button type="button" class="tp-btn" id="tp-btn" aria-expanded="false" aria-controls="tp-menu" aria-label="رنگ صفحه"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.8a8.2 8.2 0 0 1 0 16.4z" fill="currentColor"/></svg></button>
+        <div class="tp-menu" id="tp-menu" role="radiogroup" aria-label="رنگ صفحه" hidden><button type="button" role="radio" aria-checked="true" tabindex="0" data-theme-pick="paper"><i class="sw sw-paper" aria-hidden="true"></i>کاغذ</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-theme-pick="chalk"><i class="sw sw-chalk" aria-hidden="true"></i>شب</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-theme-pick="sand"><i class="sw sw-sand" aria-hidden="true"></i>سپیده</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-theme-pick="green"><i class="sw sw-green" aria-hidden="true"></i>سبز</button></div>
+      </div>
+      <a class="btn btn-go btn-sm" href="https://app.bazrlife.ir/login">شروع</a>
+    </div>
   </div>
+  <div class="prog" aria-hidden="true"><div class="prog-clip"><svg class="prog-wire" viewBox="0 0 1200 8" preserveAspectRatio="none" focusable="false"><path d="M0 4 C25 0 25 8 50 4 C75 0 75 8 100 4 C125 0 125 8 150 4 C175 0 175 8 200 4 C225 0 225 8 250 4 C275 0 275 8 300 4 C325 0 325 8 350 4 C375 0 375 8 400 4 C425 0 425 8 450 4 C475 0 475 8 500 4 C525 0 525 8 550 4 C575 0 575 8 600 4 C625 0 625 8 650 4 C675 0 675 8 700 4 C725 0 725 8 750 4 C775 0 775 8 800 4 C825 0 825 8 850 4 C875 0 875 8 900 4 C925 0 925 8 950 4 C975 0 975 8 1000 4 C1025 0 1025 8 1050 4 C1075 0 1075 8 1100 4 C1125 0 1125 8 1150 4 C1175 0 1175 8 1200 4"/></svg></div></div>
 </header>
 
+<nav class="rail" aria-label="بخش‌های اصلی صفحه">
+  <a href="#top" data-k="top"><i></i><span>بذر</span></a>
+  <a href="#body" data-k="body" data-w="body"><i></i><span>بدن</span></a>
+  <a href="#mind" data-k="mind" data-w="mind"><i></i><span>ذهن</span></a>
+  <a href="#soul" data-k="soul" data-w="soul"><i></i><span>روح</span></a>
+  <a href="#together" data-k="together"><i></i><span>با هم</span></a>
+  <a href="#start" data-k="start"><i></i><span>انتخاب</span></a>
+</nav>
+
 <main id="main">
-<!-- ════ The model: ب ذ ر = بدن، ذهن، روح (Owner's note + «هایلایت مسیر بذر»), as three worlds of the painting ════ -->
-<section class="worlds" id="top" data-state="all">
-  <div class="wrap grid w-grid">
-
-    <header class="w-hero" data-step="all">
-      <p class="eyebrow" style="--d:0ms"><span class="thread-mark" aria-hidden="true"></span><span class="latin" dir="ltr">Body · Mind · Soul</span></p>
-      <h1 class="display" style="--d:80ms"><span class="line">بذر یعنی</span><span class="line">بدن، ذهن، روح.</span></h1>
-      <p class="lead" style="--d:180ms">بذر برای کم کردن فاصله‌ی میان دانستن و زندگی کردن آنچه می‌دانیم به وجود آمده است.</p>
-      <div class="cta" style="--d:260ms">
+<!-- ════ The model: ب ذ ر = بدن، ذهن، روح (Owner's note + «هایلایت مسیر بذر»). The figure starts as a tangle. ════ -->
+<section class="snap" id="top" data-k="top">
+  <div class="st"><div class="wrap grid">
+    <header class="st-text">
+      <p class="eyebrow lift" style="--d:0ms"><svg class="thread-mark" viewBox="0 0 34 12" aria-hidden="true"><path d="M1 8c5 0 6-6 10-6s3 8 7 8 4-8 8-8 4 5 7 5"/></svg><span class="latin" dir="ltr">Body · Mind · Soul</span></p>
+      <h1 class="display"><span class="line"><span style="--d:80ms">بذر یعنی</span></span><span class="line"><span style="--d:200ms">بدن، ذهن، روح.</span></span></h1>
+      <p class="lead lift" style="--d:420ms">بذر برای کم کردن فاصله‌ی میان دانستن و زندگی کردن آنچه می‌دانیم به وجود آمده است.</p>
+      <div class="cta lift" style="--d:540ms">
         <a class="btn btn-go" href="https://app.bazrlife.ir/login">شروع</a>
-        <a class="btn btn-line" href="#body" id="to-worlds">سه دنیای بذر <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></a>
+        <a class="btn btn-line" href="#body">سه دنیای بذر <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></a>
       </div>
-      <p class="hint" style="--d:340ms"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>پایین بیایید تا هر دنیا باز شود.</p>
+      <p class="hint lift" style="--d:700ms"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>پایین بیایید تا هر دنیا باز شود.</p>
     </header>
+    <div class="fz" aria-hidden="true"><svg class="fig-css" viewBox="0 0 400 500" aria-hidden="true"><ellipse cx="239" cy="106" rx="58" ry="29" transform="rotate(-3 239 106)"/><ellipse cx="180" cy="117" rx="62" ry="19" transform="rotate(-2 180 117)"/><ellipse cx="204" cy="125" rx="58" ry="32" transform="rotate(-3 204 125)"/><ellipse cx="220" cy="150" rx="116" ry="23" transform="rotate(-19 220 150)"/><ellipse cx="205" cy="169" rx="106" ry="39" transform="rotate(-6 205 169)"/><ellipse cx="177" cy="187" rx="83" ry="29" transform="rotate(7 177 187)"/><ellipse cx="197" cy="199" rx="115" ry="29" transform="rotate(-2 197 199)"/><ellipse cx="207" cy="218" rx="66" ry="19" transform="rotate(-8 207 218)"/><ellipse cx="205" cy="226" rx="59" ry="15" transform="rotate(-10 205 226)"/><ellipse cx="189" cy="250" rx="124" ry="23" transform="rotate(-6 189 250)"/><ellipse cx="196" cy="269" rx="99" ry="21" transform="rotate(-17 196 269)"/><ellipse cx="215" cy="286" rx="114" ry="36" transform="rotate(-12 215 286)"/><ellipse cx="161" cy="299" rx="135" ry="18" transform="rotate(21 161 299)"/><ellipse cx="189" cy="307" rx="87" ry="15" transform="rotate(14 189 307)"/><ellipse cx="181" cy="336" rx="135" ry="28" transform="rotate(21 181 336)"/><ellipse cx="155" cy="351" rx="81" ry="39" transform="rotate(-5 155 351)"/><ellipse cx="202" cy="363" rx="68" ry="38" transform="rotate(20 202 363)"/><ellipse cx="207" cy="376" rx="59" ry="28" transform="rotate(-15 207 376)"/><ellipse cx="168" cy="393" rx="88" ry="37" transform="rotate(-2 168 393)"/><ellipse cx="191" cy="411" rx="130" ry="35" transform="rotate(17 191 411)"/></svg></div>
+  </div></div>
+</section>
 
-    <div class="w-stage" id="stage">
-      <div class="fig"><svg class="fig-css" viewBox="0 0 400 500" aria-hidden="true"><ellipse cx="239" cy="106" rx="58" ry="29" transform="rotate(-3 239 106)"/><ellipse cx="180" cy="117" rx="62" ry="19" transform="rotate(-2 180 117)"/><ellipse cx="204" cy="125" rx="58" ry="32" transform="rotate(-3 204 125)"/><ellipse cx="220" cy="150" rx="116" ry="23" transform="rotate(-19 220 150)"/><ellipse cx="205" cy="169" rx="106" ry="39" transform="rotate(-6 205 169)"/><ellipse cx="177" cy="187" rx="83" ry="29" transform="rotate(7 177 187)"/><ellipse cx="197" cy="199" rx="115" ry="29" transform="rotate(-2 197 199)"/><ellipse cx="207" cy="218" rx="66" ry="19" transform="rotate(-8 207 218)"/><ellipse cx="205" cy="226" rx="59" ry="15" transform="rotate(-10 205 226)"/><ellipse cx="189" cy="250" rx="124" ry="23" transform="rotate(-6 189 250)"/><ellipse cx="196" cy="269" rx="99" ry="21" transform="rotate(-17 196 269)"/><ellipse cx="215" cy="286" rx="114" ry="36" transform="rotate(-12 215 286)"/><ellipse cx="161" cy="299" rx="135" ry="18" transform="rotate(21 161 299)"/><ellipse cx="189" cy="307" rx="87" ry="15" transform="rotate(14 189 307)"/><ellipse cx="181" cy="336" rx="135" ry="28" transform="rotate(21 181 336)"/><ellipse cx="155" cy="351" rx="81" ry="39" transform="rotate(-5 155 351)"/><ellipse cx="202" cy="363" rx="68" ry="38" transform="rotate(20 202 363)"/><ellipse cx="207" cy="376" rx="59" ry="28" transform="rotate(-15 207 376)"/><ellipse cx="168" cy="393" rx="88" ry="37" transform="rotate(-2 168 393)"/><ellipse cx="191" cy="411" rx="130" ry="35" transform="rotate(17 191 411)"/></svg><canvas class="figure" id="figure" aria-hidden="true"></canvas></div>
-      <div class="legend" role="tablist" aria-label="سه دنیای بذر">
-        <button type="button" role="tab" id="tab-body" data-w="body" aria-selected="false" aria-controls="tri-cap"><b>ب</b>بدن</button>
-        <button type="button" role="tab" id="tab-mind" data-w="mind" aria-selected="false" aria-controls="tri-cap" tabindex="-1"><b>ذ</b>ذهن</button>
-        <button type="button" role="tab" id="tab-soul" data-w="soul" aria-selected="false" aria-controls="tri-cap" tabindex="-1"><b>ر</b>روح</button>
-      </div>
-      <p class="tri-cap" id="tri-cap" role="tabpanel" aria-live="polite">در بذر، بدن، ذهن و روح سه مسیر جدا از هم نیستن. روی هم اثر می‌ذارن.</p>
-      <template id="caps">
-        <p data-w="body"><b>بدن</b> شناخت وضعیت فعلی</p>
-        <p data-w="mind"><b>ذهن</b> شناخت الگوها و رفتارها</p>
-        <p data-w="soul"><b>روح</b> شناخت معنا و ارزش‌ها</p>
-      </template>
+<section class="snap world" id="body" data-w="body" data-k="body" aria-labelledby="h-body">
+  <svg class="drift d2" viewBox="0 0 300 220" aria-hidden="true" focusable="false"><path d="M40 120C40 40 200 20 230 90S120 210 70 160 150 30 260 60"/></svg>
+  <div class="st"><div class="wrap grid">
+    <div class="st-text">
+      <p class="ch-no" data-in="rise" style="--a:0.12;--b:0.5"><span class="num" aria-hidden="true">۱</span><span>شناخت وضعیت فعلی</span><span class="latin" dir="ltr">Body</span></p>
+      <h2 class="ch-word" id="h-body" data-in="rise" style="--a:0.18;--b:0.62;--dy:84px"><span>ب</span>دن</h2>
+      <p class="lead" data-in="rise" style="--a:0.3;--b:0.74">مسیر بذر از بدن شروع می‌شه. از جایی که هر روز باهاش زندگی می‌کنید: خوابتون، تغذیه‌تون، حرکتتون، انرژیتون و عادت‌های روزمره‌تون.</p>
+      <p data-in="rise" style="--a:0.38;--b:0.82">اول باید ببینیم بدنتون الان کجای مسیر ایستاده.</p>
+      <p class="echo" data-in="rise" style="--a:0.46;--b:0.9">گاهی تغییر از خواب و حرکت شروع می‌شه.</p>
     </div>
+    <div class="fz" aria-hidden="true"></div>
+  </div></div>
+</section>
 
-    <article class="chapter" id="body" data-w="body" data-step="body" aria-labelledby="h-body">
-      <figure class="ch-fig rv-frame" data-w="body" aria-hidden="true"><canvas class="world" data-w="body"></canvas></figure>
-      <p class="ch-no rv"><span class="num" aria-hidden="true">۱</span><span>شناخت وضعیت فعلی</span><span class="latin" dir="ltr">Body</span></p>
-      <h2 class="ch-word rv" id="h-body"><span>ب</span>دن</h2>
-      <p class="lead rv">مسیر بذر از بدن شروع می‌شه. از جایی که هر روز باهاش زندگی می‌کنید: خوابتون، تغذیه‌تون، حرکتتون، انرژیتون و عادت‌های روزمره‌تون.</p>
-      <p class="rv">اول باید ببینیم بدنتون الان کجای مسیر ایستاده.</p>
-      <p class="echo rv">گاهی تغییر از خواب و حرکت شروع می‌شه.</p>
-    </article>
+<section class="snap world" id="mind" data-w="mind" data-k="mind" aria-labelledby="h-mind">
+  <svg class="drift d2" viewBox="0 0 300 220" aria-hidden="true" focusable="false"><path d="M30 80C90 0 250 40 220 120S60 200 50 130 180 60 270 110"/></svg>
+  <div class="st"><div class="wrap grid">
+    <div class="st-text">
+      <p class="ch-no" data-in="focus" style="--a:0.12;--b:0.5"><span class="num" aria-hidden="true">۲</span><span>شناخت الگوها و رفتارها</span><span class="latin" dir="ltr">Mind</span></p>
+      <h2 class="ch-word" id="h-mind" data-in="focus" style="--a:0.16;--b:0.66;--ds:.3"><span>ذ</span>هن</h2>
+      <p class="lead" data-in="focus" style="--a:0.3;--b:0.76">بعد می‌ریم سراغ ذهن. الگوهایی که تکرار می‌کنید. نیازهایی که پشت رفتارهاتون هستن.</p>
+      <p data-in="focus" style="--a:0.38;--b:0.84">باورها، تصمیم‌ها و عادت‌هایی که شاید سال‌هاست بدون اینکه متوجه باشید، دارن مسیرتون رو شکل می‌دن.</p>
+      <p class="echo" data-in="focus" style="--a:0.46;--b:0.92">گاهی از شناخت یک الگوی قدیمی.</p>
+    </div>
+    <div class="fz" aria-hidden="true"></div>
+  </div></div>
+</section>
 
-    <article class="chapter" id="mind" data-w="mind" data-step="mind" aria-labelledby="h-mind">
-      <figure class="ch-fig rv-frame" data-w="mind" aria-hidden="true"><canvas class="world" data-w="mind"></canvas></figure>
-      <p class="ch-no rv"><span class="num" aria-hidden="true">۲</span><span>شناخت الگوها و رفتارها</span><span class="latin" dir="ltr">Mind</span></p>
-      <h2 class="ch-word rv" id="h-mind"><span>ذ</span>هن</h2>
-      <p class="lead rv">بعد می‌ریم سراغ ذهن. الگوهایی که تکرار می‌کنید. نیازهایی که پشت رفتارهاتون هستن.</p>
-      <p class="rv">باورها، تصمیم‌ها و عادت‌هایی که شاید سال‌هاست بدون اینکه متوجه باشید، دارن مسیرتون رو شکل می‌دن.</p>
-      <p class="echo rv">گاهی از شناخت یک الگوی قدیمی.</p>
-    </article>
+<section class="snap world" id="soul" data-w="soul" data-k="soul" aria-labelledby="h-soul">
+  <svg class="drift d2" viewBox="0 0 300 220" aria-hidden="true" focusable="false"><path d="M50 150C20 70 140 10 220 50S250 190 150 180 40 90 120 40"/></svg>
+  <div class="st"><div class="wrap grid">
+    <div class="st-text">
+      <p class="ch-no" data-in="fall" style="--a:0.2;--b:0.62"><span class="num" aria-hidden="true">۳</span><span>شناخت معنا و ارزش‌ها</span><span class="latin" dir="ltr">Soul</span></p>
+      <h2 class="ch-word" id="h-soul" data-in="fall" style="--a:0.26;--b:0.74"><span>ر</span>وح</h2>
+      <p class="lead" data-in="fall" style="--a:0.38;--b:0.86">و بعد می‌رسیم به روح. به چیزی که برای شما معنا داره. ارزش‌هاتون. رابطه‌تون با خودتون و زندگی.</p>
+      <p data-in="fall" style="--a:0.48;--b:0.94">و اینکه واقعاً می‌خواید چه جور آدمی باشید و چه جور زندگی‌ای بسازید.</p>
+      <p class="echo" data-in="fall" style="--a:0.56;--b:1">و گاهی از این سؤال ساده:<strong>«من واقعاً چی می‌خوام؟»</strong></p>
+    </div>
+    <div class="fz" aria-hidden="true"></div>
+  </div></div>
+</section>
 
-    <article class="chapter" id="soul" data-w="soul" data-step="soul" aria-labelledby="h-soul">
-      <figure class="ch-fig rv-frame" data-w="soul" aria-hidden="true"><canvas class="world" data-w="soul"></canvas></figure>
-      <p class="ch-no rv"><span class="num" aria-hidden="true">۳</span><span>شناخت معنا و ارزش‌ها</span><span class="latin" dir="ltr">Soul</span></p>
-      <h2 class="ch-word rv" id="h-soul"><span>ر</span>وح</h2>
-      <p class="lead rv">و بعد می‌رسیم به روح. به چیزی که برای شما معنا داره. ارزش‌هاتون. رابطه‌تون با خودتون و زندگی.</p>
-      <p class="rv">و اینکه واقعاً می‌خواید چه جور آدمی باشید و چه جور زندگی‌ای بسازید.</p>
-      <p class="echo rv">و گاهی از این سؤال ساده:<strong>«من واقعاً چی می‌خوام؟»</strong></p>
-    </article>
-
-    <div class="together" id="together" data-step="all3">
-      <p class="kick rv"><span class="latin" dir="ltr">Body · Mind · Soul</span></p>
-      <h2 class="h2 rv" style="margin-top:14px">در بذر، بدن، ذهن و روح سه مسیر جدا از هم نیستن.<span class="soft">روی هم اثر می‌ذارن.</span></h2>
+<section class="snap" id="together" data-k="together" aria-labelledby="h-together">
+  <div class="st"><div class="wrap grid">
+    <div class="st-text">
+      <p class="kick" data-in="rise" style="--a:.1;--b:.5"><span class="latin" dir="ltr">Body · Mind · Soul</span></p>
+      <h2 class="h2" id="h-together"><span class="w" data-in="word" style="--a:0.12;--b:0.48">در</span> <span class="w" data-in="word" style="--a:0.16;--b:0.52">بذر،</span> <span class="w" data-in="word" style="--a:0.21;--b:0.57">بدن،</span> <span class="w" data-in="word" style="--a:0.26;--b:0.61">ذهن</span> <span class="w" data-in="word" style="--a:0.30;--b:0.66">و</span> <span class="w" data-in="word" style="--a:0.34;--b:0.70">روح</span> <span class="w" data-in="word" style="--a:0.39;--b:0.75">سه</span> <span class="w" data-in="word" style="--a:0.43;--b:0.79">مسیر</span> <span class="w" data-in="word" style="--a:0.48;--b:0.84">جدا</span> <span class="w" data-in="word" style="--a:0.52;--b:0.88">از</span> <span class="w" data-in="word" style="--a:0.57;--b:0.93">هم</span> <span class="w" data-in="word" style="--a:0.61;--b:0.97">نیستن.</span><span class="soft"><span class="w" data-in="word" style="--a:0.50;--b:0.86">روی</span> <span class="w" data-in="word" style="--a:0.55;--b:0.91">هم</span> <span class="w" data-in="word" style="--a:0.60;--b:0.96">اثر</span> <span class="w" data-in="word" style="--a:0.65;--b:1.00">می‌ذارن.</span></span></h2>
       <ol class="flow">
-        <li class="rv" data-w="body"><span class="node" aria-hidden="true">ب</span><div><b>بدن</b><span>شناخت وضعیت فعلی</span></div></li>
-        <li class="rv" data-w="mind" style="--d:80ms"><span class="node" aria-hidden="true">ذ</span><div><b>ذهن</b><span>شناخت الگوها و رفتارها</span></div></li>
-        <li class="rv" data-w="soul" style="--d:160ms"><span class="node" aria-hidden="true">ر</span><div><b>روح</b><span>شناخت معنا و ارزش‌ها</span></div></li>
-        <li class="rv" data-w="change" style="--d:240ms"><span class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20.5V11"/><path d="M12 14c-.8-4-4.4-5.6-8-4.6 1 3.7 4.4 5.2 8 4.6z"/><path d="M12 11.5c.8-4 4.4-5.6 8-4.6-1 3.7-4.4 5.2-8 4.6z"/></svg></span><div><b>تغییر</b><span>انتخاب چند قدم واقعی و قابل ادامه</span></div></li>
+        <li data-w="body" data-in="slide" style="--a:.34;--b:.62"><span class="node" aria-hidden="true">ب</span><div><b>بدن</b><span>شناخت وضعیت فعلی</span></div></li>
+        <li data-w="mind" data-in="slide" style="--a:.42;--b:.7"><span class="node" aria-hidden="true">ذ</span><div><b>ذهن</b><span>شناخت الگوها و رفتارها</span></div></li>
+        <li data-w="soul" data-in="slide" style="--a:.5;--b:.78"><span class="node" aria-hidden="true">ر</span><div><b>روح</b><span>شناخت معنا و ارزش‌ها</span></div></li>
+        <li data-w="change" data-in="slide" style="--a:.58;--b:.86"><span class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20.5V11"/><path d="M12 14c-.8-4-4.4-5.6-8-4.6 1 3.7 4.4 5.2 8 4.6z"/><path d="M12 11.5c.8-4 4.4-5.6 8-4.6-1 3.7-4.4 5.2-8 4.6z"/></svg></span><div><b>تغییر</b><span>انتخاب چند قدم واقعی و قابل ادامه</span></div></li>
       </ol>
-      <p class="close rv">قرار نیست همه‌چیز رو یک‌باره تغییر بدید. اول خودتون رو می‌شناسید. بعد چیزی رو انتخاب می‌کنید که واقعاً برای شما مهمه. و از همون‌جا، قدم‌به‌قدم مسیرتون رو می‌سازید.</p>
+      <p class="close" data-in="rise" style="--a:.66;--b:1;--dy:24px">قرار نیست همه‌چیز رو یک‌باره تغییر بدید. اول خودتون رو می‌شناسید. بعد چیزی رو انتخاب می‌کنید که واقعاً برای شما مهمه. و از همون‌جا، قدم‌به‌قدم مسیرتون رو می‌سازید.</p>
     </div>
-
-  </div>
+    <div class="fz" aria-hidden="true"></div>
+  </div></div>
 </section>
 
 <!-- ════ The familiar tension (brand book 1.1) and knowing vs doing (highlight 1). The world each line belongs to is marked. ════ -->
 <section class="sec" id="why">
+  <svg class="drift d2" viewBox="0 0 300 220" aria-hidden="true" focusable="false"><path d="M30 80C90 0 250 40 220 120S60 200 50 130 180 60 270 110"/></svg>
   <div class="wrap grid">
     <div class="why-a">
       <p class="kick rv">تنش آشنا</p>
@@ -518,6 +616,7 @@ button{ font:inherit; color:inherit; }
 
 <!-- ════ The method (highlight 3). Stage names beside the four sentences were added by an agent (see the README of /old/). ════ -->
 <section class="sec band" id="method">
+  <svg class="drift d2" viewBox="0 0 300 220" aria-hidden="true" focusable="false"><path d="M40 120C40 40 200 20 230 90S120 210 70 160 150 30 260 60"/></svg><svg class="drift d3" viewBox="0 0 300 220" aria-hidden="true" focusable="false"><path d="M50 150C20 70 140 10 220 50S250 190 150 180 40 90 120 40"/></svg>
   <div class="wrap grid">
     <div class="m-text">
       <p class="kick rv"><span class="latin" dir="ltr">TTM · Stages of Change</span></p>
@@ -598,6 +697,7 @@ button{ font:inherit; color:inherit; }
 
 <!-- ════ Questions (highlight 5). «AI» waits for E3; the weight-loss question and the first answer's diet sentence wait for مرجع تغذیه. ════ -->
 <section class="sec" id="faq">
+  <svg class="drift d3" viewBox="0 0 300 220" aria-hidden="true" focusable="false"><path d="M30 80C90 0 250 40 220 120S60 200 50 130 180 60 270 110"/></svg>
   <div class="wrap grid">
     <div class="head">
       <p class="kick rv">سؤال‌های شما</p>
@@ -628,18 +728,20 @@ button{ font:inherit; color:inherit; }
   </div>
 </section>
 
-<!-- ════ The end: the gate at night, its lanterns lit (brand book 1.1, «اصل بنیادین») ════ -->
-<section class="sec end" id="start">
-  <div class="wrap grid">
-    <div class="end-text">
-      <p class="principle latin rv" dir="ltr">We illuminate. You decide.</p>
-      <h2 class="h2 rv">ما مسیر را روشن‌تر می‌کنیم؛ انتخاب با شماست.</h2>
-      <p class="lead rv">مسیر مناسب خودتان را انتخاب کنید.</p>
-      <a class="btn btn-go rv" href="https://app.bazrlife.ir/login">شروع</a>
-      <p class="small muted rv"><span class="term" dir="ltr">A place to know, to be, to become.</span></p>
+
+<!-- ════ The end (brand book 1.1, «اصل بنیادین»): the figure clear, its three threads together ════ -->
+<section class="snap" id="start" data-k="start" aria-labelledby="h-start">
+  <svg class="drift d2" viewBox="0 0 300 220" aria-hidden="true" focusable="false"><path d="M50 150C20 70 140 10 220 50S250 190 150 180 40 90 120 40"/></svg>
+  <div class="st"><div class="wrap grid">
+    <div class="st-text">
+      <p class="principle latin" dir="ltr" data-in="rise" style="--a:.1;--b:.5;--dy:20px">We illuminate. You decide.</p>
+      <h2 class="h2" id="h-start"><span class="w" data-in="word" style="--a:0.16;--b:0.52">ما</span> <span class="w" data-in="word" style="--a:0.22;--b:0.58">مسیر</span> <span class="w" data-in="word" style="--a:0.28;--b:0.64">را</span> <span class="w" data-in="word" style="--a:0.34;--b:0.70">روشن‌تر</span> <span class="w" data-in="word" style="--a:0.40;--b:0.76">می‌کنیم؛</span> <span class="w" data-in="word" style="--a:0.46;--b:0.82">انتخاب</span> <span class="w" data-in="word" style="--a:0.52;--b:0.88">با</span> <span class="w" data-in="word" style="--a:0.58;--b:0.94">شماست.</span></h2>
+      <p class="lead" data-in="rise" style="--a:.5;--b:.85;--dy:20px">مسیر مناسب خودتان را انتخاب کنید.</p>
+      <a class="btn btn-go" href="https://app.bazrlife.ir/login" data-in="pop" style="--a:.6;--b:.95">شروع</a>
+      <p class="small muted" data-in="rise" style="--a:.7;--b:1;--dy:12px"><span class="term" dir="ltr">A place to know, to be, to become.</span></p>
     </div>
-    <figure class="end-art rv-frame" aria-hidden="true"><canvas class="closing"></canvas></figure>
-  </div>
+    <div class="fz" aria-hidden="true"></div>
+  </div></div>
 </section>
 </main>
 
