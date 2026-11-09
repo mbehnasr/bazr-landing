@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>[پیش‌نویس] بذر · بدن، ذهن، روح</title>
+<!-- «رشته» (BZR-182): a second preview beside /bzr/. One long wire, generated in code (thread.js), loops around the
+     volume of a standing person; as you scroll it moves from a tangle to a clear figure, and then into three threads,
+     ب ذ ر = بدن، ذهن، روح. The idea only (a person emerging from a tangle of looping line) came from a photo of someone
+     else's sculpture; nothing is traced, sampled or embedded, and the photo is not in this repo. Ink on paper; a world's
+     colour shows only when it is chosen. A private preview: noindex stays and the footer says it is an internal preview
+     until Owner پروژه picks a design (BZR-139, ADR-0005). Copy as /bzr/; ADR-0006: no app screens, prices still empty. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="بذر یعنی بدن، ذهن، روح. بذر یک پلتفرم Lifestyle و Behavior Change است که کمک می‌کند الگوهای رفتاری، نیازها، عادت‌ها و سبک زندگی خودتان را بهتر بشناسید و قدم‌به‌قدم مسیر تغییر خودتان را بسازید.">
+<meta name="theme-color" content="#f3f1ec">
+<meta name="color-scheme" content="light">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preload" href="../assets/fonts/vazirmatn.woff2" as="font" type="font/woff2" crossorigin>
+<script>document.documentElement.classList.add("js");</script>
+<style>
+@font-face{ font-family:"Vazirmatn"; src:url("../assets/fonts/vazirmatn.woff2") format("woff2"); font-weight:100 900; font-style:normal; font-display:swap; }
+
+/* ── Tokens. Ink and the main button are brand book 1.1's deep digital green (ADR-0008) on a pale paper, with a dark
+      wire; each world has its own colour (terracotta, teal, violet), shown only when that world is chosen. «-ink» is for text (≥ 5.7:1 on every
+      background here), the plain tone for large letters and lines only. ── */
+:root{
+  --canvas:#f3f1ec; --card:#fbfaf7; --stone:#ebe7df; --line:#e1ddd4; --line-2:#cfc8bb; --wire:#1c2420;
+  --ink:#14302a; --ink-2:#3e4a45; --ink-3:#5c6661;
+  --primary:#214d3b; --primary-hi:#2a5c47; --on-primary:#fdfaf5; --accent:#d99a4e; --track:#e7e0d6;
+  --body:#b86a35; --body-ink:#8c4618; --body-soft:#f3e2cf; --body-tint:#f5efe8;
+  --mind:#23807f; --mind-ink:#155a5c; --mind-soft:#d9ebe7; --mind-tint:#eef2ef;
+  --soul:#7d5fa6; --soul-ink:#574083; --soul-soft:#e7e0f0; --soul-tint:#f2eff2;
+  --shadow:0 1px 0 rgb(255 255 255 / .7) inset, 0 2px 6px -2px rgb(60 44 24 / .1), 0 16px 32px -20px rgb(60 44 24 / .3);
+  --frame-shadow:0 2px 4px rgb(60 44 24 / .06), 0 24px 48px -28px rgb(60 44 24 / .45);
+  --ease-out:cubic-bezier(.23,1,.32,1); --ease-io:cubic-bezier(.77,0,.175,1);
+  --f:"Vazirmatn", Tahoma, system-ui, sans-serif;
+  /* the grid: 4 columns on a phone, 8 on a tablet, 12 on a desktop, inside one 1200 px column */
+  --max:1200px; --cols:4; --gut:16px; --gap:16px; --sec:88px; --head:32px; --top:60px;
+}
+@media (min-width:700px){ :root{ --cols:8; --gut:32px; --gap:20px; --sec:112px; --head:40px; } }
+@media (min-width:1024px){ :root{ --cols:12; --gut:40px; --gap:24px; --sec:144px; --head:48px; --top:68px; } }
+[data-w="body"]{ --w:var(--body); --wi:var(--body-ink); --ws:var(--body-soft); }
+[data-w="mind"]{ --w:var(--mind); --wi:var(--mind-ink); --ws:var(--mind-soft); }
+[data-w="soul"]{ --w:var(--soul); --wi:var(--soul-ink); --ws:var(--soul-soft); }
+[data-w="change"]{ --w:var(--primary); --wi:var(--ink); --ws:#e3ebdf; }
+.l-b{ color:var(--body); } .l-m{ color:var(--mind); } .l-s{ color:var(--soul); }
+
+html{ -webkit-text-size-adjust:100%; -webkit-tap-highlight-color:transparent; scroll-padding-top:calc(var(--top) + 16px); }
+@media (prefers-reduced-motion:no-preference){ html{ scroll-behavior:smooth; } }
+*,*::before,*::after{ box-sizing:border-box; }
+body{ --page:var(--canvas); margin:0; background:var(--page); transition:background-color .9s ease; color:var(--ink-2); font-family:var(--f); font-size:1.0625rem; line-height:2; -webkit-font-smoothing:antialiased; overflow-x:clip; }
+h1,h2,h3,p,ul,ol,figure,blockquote,dl,dd{ margin:0; }
+ul,ol{ padding:0; list-style:none; }
+h1,h2,h3{ color:var(--ink); text-wrap:balance; }
+p{ text-wrap:pretty; }
+img{ display:block; max-width:100%; height:auto; }
+a{ color:inherit; }
+button{ font:inherit; color:inherit; }
+[hidden]{ display:none !important; }
+:focus-visible{ outline:2.5px solid var(--ink); outline-offset:3px; border-radius:10px; }
+.term{ font-weight:600; unicode-bidi:isolate; }
+.skip{ position:absolute; inset-inline-start:12px; top:-60px; z-index:50; background:var(--ink); color:var(--card); padding:10px 16px; border-radius:12px; text-decoration:none; }
+.skip:focus{ top:12px; }
+
+.wrap{ max-width:calc(var(--max) + 2 * var(--gut)); margin-inline:auto; padding-inline:var(--gut); }
+.grid{ display:grid; grid-template-columns:repeat(var(--cols), minmax(0, 1fr)); column-gap:var(--gap); }
+.grid > *{ grid-column:1 / -1; min-width:0; }
+.sec{ padding-top:var(--sec); }
+.rule{ border-top:1px solid var(--line-2); padding-top:20px; }
+
+/* ── Type: one family, a wide range of weights; Latin terms set in Vazirmatn's own Latin (brand book 1.1) ── */
+.kick{ display:flex; align-items:center; gap:10px; font-weight:700; font-size:.86rem; line-height:1.6; color:var(--ink-3); }
+.kick .term{ font-weight:600; letter-spacing:.12em; text-transform:uppercase; font-size:.76rem; }
+.kick::before{ content:""; width:22px; height:1.5px; background:currentColor; flex:none; }
+.kick.plain::before{ display:none; }
+.display{ font-weight:900; font-size:clamp(2.4rem, 14cqi, 4.7rem); line-height:1.32; color:var(--ink); text-wrap:initial; }
+.display .line{ display:block; }
+.h2{ font-weight:800; font-size:clamp(1.6rem, 1.18rem + 1.6vw, 2.5rem); line-height:1.5; }
+.h3{ font-weight:800; font-size:1.14rem; line-height:1.7; }
+.lead{ font-size:clamp(1.06rem, 1rem + .3vw, 1.2rem); line-height:2; color:var(--ink-2); }
+.muted{ color:var(--ink-3); }
+.small{ font-size:.9rem; line-height:1.9; }
+.soft{ display:block; color:var(--ink-3); }
+.head{ display:grid; gap:14px; margin-bottom:var(--head); align-content:start; }
+.stack > * + *{ margin-top:16px; }
+.latin{ font-weight:600; letter-spacing:.14em; text-transform:uppercase; font-size:.74rem; unicode-bidi:isolate; }
+
+/* ── Buttons: the painting's sage pill, and a quiet outline ── */
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:.55em; min-height:50px; padding-inline:28px; border-radius:999px; border:0; font:inherit; font-weight:700; font-size:1rem; line-height:1.2; text-decoration:none; cursor:pointer; touch-action:manipulation; user-select:none; -webkit-user-select:none; transition:transform .16s var(--ease-out), background-color .2s ease, box-shadow .2s ease; }
+.btn:active{ transform:scale(.97); }
+.btn-go{ background:var(--primary); color:var(--on-primary); box-shadow:0 12px 24px -14px rgb(20 48 36 / .85); }
+.btn-line{ background:transparent; color:var(--ink); box-shadow:inset 0 0 0 1.5px var(--line-2); }
+.btn-sm{ min-height:44px; padding-inline:20px; font-size:.95rem; }
+.btn svg{ width:18px; height:18px; flex:none; }
+@media (hover:hover) and (pointer:fine){ .btn-go:hover{ background:var(--primary-hi); } .btn-line:hover{ background:var(--card); box-shadow:inset 0 0 0 1.5px var(--ink-3); } }
+
+/* ── Top bar ── */
+.top{ position:sticky; top:0; z-index:30; background:color-mix(in srgb, var(--page) 97%, transparent); padding-top:env(safe-area-inset-top, 0px); transition:box-shadow .25s ease, background-color .6s ease; }
+.top.stuck{ box-shadow:0 1px 0 var(--line); }
+.top-in{ height:var(--top); display:flex; align-items:center; gap:16px; }
+.mark{ width:44px; height:44px; flex:none; border-radius:50%; display:grid; place-items:center; background:var(--card); box-shadow:0 0 0 1px var(--line); }
+.mark img{ width:26px; height:26px; }
+.top nav{ display:none; align-items:center; gap:2px; }
+.top nav a{ position:relative; display:inline-flex; align-items:center; min-height:44px; text-decoration:none; color:var(--ink-2); font-size:.94rem; padding:0 12px; border-radius:999px; line-height:1.5; }
+.top nav a[data-w]::after{ content:""; position:absolute; inset-inline:12px; bottom:6px; height:2px; border-radius:2px; background:var(--w); transform:scaleX(0); transition:transform .5s var(--ease-out); }
+.top nav a[aria-current="true"]{ color:var(--ink); font-weight:700; }
+.top nav a[aria-current="true"]::after{ transform:scaleX(1); }
+.top nav i{ width:1px; height:18px; background:var(--line-2); margin-inline:8px; }
+.top-end{ margin-inline-start:auto; }
+@media (min-width:1024px){ .top nav{ display:flex; } }
+@media (hover:hover) and (pointer:fine){ .top nav a:hover{ color:var(--ink); background:rgb(33 77 59 / .08); } }
+
+/* ════ The three worlds ════
+   Phone: the title, then the three worlds stacked as bands, then each world in turn.
+   Desktop: the three panels stay in view on the left while the words scroll on the right; each world opens as its
+   words reach the middle of the screen, and they all come back together at the end. */
+.worlds{ padding-top:28px; }
+.w-hero{ display:grid; gap:18px; justify-items:start; align-content:start; container-type:inline-size; padding-bottom:32px; }
+.eyebrow{ display:flex; align-items:center; gap:12px; color:var(--ink-3); }
+.thread-mark{ width:34px; height:12px; background:no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 12'%3E%3Cpath d='M1 8c5 0 6-6 10-6s3 8 7 8 4-8 8-8 4 5 7 5' fill='none' stroke='%231c2420' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E"); }
+.w-hero .lead{ max-width:34em; }
+.cta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:6px; }
+@media (max-width:419px){ .cta .btn{ flex:1 1 auto; } }
+
+/* the figure: one wire drawn on a canvas by thread.js; before the script runs (or without it) a faint tangle stands in */
+.w-stage{ display:grid; justify-items:center; }
+.fig{ position:relative; width:min(100%, 380px); aspect-ratio:4 / 5; cursor:grab; }
+.fig:active{ cursor:grabbing; }
+.fig-css{ position:absolute; inset:0; width:100%; height:100%; fill:none; stroke:var(--wire); stroke-width:1.1; opacity:.3; }
+.art .fig-css{ display:none; }
+.figure{ position:absolute; inset:0; width:100%; height:100%; display:block; touch-action:pan-y; user-select:none; -webkit-user-select:none; -webkit-tap-highlight-color:transparent; }
+@media (min-width:700px){ .fig{ width:min(100%, 440px); } }
+
+/* the legend under the sphere: the three words, each under its world, and a line in each world's colour */
+.legend{ display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); margin-top:10px; width:min(100%, 340px); }
+@media (min-width:700px){ .legend{ width:min(100%, 400px); } }
+.legend button{ position:relative; display:flex; align-items:center; justify-content:center; gap:8px; min-width:0; min-height:48px; padding:6px 2px 12px; white-space:nowrap; border:0; background:none; cursor:pointer; touch-action:manipulation; color:var(--ink-3); font-size:.98rem; font-weight:600; border-radius:10px; transition:color .3s ease; }
+.legend button b{ font-weight:800; font-size:1.1rem; color:var(--ink); transition:color .3s ease; }
+.legend button[aria-selected="true"] b, .tri-three .legend button b{ color:var(--wi); }
+.legend button::after{ content:""; position:absolute; inset-inline:0; bottom:0; height:2px; border-radius:2px; background:var(--line-2); transition:background-color .4s ease; }
+.legend button[aria-selected="true"]{ color:var(--ink); font-weight:700; }
+.legend button[aria-selected="true"]::after, .tri-three .legend button::after{ background:var(--w); height:3px; }
+.tri-cap{ justify-self:stretch; margin-top:14px; min-height:1.9em; font-size:.98rem; line-height:1.9; color:var(--ink-2); padding-inline-start:14px; border-inline-start:3px solid var(--w, var(--line-2)); transition:border-color .4s ease; }
+.tri-cap b{ color:var(--wi, var(--ink)); font-weight:800; margin-inline-end:2px; }
+
+.hint{ display:none; }
+@media (min-width:1024px){
+  .hint{ display:flex; align-items:center; gap:10px; margin-top:22px; color:var(--ink-3); font-size:.9rem; line-height:1.6; }
+  .hint svg{ width:18px; height:18px; }
+}
+@media (min-width:1024px) and (prefers-reduced-motion:no-preference){ .hint svg{ animation:nudge 2.4s var(--ease-io) 1.6s 3; } }
+@keyframes nudge{ 0%, 100%{ transform:none; } 50%{ transform:translateY(4px); } }
+
+/* each world */
+.chapter{ display:grid; align-content:start; padding-block:var(--sec) 0; container-type:inline-size; }
+@media (max-width:1023px){ #body{ padding-top:calc(var(--sec) * .6); } }
+.ch-fig{ position:relative; border-radius:18px; overflow:hidden; aspect-ratio:5 / 4; margin-bottom:28px; }
+.ch-fig{ background:var(--card); box-shadow:0 0 0 1px var(--line) inset; }
+.ch-fig canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+.ch-no{ display:flex; align-items:center; gap:10px; color:var(--wi); font-weight:700; font-size:.95rem; line-height:1.6; }
+.ch-no .num{ width:28px; height:28px; flex:none; border-radius:50%; display:grid; place-items:center; font-size:.88rem; font-weight:800; line-height:1; box-shadow:inset 0 0 0 1.5px var(--w); }
+.ch-no .latin{ color:var(--ink-3); margin-inline-start:6px; }
+.ch-word{ margin-top:6px; font-weight:900; font-size:clamp(4.2rem, 26cqi, 7.4rem); line-height:1.25; color:var(--ink); }
+.ch-word span{ color:var(--w); }
+.chapter .lead{ margin-top:14px; }
+.chapter .lead + p{ margin-top:12px; }
+.echo{ margin-top:28px; padding-top:18px; border-top:1px solid var(--line-2); font-weight:700; font-size:1.12rem; line-height:1.9; color:var(--wi); }
+.echo strong{ display:block; margin-top:6px; font-weight:900; font-size:clamp(1.6rem, 1.3rem + 1.4vw, 2.3rem); line-height:1.5; color:var(--ink); }
+
+/* together: the three, and a fourth step after them */
+.together{ padding-block:var(--sec) 0; display:grid; align-content:start; }
+.flow{ margin-top:28px; display:grid; }
+.flow li{ position:relative; display:grid; grid-template-columns:48px minmax(0, 1fr); gap:16px; padding-bottom:20px; }
+.flow li:last-child{ padding-bottom:0; }
+.flow li::before{ content:""; position:absolute; inset-inline-start:23px; top:52px; bottom:4px; width:2px; border-radius:2px; background:linear-gradient(var(--w), var(--nw, var(--line-2))); }
+.flow li:last-child::before{ display:none; }
+.flow li[data-w="body"]{ --nw:var(--mind); } .flow li[data-w="mind"]{ --nw:var(--soul); } .flow li[data-w="soul"]{ --nw:var(--primary); }
+.flow .node{ width:48px; height:48px; border-radius:50%; display:grid; place-items:center; font-weight:800; font-size:1.2rem; line-height:1; color:var(--card); background:var(--wi); }
+.flow li[data-w="change"] .node, .ask li[data-w="change"] .tag-w{ background:var(--card); box-shadow:inset 0 0 0 1.5px var(--primary); }
+.node svg, .tag-w svg{ width:58%; height:58%; fill:none; stroke:var(--primary); stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.flow b{ display:block; color:var(--ink); font-weight:800; font-size:1.08rem; line-height:1.6; padding-top:1px; }
+.flow div > span{ display:block; color:var(--ink-3); font-size:.98rem; line-height:1.8; }
+.together .h2{ font-size:clamp(1.45rem, 1.2rem + 1vw, 2.05rem); line-height:1.6; }
+.together .close{ margin-top:32px; padding-top:20px; border-top:1px solid var(--line-2); }
+
+@media (min-width:700px){
+  .w-hero{ padding-bottom:40px; }
+  .chapter{ grid-template-columns:repeat(8, minmax(0, 1fr)); column-gap:var(--gap); }
+  .chapter > *{ grid-column:1 / span 5; }
+  .ch-fig{ grid-column:6 / span 3; grid-row:1 / span 6; aspect-ratio:4 / 5; margin:0; align-self:start; }
+  .ch-word{ font-size:clamp(4.2rem, 20cqi, 7rem); }
+}
+@media (min-width:1024px){
+  .worlds{ padding-top:0; }
+  .w-grid{ align-items:start; }
+  .w-hero{ grid-column:1 / span 5; grid-row:1; min-height:calc(100svh - var(--top)); align-content:center; padding-block:40px; }
+  .chapter{ grid-column:1 / span 5; display:grid; grid-template-columns:none; min-height:96svh; align-content:center; padding-block:48px; }
+  .chapter > *{ grid-column:auto; }
+  .ch-fig{ display:none; }
+  #body{ grid-row:2; } #mind{ grid-row:3; } #soul{ grid-row:4; }
+  .ch-word{ font-size:clamp(5rem, 28cqi, 8.2rem); }
+  .together{ grid-column:1 / span 5; grid-row:5; min-height:100svh; align-content:center; padding-block:48px 64px; }
+  .w-stage{ grid-column:7 / span 6; grid-row:1 / span 5; position:sticky; top:max(calc(var(--top) + 8px), calc(var(--top) + (100svh - var(--top) - 640px) / 2)); }
+  .fig{ width:min(100%, 470px, (100svh - var(--top) - 120px) * .8); }
+  .legend{ width:min(100%, 470px, (100svh - var(--top) - 120px) * .8); }
+  .tri-cap{ display:none; }
+  /* the page takes on a whisper of the open world's colour */
+  body[data-state="body"]{ --page:var(--body-tint); }
+  body[data-state="mind"]{ --page:var(--mind-tint); }
+  body[data-state="soul"]{ --page:var(--soul-tint); }
+}
+@media (min-width:1024px) and (max-height:599px){ .w-stage{ position:relative; top:auto; } }
+
+/* ════ The rest of the page ════ */
+/* knowing and doing */
+.why-a{ display:grid; gap:16px; align-content:start; }
+.why-b{ margin-top:48px; }
+.why-c{ margin-top:56px; display:grid; gap:12px; justify-items:center; text-align:center; }
+.why-c p{ max-width:34em; }
+.why-c .punch{ color:var(--ink); font-weight:800; font-size:clamp(1.14rem, 1.05rem + .5vw, 1.4rem); }
+.ledger{ border-top:1.5px solid var(--ink); }
+.ledger-row{ display:grid; grid-template-columns:28px minmax(0, 1fr) 54px 64px; gap:12px; align-items:center; padding-block:16px; border-bottom:1px solid var(--line); line-height:1.8; color:var(--ink); }
+.ledger-row > :nth-child(n+3){ justify-self:center; }
+.ledger-head{ padding-block:10px; font-size:.82rem; color:var(--ink-3); }
+.tag-w{ width:28px; height:28px; border-radius:50%; display:grid; place-items:center; font-weight:800; font-size:.9rem; line-height:1; color:var(--ink); box-shadow:inset 0 0 0 1.2px var(--line-2); }
+.yes{ width:11px; height:11px; border-radius:50%; background:var(--primary); }
+.q{ font-weight:800; font-size:1.4rem; line-height:1; color:var(--body-ink); }
+@media (max-width:419px){ .ledger-row{ grid-template-columns:24px minmax(0, 1fr) 42px 54px; gap:8px; } .ledger-row .tag-w{ width:24px; height:24px; font-size:.8rem; } .ledger-head{ font-size:.76rem; } }
+.big{ margin-top:6px; font-weight:900; font-size:clamp(3.2rem, 2rem + 5vw, 6.2rem); line-height:1.2; color:var(--ink); }
+.big i{ font-style:normal; color:var(--accent); }
+@media (min-width:700px){ .why-a{ grid-column:1 / span 6; } .why-b{ grid-column:1 / -1; } .why-c{ grid-column:2 / span 6; margin-top:72px; } }
+@media (min-width:1024px){ .why-a{ grid-column:1 / span 5; } .why-b{ grid-column:7 / span 6; margin-top:0; padding-top:6px; } .why-c{ grid-column:3 / span 8; margin-top:96px; } }
+
+/* know · be · become: three verbs on one rule */
+.kbb{ display:grid; gap:0 var(--gap); border-top:1.5px solid var(--ink); }
+.kbb li{ display:grid; gap:6px; align-content:start; padding-block:22px; border-bottom:1px solid var(--line); }
+.kbb b{ font-weight:900; font-size:clamp(1.5rem, 1.2rem + 1vw, 2rem); line-height:1.5; color:var(--ink); }
+.kbb .latin{ color:var(--ink-3); justify-self:start; }
+.kbb p{ color:var(--ink-2); }
+.tagline{ margin-top:22px; color:var(--ink-3); }
+@media (min-width:700px){ .kbb-head{ grid-column:1 / span 6; } .kbb{ grid-template-columns:repeat(3, minmax(0, 1fr)); } .kbb li{ border-bottom:0; padding-block:24px 0; } }
+@media (min-width:1024px){ .kbb-head{ grid-column:1 / span 7; } }
+
+/* your path: four steps */
+.steps{ display:grid; border-top:1.5px solid var(--ink); }
+.steps > li{ display:grid; grid-template-columns:56px minmax(0, 1fr); gap:12px; padding-block:24px; border-bottom:1px solid var(--line); }
+.steps .n{ font-weight:200; font-size:2.6rem; line-height:1; color:var(--ink); padding-top:2px; }
+.steps h3{ margin-bottom:6px; }
+.qs{ display:grid; margin-top:8px; }
+.qs li{ position:relative; padding-inline-start:20px; color:var(--ink); }
+.qs li::before{ content:""; position:absolute; inset-inline-start:0; top:.95em; width:8px; height:8px; border-radius:50%; box-shadow:inset 0 0 0 1.4px var(--ink); }
+.path-close{ margin-top:32px; padding:24px; border-radius:20px; background:var(--card); box-shadow:var(--shadow); }
+.path-close strong{ display:block; color:var(--ink); font-weight:800; margin-bottom:6px; }
+@media (min-width:700px){ .path-head{ grid-column:1 / span 6; } }
+@media (min-width:1024px){
+  .path-head{ grid-column:1 / span 4; position:sticky; top:calc(var(--top) + 40px); align-self:start; margin-bottom:0; }
+  .steps{ grid-column:6 / span 7; }
+  .path-close{ grid-column:6 / span 7; }
+}
+
+/* the method sits on a band of warm stone, a change of pace in the long middle of the page */
+.band{ --line:#e0d2bf; margin-top:var(--sec); padding-block:calc(var(--sec) * .72); background:#f1e8dc; }
+.m-text{ display:grid; gap:16px; }
+.stages{ display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:var(--gap); margin-top:var(--head); }
+.stage{ background:var(--card); border-radius:20px; padding:20px; display:grid; gap:12px; align-content:start; box-shadow:var(--shadow); }
+.loose{ width:100%; height:auto; aspect-ratio:120 / 64; fill:none; stroke:var(--wire); stroke-width:1.3; stroke-linecap:round; stroke-linejoin:round; }
+.stage .term{ color:var(--ink); font-size:1.02rem; justify-self:start; }
+.stage p{ font-size:.95rem; line-height:1.85; }
+.m-more{ margin-top:var(--head); display:grid; gap:16px; }
+.ways{ display:flex; flex-wrap:wrap; gap:8px; }
+.ways li{ padding:6px 16px; border-radius:999px; background:var(--card); box-shadow:inset 0 0 0 1px var(--line); color:var(--ink); font-size:.92rem; font-weight:600; line-height:1.8; }
+.ask-lead{ margin-top:56px; color:var(--ink); font-weight:700; }
+.ask{ margin-top:12px; border-top:1.5px solid var(--ink); }
+.ask li{ display:grid; grid-template-columns:36px minmax(0, 1fr); gap:14px; align-items:center; padding-block:16px; border-bottom:1px solid var(--line); font-weight:800; font-size:clamp(1.06rem, 1rem + .4vw, 1.3rem); color:var(--ink); line-height:1.7; }
+.ask li .tag-w{ width:36px; height:36px; font-size:1rem; }
+.science{ margin-top:28px; color:var(--ink-3); }
+@media (min-width:700px){ .stages{ grid-template-columns:repeat(4, minmax(0, 1fr)); } .m-text, .m-more, .science{ grid-column:1 / span 6; } .ask-lead{ grid-column:1 / span 3; margin-top:72px; } .ask{ grid-column:4 / span 5; margin-top:72px; } }
+@media (min-width:1024px){ .m-text, .m-more, .science{ grid-column:1 / span 7; } .ask-lead{ grid-column:1 / span 4; } .ask{ grid-column:6 / span 7; } }
+
+/* inside Bazr and the stages of growth */
+.trio{ display:grid; gap:0 var(--gap); border-top:1.5px solid var(--ink); }
+.item{ display:grid; grid-template-columns:44px minmax(0, 1fr); gap:14px; align-items:center; padding-block:20px; border-bottom:1px solid var(--line); color:var(--ink); font-weight:700; font-size:1.06rem; }
+.item svg{ width:44px; height:44px; padding:10px; border-radius:50%; background:var(--card); box-shadow:inset 0 0 0 1px var(--line); fill:none; stroke:var(--primary); stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+@media (min-width:700px){ .trio{ grid-template-columns:repeat(3, minmax(0, 1fr)); } .item{ grid-template-columns:none; justify-items:start; gap:14px; border-bottom:0; padding-block:24px 0; } }
+.note{ margin-top:32px; padding:22px 24px; border-radius:20px; background:var(--card); box-shadow:var(--shadow); }
+.note b{ display:block; color:var(--ink); font-weight:800; margin-bottom:4px; }
+@media (min-width:1024px){ .in-head{ grid-column:1 / span 7; } .note{ grid-column:1 / span 7; } }
+.grow{ margin-top:var(--sec); }
+.plants{ display:grid; grid-auto-flow:column; grid-auto-columns:minmax(124px, 1fr); gap:var(--gap); overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scroll-padding-inline:var(--gut); margin:-12px calc(var(--gut) * -1) -24px; padding:12px var(--gut) 32px; scrollbar-width:none; }
+.plants::-webkit-scrollbar{ display:none; }
+.plants li{ scroll-snap-align:start; display:grid; justify-items:center; gap:10px; padding:18px 10px 16px; border-radius:20px; background:var(--card); box-shadow:var(--shadow); }
+.plants svg{ width:96px; height:134px; overflow:visible; }
+.plants .gd{ fill:none; stroke:var(--line-2); stroke-width:1.2; stroke-linecap:round; }
+.plants .pl{ fill:none; stroke:var(--wire); stroke-width:1.45; stroke-linecap:round; stroke-linejoin:round; }
+.plants .no{ font-size:.8rem; color:var(--ink-3); font-weight:600; line-height:1.6; }
+.plants b{ color:var(--ink); font-weight:800; font-size:1.05rem; line-height:1.4; }
+@media (min-width:700px){ .plants{ overflow:visible; margin:0; padding:0; grid-auto-flow:row; grid-auto-columns:auto; grid-template-columns:repeat(5, minmax(0, 1fr)); } .plants svg{ width:112px; height:156px; } }
+
+/* membership: prices stay empty until they are announced (ADR-0006) */
+.plans{ display:grid; gap:var(--gap); }
+@media (min-width:700px){ .plans{ grid-template-columns:repeat(3, minmax(0, 1fr)); } .mem-head{ grid-column:1 / span 6; } }
+@media (min-width:1024px){ .mem-head{ grid-column:1 / span 7; } }
+.plan{ padding:24px; display:grid; gap:18px; align-content:start; border-radius:22px; background:var(--card); box-shadow:var(--shadow); }
+.plan-top{ display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.plan-top b{ color:var(--ink); font-weight:800; font-size:1.08rem; }
+.soon{ padding:3px 14px; border-radius:999px; background:#f6e7cc; color:#7a4e0c; font-weight:700; font-size:.84rem; line-height:1.8; }
+.skel{ display:block; height:10px; border-radius:6px; background:var(--track); }
+.w40{ width:40%; } .w60{ width:60%; } .w80{ width:80%; }
+.lines{ display:grid; gap:12px; padding-block:16px; border-block:1px solid var(--line); }
+.mem-foot{ margin-top:24px; display:flex; flex-wrap:wrap; align-items:center; gap:12px 24px; }
+@media (max-width:699px){ .plan .lines{ display:none; } .plan{ gap:12px; padding:20px 22px; } }
+
+/* questions */
+.faqs{ display:grid; gap:var(--gap); }
+@media (min-width:700px){ .faqs{ grid-template-columns:repeat(2, minmax(0, 1fr)); } }
+.faq{ padding-top:20px; border-top:1.5px solid var(--ink); display:grid; gap:10px; align-content:start; }
+.faq h3{ font-weight:800; font-size:1.18rem; }
+
+/* behind the scenes */
+.quote{ font-weight:700; font-size:clamp(1.3rem, 1.1rem + .9vw, 1.85rem); line-height:1.85; color:var(--ink); }
+.by{ margin-top:22px; display:flex; align-items:center; gap:12px; color:var(--ink-3); font-size:.95rem; }
+.avatar{ width:44px; height:44px; border-radius:50%; display:grid; place-items:center; background:var(--card); box-shadow:inset 0 0 0 1px var(--line); color:var(--ink); font-weight:800; }
+.story-side{ margin-top:40px; display:grid; gap:16px; }
+.cycle{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:4px; }
+.cycle li{ padding:5px 14px; border-radius:999px; background:var(--card); box-shadow:inset 0 0 0 1px var(--line); font-size:.92rem; line-height:1.8; color:var(--ink); }
+.cycle li.arr{ background:none; box-shadow:none; padding:0; color:var(--ink-3); }
+@media (min-width:700px){ .story-q{ grid-column:1 / span 7; } .story-side{ grid-column:1 / span 6; } }
+@media (min-width:1024px){ .story-q{ grid-column:1 / span 7; } .story-side{ grid-column:9 / span 4; margin-top:0; } }
+
+/* the end: the gate at night, its lanterns lit */
+.end .grid{ align-items:center; row-gap:32px; }
+.end-text{ display:grid; gap:18px; justify-items:start; }
+.principle{ color:var(--ink-3); }
+.end-art{ position:relative; border-radius:20px; overflow:hidden; aspect-ratio:5 / 4; background:var(--card); box-shadow:0 0 0 1px var(--line) inset; }
+.end-art canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+@media (min-width:700px){ .end-text{ grid-column:1 / span 4; } .end-art{ grid-column:5 / span 4; } }
+@media (min-width:1024px){ .end-text{ grid-column:1 / span 5; } .end-art{ grid-column:7 / span 6; } }
+
+/* footer */
+.foot{ margin-top:var(--sec); background:var(--stone); padding-block:56px calc(28px + env(safe-area-inset-bottom, 0px)); }
+.foot .grid{ row-gap:32px; }
+.foot-logo{ width:96px; height:auto; }
+.foot-h{ font-weight:800; color:var(--ink); font-size:.95rem; margin-bottom:4px; }
+.foot ul a{ display:inline-flex; min-height:44px; min-width:44px; align-items:center; text-decoration:none; color:var(--ink-2); }
+.biz{ display:grid; gap:8px; }
+.biz dt{ font-size:.8rem; color:var(--ink-3); line-height:1.6; }
+.biz dd:empty::before{ content:""; display:block; width:70%; height:10px; margin-top:6px; border-radius:6px; background:var(--track); }
+.seal{ margin-top:12px; }
+.seal:empty{ width:80px; height:88px; border:1.5px dashed var(--line-2); border-radius:12px; }
+.legal{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px 20px; padding-top:18px; border-top:1px solid var(--line-2); font-size:.84rem; color:var(--ink-3); }
+.f-a{ grid-column:1 / span 2; } .f-b{ grid-column:3 / span 2; }
+@media (min-width:700px){ .f-brand{ grid-column:1 / span 8; } .f-a{ grid-column:1 / span 2; } .f-b{ grid-column:3 / span 2; } .f-c{ grid-column:5 / span 4; } }
+@media (min-width:1024px){ .f-brand{ grid-column:1 / span 4; } .f-a{ grid-column:6 / span 2; } .f-b{ grid-column:8 / span 2; } .f-c{ grid-column:10 / span 3; } }
+@media (hover:hover) and (pointer:fine){ .foot ul a:hover{ color:var(--ink); text-decoration:underline; } }
+
+/* ── Motion: words rise into place once; frames open from the bottom. Under «کاهش حرکت» everything is simply there. ── */
+@media (prefers-reduced-motion:no-preference){
+  .js .rv{ opacity:0; transform:translateY(16px); transition:opacity .7s ease-out, transform .9s var(--ease-out); transition-delay:var(--d, 0ms); }
+  .js .rv.in{ opacity:1; transform:none; }
+  .js .rv-frame{ clip-path:inset(14% 0 0 0 round 20px); opacity:0; transition:clip-path 1.1s var(--ease-io), opacity .6s ease-out; }
+  .js .rv-frame.in{ clip-path:inset(0 0 0 0 round 20px); opacity:1; }
+  .js .w-hero > *{ animation:rise .8s var(--ease-out) both; animation-delay:var(--d, 0ms); }
+}
+@keyframes rise{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
+@media (prefers-reduced-motion:reduce){ body, .btn, .top, .worlds, .legend button, .legend button::after, .tri-cap, .top nav a[data-w]::after{ transition:none; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">رفتن به متن اصلی</a>
+
+<header class="top" id="top-bar">
+  <div class="wrap top-in">
+    <a class="mark" href="#top" aria-label="بالای صفحه"><img src="../assets/looks/brand/sprout-80.webp" width="26" height="26" alt=""></a>
+    <nav aria-label="بخش‌های صفحه">
+      <a href="#body" data-w="body">بدن</a><a href="#mind" data-w="mind">ذهن</a><a href="#soul" data-w="soul">روح</a><i aria-hidden="true"></i><a href="#path">مسیر</a><a href="#method">متد</a><a href="#inside">داخل بذر</a><a href="#membership">عضویت بذر</a><a href="#faq">سؤال‌ها</a>
+    </nav>
+    <div class="top-end"><a class="btn btn-go btn-sm" href="https://app.bazrlife.ir/login">شروع</a></div>
+  </div>
+</header>
+
+<main id="main">
+<!-- ════ The model: ب ذ ر = بدن، ذهن، روح (Owner's note + «هایلایت مسیر بذر»), as three worlds of the painting ════ -->
+<section class="worlds" id="top" data-state="all">
+  <div class="wrap grid w-grid">
+
+    <header class="w-hero" data-step="all">
+      <p class="eyebrow" style="--d:0ms"><span class="thread-mark" aria-hidden="true"></span><span class="latin" dir="ltr">Body · Mind · Soul</span></p>
+      <h1 class="display" style="--d:80ms"><span class="line">بذر یعنی</span><span class="line">بدن، ذهن، روح.</span></h1>
+      <p class="lead" style="--d:180ms">بذر برای کم کردن فاصله‌ی میان دانستن و زندگی کردن آنچه می‌دانیم به وجود آمده است.</p>
+      <div class="cta" style="--d:260ms">
+        <a class="btn btn-go" href="https://app.bazrlife.ir/login">شروع</a>
+        <a class="btn btn-line" href="#body" id="to-worlds">سه دنیای بذر <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></a>
+      </div>
+      <p class="hint" style="--d:340ms"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>پایین بیایید تا هر دنیا باز شود.</p>
+    </header>
+
+    <div class="w-stage" id="stage">
+      <div class="fig"><svg class="fig-css" viewBox="0 0 400 500" aria-hidden="true"><ellipse cx="239" cy="106" rx="58" ry="29" transform="rotate(-3 239 106)"/><ellipse cx="180" cy="117" rx="62" ry="19" transform="rotate(-2 180 117)"/><ellipse cx="204" cy="125" rx="58" ry="32" transform="rotate(-3 204 125)"/><ellipse cx="220" cy="150" rx="116" ry="23" transform="rotate(-19 220 150)"/><ellipse cx="205" cy="169" rx="106" ry="39" transform="rotate(-6 205 169)"/><ellipse cx="177" cy="187" rx="83" ry="29" transform="rotate(7 177 187)"/><ellipse cx="197" cy="199" rx="115" ry="29" transform="rotate(-2 197 199)"/><ellipse cx="207" cy="218" rx="66" ry="19" transform="rotate(-8 207 218)"/><ellipse cx="205" cy="226" rx="59" ry="15" transform="rotate(-10 205 226)"/><ellipse cx="189" cy="250" rx="124" ry="23" transform="rotate(-6 189 250)"/><ellipse cx="196" cy="269" rx="99" ry="21" transform="rotate(-17 196 269)"/><ellipse cx="215" cy="286" rx="114" ry="36" transform="rotate(-12 215 286)"/><ellipse cx="161" cy="299" rx="135" ry="18" transform="rotate(21 161 299)"/><ellipse cx="189" cy="307" rx="87" ry="15" transform="rotate(14 189 307)"/><ellipse cx="181" cy="336" rx="135" ry="28" transform="rotate(21 181 336)"/><ellipse cx="155" cy="351" rx="81" ry="39" transform="rotate(-5 155 351)"/><ellipse cx="202" cy="363" rx="68" ry="38" transform="rotate(20 202 363)"/><ellipse cx="207" cy="376" rx="59" ry="28" transform="rotate(-15 207 376)"/><ellipse cx="168" cy="393" rx="88" ry="37" transform="rotate(-2 168 393)"/><ellipse cx="191" cy="411" rx="130" ry="35" transform="rotate(17 191 411)"/></svg><canvas class="figure" id="figure" aria-hidden="true"></canvas></div>
+      <div class="legend" role="tablist" aria-label="سه دنیای بذر">
+        <button type="button" role="tab" id="tab-body" data-w="body" aria-selected="false" aria-controls="tri-cap"><b>ب</b>بدن</button>
+        <button type="button" role="tab" id="tab-mind" data-w="mind" aria-selected="false" aria-controls="tri-cap" tabindex="-1"><b>ذ</b>ذهن</button>
+        <button type="button" role="tab" id="tab-soul" data-w="soul" aria-selected="false" aria-controls="tri-cap" tabindex="-1"><b>ر</b>روح</button>
+      </div>
+      <p class="tri-cap" id="tri-cap" role="tabpanel" aria-live="polite">در بذر، بدن، ذهن و روح سه مسیر جدا از هم نیستن. روی هم اثر می‌ذارن.</p>
+      <template id="caps">
+        <p data-w="body"><b>بدن</b> شناخت وضعیت فعلی</p>
+        <p data-w="mind"><b>ذهن</b> شناخت الگوها و رفتارها</p>
+        <p data-w="soul"><b>روح</b> شناخت معنا و ارزش‌ها</p>
+      </template>
+    </div>
+
+    <article class="chapter" id="body" data-w="body" data-step="body" aria-labelledby="h-body">
+      <figure class="ch-fig rv-frame" data-w="body" aria-hidden="true"><canvas class="world" data-w="body"></canvas></figure>
+      <p class="ch-no rv"><span class="num" aria-hidden="true">۱</span><span>شناخت وضعیت فعلی</span><span class="latin" dir="ltr">Body</span></p>
+      <h2 class="ch-word rv" id="h-body"><span>ب</span>دن</h2>
+      <p class="lead rv">مسیر بذر از بدن شروع می‌شه. از جایی که هر روز باهاش زندگی می‌کنید: خوابتون، تغذیه‌تون، حرکتتون، انرژیتون و عادت‌های روزمره‌تون.</p>
+      <p class="rv">اول باید ببینیم بدنتون الان کجای مسیر ایستاده.</p>
+      <p class="echo rv">گاهی تغییر از خواب و حرکت شروع می‌شه.</p>
+    </article>
+
+    <article class="chapter" id="mind" data-w="mind" data-step="mind" aria-labelledby="h-mind">
+      <figure class="ch-fig rv-frame" data-w="mind" aria-hidden="true"><canvas class="world" data-w="mind"></canvas></figure>
+      <p class="ch-no rv"><span class="num" aria-hidden="true">۲</span><span>شناخت الگوها و رفتارها</span><span class="latin" dir="ltr">Mind</span></p>
+      <h2 class="ch-word rv" id="h-mind"><span>ذ</span>هن</h2>
+      <p class="lead rv">بعد می‌ریم سراغ ذهن. الگوهایی که تکرار می‌کنید. نیازهایی که پشت رفتارهاتون هستن.</p>
+      <p class="rv">باورها، تصمیم‌ها و عادت‌هایی که شاید سال‌هاست بدون اینکه متوجه باشید، دارن مسیرتون رو شکل می‌دن.</p>
+      <p class="echo rv">گاهی از شناخت یک الگوی قدیمی.</p>
+    </article>
+
+    <article class="chapter" id="soul" data-w="soul" data-step="soul" aria-labelledby="h-soul">
+      <figure class="ch-fig rv-frame" data-w="soul" aria-hidden="true"><canvas class="world" data-w="soul"></canvas></figure>
+      <p class="ch-no rv"><span class="num" aria-hidden="true">۳</span><span>شناخت معنا و ارزش‌ها</span><span class="latin" dir="ltr">Soul</span></p>
+      <h2 class="ch-word rv" id="h-soul"><span>ر</span>وح</h2>
+      <p class="lead rv">و بعد می‌رسیم به روح. به چیزی که برای شما معنا داره. ارزش‌هاتون. رابطه‌تون با خودتون و زندگی.</p>
+      <p class="rv">و اینکه واقعاً می‌خواید چه جور آدمی باشید و چه جور زندگی‌ای بسازید.</p>
+      <p class="echo rv">و گاهی از این سؤال ساده:<strong>«من واقعاً چی می‌خوام؟»</strong></p>
+    </article>
+
+    <div class="together" id="together" data-step="all3">
+      <p class="kick rv"><span class="latin" dir="ltr">Body · Mind · Soul</span></p>
+      <h2 class="h2 rv" style="margin-top:14px">در بذر، بدن، ذهن و روح سه مسیر جدا از هم نیستن.<span class="soft">روی هم اثر می‌ذارن.</span></h2>
+      <ol class="flow">
+        <li class="rv" data-w="body"><span class="node" aria-hidden="true">ب</span><div><b>بدن</b><span>شناخت وضعیت فعلی</span></div></li>
+        <li class="rv" data-w="mind" style="--d:80ms"><span class="node" aria-hidden="true">ذ</span><div><b>ذهن</b><span>شناخت الگوها و رفتارها</span></div></li>
+        <li class="rv" data-w="soul" style="--d:160ms"><span class="node" aria-hidden="true">ر</span><div><b>روح</b><span>شناخت معنا و ارزش‌ها</span></div></li>
+        <li class="rv" data-w="change" style="--d:240ms"><span class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20.5V11"/><path d="M12 14c-.8-4-4.4-5.6-8-4.6 1 3.7 4.4 5.2 8 4.6z"/><path d="M12 11.5c.8-4 4.4-5.6 8-4.6-1 3.7-4.4 5.2-8 4.6z"/></svg></span><div><b>تغییر</b><span>انتخاب چند قدم واقعی و قابل ادامه</span></div></li>
+      </ol>
+      <p class="close rv">قرار نیست همه‌چیز رو یک‌باره تغییر بدید. اول خودتون رو می‌شناسید. بعد چیزی رو انتخاب می‌کنید که واقعاً برای شما مهمه. و از همون‌جا، قدم‌به‌قدم مسیرتون رو می‌سازید.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════ The familiar tension (brand book 1.1) and knowing vs doing (highlight 1). The world each line belongs to is marked. ════ -->
+<section class="sec" id="why">
+  <div class="wrap grid">
+    <div class="why-a">
+      <p class="kick rv">تنش آشنا</p>
+      <h2 class="h2 rv">می‌دونم باید چی کار کنم.<span class="soft">پس چرا انجامش نمی‌دم؟</span></h2>
+      <p class="lead rv">بذر یک پلتفرم <span class="term" dir="ltr">Lifestyle</span> و <span class="term" dir="ltr">Behavior Change</span> هست که کمک می‌کنه الگوهای رفتاری، نیازها، عادت‌ها و سبک زندگی خودتون رو بهتر بشناسید و قدم‌به‌قدم مسیر تغییر مخصوص خودتون رو بسازید.</p>
+    </div>
+    <div class="why-b">
+      <div class="head rv">
+        <p class="kick">فاصله‌ی دونستن تا انجام دادن</p>
+        <h3 class="h3" style="font-size:clamp(1.2rem, 1.05rem + .6vw, 1.5rem)">همه‌ی ما چیزهایی درباره‌ی خودمون و زندگی می‌دونیم.</h3>
+      </div>
+      <div class="ledger rv" role="table" aria-label="دونستن و انجام دادن">
+        <div class="ledger-row ledger-head" role="row"><span role="columnheader"></span><span role="columnheader"></span><span role="columnheader">دونستن</span><span role="columnheader">انجام دادن</span></div>
+        <div class="ledger-row" role="row"><span role="cell" class="tag-w" data-w="body" aria-label="بدن">ب</span><span role="cell">می‌دونیم ورزش برامون خوبه.</span><span role="cell" class="yes" aria-label="بله"></span><span role="cell" class="q">؟</span></div>
+        <div class="ledger-row" role="row"><span role="cell" class="tag-w" data-w="body" aria-label="بدن">ب</span><span role="cell">می‌دونیم باید بهتر غذا بخوریم.</span><span role="cell" class="yes" aria-label="بله"></span><span role="cell" class="q">؟</span></div>
+        <div class="ledger-row" role="row"><span role="cell" class="tag-w" data-w="soul" aria-label="روح">ر</span><span role="cell">می‌دونیم بعضی آدم‌ها، رابطه‌ها یا عادت‌ها دیگه جایی توی زندگی‌ای که می‌خوایم ندارن.</span><span role="cell" class="yes" aria-label="بله"></span><span role="cell" class="q">؟</span></div>
+      </div>
+    </div>
+    <div class="why-c">
+      <p class="punch rv">ولی صرف دونستن، همیشه باعث تغییر نمی‌شه.</p>
+      <p class="rv">چون خیلی وقت‌ها قبل از اینکه بدونیم «چه کاری باید انجام بدیم»، باید بفهمیم چرا الان اینطوری رفتار می‌کنیم.</p>
+      <p class="muted rv">و بذر از همین نقطه شروع می‌شه:</p>
+      <p class="big rv">شناخت<i>.</i></p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ Know · Be · Become (highlight 1, slides 4–5) ════ -->
+<section class="sec" id="what">
+  <div class="wrap grid">
+    <div class="head kbb-head">
+      <p class="kick rv"><span class="latin" dir="ltr">Know · Be · Become</span></p>
+      <h2 class="h2 rv">اینجا یک نسخه‌ی یکسان برای همه وجود نداره.</h2>
+      <p class="lead rv">مسیر هر فرد بر اساس شرایط، رفتارها، نیازها و مرحله‌ای که در تغییر قرار داره متفاوت طراحی می‌شه.</p>
+    </div>
+    <ol class="kbb">
+      <li class="rv"><span class="latin" dir="ltr">Know</span><b>شناختن</b><p>خودتان و الگوهایتان را بشناسید.</p></li>
+      <li class="rv" style="--d:80ms"><span class="latin" dir="ltr">Be</span><b>حضور داشتن</b><p>آگاهانه‌تر در زندگی‌تان حضور داشته باشید.</p></li>
+      <li class="rv" style="--d:160ms"><span class="latin" dir="ltr">Become</span><b>تغییر کردن</b><p>در مسیر تغییر قدم بردارید.</p></li>
+    </ol>
+    <p class="tagline small"><span class="term" dir="ltr">A place to know, to be, to become.</span></p>
+  </div>
+</section>
+
+<!-- ════ Your path (highlight 2) ════ -->
+<section class="sec" id="path">
+  <div class="wrap grid">
+    <div class="head path-head">
+      <p class="kick rv">مسیر شما</p>
+      <h2 class="h2 rv">تغییر از انتخاب یک هدف شروع نمی‌شه.</h2>
+      <p class="lead rv">برای ما، تغییر از شناخت نقطه‌ای شروع می‌شه که الان در اون ایستادید.</p>
+    </div>
+    <ol class="steps">
+      <li class="rv"><span class="n" aria-hidden="true">۱</span><div><h3 class="h3">دیدن الگوها</h3><p>در مرحله‌ی اول، بذر کمک می‌کنه الگوهای تکرارشونده‌ی خودتون رو ببینید:</p><ul class="qs"><li>چه چیزهایی شما رو جلو می‌برن؟</li><li>چه چیزهایی متوقفتون می‌کنن؟</li><li>چه نیازهایی پشت رفتارهای شما قرار دارن؟</li></ul></div></li>
+      <li class="rv"><span class="n" aria-hidden="true">۲</span><div><h3 class="h3">تصویر واضح‌تر</h3><p>با ویس‌های آموزشی، تمرین‌های کوتاه و ثبت تجربه‌های روزانه، کم‌کم تصویر واضح‌تری از خودتون ساخته می‌شه.</p></div></li>
+      <li class="rv"><span class="n" aria-hidden="true">۳</span><div><h3 class="h3">چند اولویت مشخص</h3><p>بعد از شناخت، قرار نیست ده چیز رو با هم تغییر بدید. از بین مهم‌ترین الگوهای زندگی‌تون، چند اولویت مشخص انتخاب می‌شن و تغییر از همون‌ها شروع می‌شه.</p></div></li>
+      <li class="rv"><span class="n" aria-hidden="true">۴</span><div><h3 class="h3">قدم‌های کوچک</h3><p>قدم‌های کوچک. پیگیری مداوم. اصلاح مسیر بر اساس چیزی که واقعاً در زندگی شما اتفاق می‌افته.</p></div></li>
+    </ol>
+    <div class="path-close rv"><strong>هدف بذر ساختن یک «برنامه‌ی ایده‌آل» نیست.</strong><p>هدف، ساختن مسیریه که با توجه به نیازها، دغدغه‌ها و شرایط زندگی شما طراحی شده؛ تا بتونید تو روزمره‌تون بیاریدش و آروم‌آروم سبک زندگی خودتون رو بسازید.</p></div>
+  </div>
+</section>
+
+<!-- ════ The method (highlight 3). Stage names beside the four sentences were added by an agent (see the README of /old/). ════ -->
+<section class="sec band" id="method">
+  <div class="wrap grid">
+    <div class="m-text">
+      <p class="kick rv"><span class="latin" dir="ltr">TTM · Stages of Change</span></p>
+      <h2 class="h2 rv">تغییر فقط با انگیزه اتفاق نمی‌افته.</h2>
+      <p class="lead rv">برای اینکه یک تغییر ماندگار بشه، باید بفهمیم هر آدم الان دقیقاً کجای مسیر تغییر ایستاده.</p>
+      <p class="rv">یکی از مدل‌هایی که در بذر ازش استفاده می‌کنیم، مدل علمی <span class="term" dir="ltr">TTM</span> یا «مراحل تغییر»ه. این مدل می‌گه همه‌ی آدم‌ها برای تغییر یک رفتار، در یک مرحله نیستن.</p>
+    </div>
+    <ol class="stages">
+      <li class="stage rv"><svg class="loose" viewBox="0 0 120 64" aria-hidden="true"><path d="M4.0 36.0C5.8 36.2 11.2 37.8 14.8 37.2C18.4 36.6 23.3 32.2 25.6 32.4C28.0 32.6 26.8 36.8 28.9 38.6C31.0 40.4 34.4 42.2 38.1 43.5C41.7 44.8 46.5 45.8 51.0 46.4C55.5 46.9 60.6 47.1 64.9 46.9C69.3 46.7 73.7 46.1 77.2 45.1C80.6 44.2 83.6 42.8 85.6 41.1C87.6 39.5 88.7 37.4 88.9 35.3C89.2 33.2 88.4 30.8 87.1 28.5C85.8 26.2 83.4 23.7 80.9 21.6C78.3 19.5 75.0 17.4 71.7 15.8C68.5 14.3 64.8 13.0 61.5 12.3C58.2 11.6 54.7 11.4 51.9 11.7C49.1 12.1 46.4 13.1 44.5 14.5C42.6 15.8 41.1 17.9 40.5 20.0C39.8 22.2 39.8 24.9 40.5 27.4C41.2 30.0 42.8 32.8 44.7 35.2C46.7 37.6 49.4 40.0 52.2 41.7C54.9 43.4 58.3 44.8 61.2 45.5C64.0 46.1 67.2 46.2 69.5 45.6C71.9 45.0 74.1 43.7 75.4 41.9C76.7 40.2 77.5 37.8 77.4 35.3C77.4 32.8 76.5 29.8 75.1 27.1C73.7 24.4 71.4 21.5 68.9 19.2C66.4 17.0 63.2 14.8 60.1 13.5C56.9 12.1 53.3 11.3 50.1 11.1C46.9 11.0 43.5 11.6 40.7 12.8C38.0 13.9 35.4 15.8 33.4 18.0C31.5 20.1 30.0 23.0 29.1 25.7C28.3 28.4 28.0 31.5 28.3 34.1C28.6 36.8 29.5 39.5 30.8 41.6C32.1 43.7 34.1 45.5 36.1 46.6C38.2 47.8 40.7 48.4 43.1 48.5C45.6 48.5 48.4 47.9 50.8 46.8C53.3 45.8 55.9 44.1 57.9 42.2C59.9 40.4 61.7 37.9 62.6 35.6C63.5 33.3 64.0 30.6 63.5 28.4C63.0 26.1 61.7 23.7 59.7 22.0C57.6 20.2 54.6 18.6 51.3 17.8C48.0 16.9 43.7 16.5 39.7 16.7C35.7 16.9 31.1 17.7 27.3 19.0C23.5 20.3 19.6 22.3 17.0 24.5C14.3 26.6 12.2 29.4 11.4 32.0C10.6 34.7 10.8 37.7 12.2 40.3C13.6 42.9 16.3 45.6 19.6 47.8C22.9 49.9 27.6 51.8 32.1 53.0C36.6 54.2 42.0 55.0 46.8 55.0C51.5 55.0 56.7 54.3 60.6 52.9C64.6 51.6 68.3 49.4 70.6 47.0C72.9 44.6 74.2 41.4 74.3 38.5C74.4 35.5 73.2 32.2 71.2 29.5C69.1 26.9 65.7 24.3 62.0 22.5C58.4 20.8 53.6 19.6 49.3 19.1C45.0 18.7 40.0 19.1 36.1 19.9C32.1 20.7 28.2 22.4 25.5 24.0C22.8 25.7 20.7 28.0 19.7 29.9C18.7 31.8 18.8 34.0 19.6 35.5C20.4 37.1 22.4 38.4 24.7 39.2C27.0 39.9 30.3 40.1 33.6 39.9C36.9 39.6 40.8 38.7 44.3 37.6C47.9 36.5 51.6 34.8 54.8 33.1C58.0 31.5 61.0 29.5 63.3 27.7C65.6 25.9 67.5 24.0 68.6 22.5C69.7 21.0 70.1 19.5 69.7 18.4C69.4 17.4 68.3 16.5 66.7 15.9C65.0 15.3 62.6 15.0 60.0 14.8C57.4 14.7 54.1 14.7 51.0 14.8C47.9 14.9 44.4 15.2 41.4 15.5C38.4 15.9 35.3 16.3 33.0 17.0C30.6 17.6 28.6 18.3 27.2 19.3C25.9 20.2 25.2 21.4 25.1 22.7C25.1 24.0 25.7 25.6 26.9 27.2C28.0 28.8 29.9 30.7 32.1 32.4C34.3 34.1 37.1 35.9 40.0 37.4C42.8 38.8 46.2 40.2 49.3 41.0C52.4 41.9 55.8 42.4 58.6 42.3C61.5 42.2 64.3 41.5 66.4 40.4C68.5 39.3 70.3 37.5 71.3 35.6C72.2 33.7 72.6 31.2 72.1 28.9C71.7 26.5 70.4 23.8 68.6 21.6C66.8 19.4 64.1 17.2 61.3 15.7C58.5 14.3 54.9 13.1 51.8 12.8C48.6 12.5 45.1 12.9 42.3 13.9C39.6 14.9 36.9 16.8 35.2 18.9C33.6 21.1 32.5 24.0 32.5 26.8C32.4 29.6 33.3 33.0 34.9 35.7C36.5 38.5 39.3 41.4 42.3 43.5C45.3 45.6 49.3 47.4 53.1 48.3C56.9 49.3 61.3 49.6 65.0 49.2C68.8 48.8 72.6 47.6 75.6 46.0C78.5 44.5 81.0 42.2 82.5 39.9C84.1 37.7 81.8 34.6 84.7 32.5C87.7 30.3 95.2 28.0 100.4 27.2C105.6 26.5 113.4 27.9 116.0 28.0"/></svg><span class="term" dir="ltr">Contemplation</span><p>ممکنه یک نفر هنوز مطمئن نباشه اصلاً می‌خواد تغییر کنه.</p></li>
+      <li class="stage rv" style="--d:70ms"><svg class="loose" viewBox="0 0 120 64" aria-hidden="true"><path d="M4.0 36.0C6.1 35.9 12.6 36.6 16.9 35.4C21.2 34.1 27.2 29.0 29.8 28.7C32.3 28.5 30.6 32.3 32.2 33.9C33.8 35.5 36.5 37.1 39.4 38.2C42.3 39.4 46.1 40.3 49.8 40.7C53.4 41.2 57.7 41.2 61.3 40.9C65.0 40.5 68.8 39.7 71.7 38.6C74.6 37.5 77.2 35.9 78.7 34.3C80.3 32.7 81.2 30.8 81.2 29.0C81.2 27.2 80.2 25.3 78.6 23.7C77.0 22.1 74.4 20.6 71.5 19.6C68.7 18.5 65.0 17.7 61.5 17.4C58.0 17.1 54.0 17.2 50.6 17.7C47.2 18.2 43.7 19.2 41.0 20.3C38.3 21.5 36.0 23.1 34.6 24.7C33.1 26.3 32.4 28.2 32.5 29.9C32.6 31.5 33.6 33.4 35.2 34.8C36.8 36.2 39.3 37.6 42.1 38.5C44.9 39.4 48.4 40.1 51.8 40.4C55.2 40.6 59.0 40.5 62.3 40.0C65.6 39.4 69.0 38.4 71.5 37.1C74.0 35.9 76.1 34.1 77.3 32.3C78.5 30.4 78.9 28.2 78.5 26.2C78.0 24.2 76.6 21.9 74.6 20.2C72.5 18.4 69.5 16.7 66.3 15.7C63.2 14.6 59.1 13.9 55.4 13.8C51.7 13.8 47.5 14.3 44.1 15.3C40.6 16.3 37.1 18.0 34.5 19.9C32.0 21.9 29.9 24.4 28.8 26.9C27.6 29.4 27.3 32.2 27.8 34.7C28.3 37.1 29.7 39.7 31.6 41.5C33.6 43.4 36.4 45.0 39.3 45.9C42.2 46.7 45.8 47.0 49.1 46.7C52.4 46.4 56.0 45.3 59.0 43.9C62.0 42.5 64.9 40.4 67.1 38.2C69.2 36.0 71.0 33.4 72.0 30.9C73.0 28.4 73.3 25.7 72.9 23.5C72.5 21.2 71.4 19.0 69.6 17.3C67.9 15.7 65.4 14.4 62.6 13.8C59.8 13.1 56.3 12.9 53.0 13.3C49.6 13.7 45.8 14.7 42.4 16.0C39.1 17.3 35.6 19.3 32.9 21.3C30.3 23.3 27.9 25.8 26.5 28.2C25.1 30.6 24.3 33.2 24.5 35.5C24.7 37.8 25.9 40.1 27.8 42.0C29.7 43.8 32.7 45.5 36.0 46.6C39.4 47.7 43.7 48.4 47.8 48.5C51.9 48.7 56.7 48.3 60.8 47.5C64.9 46.7 69.2 45.3 72.4 43.7C75.7 42.0 78.5 39.8 80.3 37.6C82.1 35.4 83.2 32.7 83.2 30.3C83.2 28.0 82.2 25.5 80.5 23.5C78.7 21.5 75.9 19.7 72.8 18.6C69.7 17.4 65.7 16.7 62.0 16.6C58.2 16.5 53.9 17.1 50.4 18.1C46.9 19.1 43.3 20.8 40.8 22.6C38.3 24.4 36.3 26.8 35.4 29.0C34.6 31.2 34.6 33.7 35.6 35.8C36.6 37.8 38.8 39.9 41.6 41.3C44.3 42.7 48.2 43.8 52.3 44.2C56.3 44.6 61.2 44.5 65.7 43.9C70.3 43.2 75.3 41.9 79.4 40.4C83.6 38.8 87.8 36.7 90.9 34.5C93.9 32.4 96.5 29.9 97.9 27.7C99.3 25.4 97.6 22.2 99.3 21.2C100.9 20.2 104.8 20.5 107.6 21.6C110.4 22.7 114.6 26.9 116.0 28.0"/></svg><span class="term" dir="ltr">Preparation</span><p>یک نفر آماده‌ی شروع باشه.</p></li>
+      <li class="stage rv" style="--d:140ms"><svg class="loose" viewBox="0 0 120 64" aria-hidden="true"><path d="M4.0 36.0C6.6 36.1 14.6 37.2 19.9 36.3C25.2 35.4 32.8 30.4 35.8 30.6C38.8 30.9 36.3 35.7 37.8 38.0C39.2 40.3 41.7 42.6 44.5 44.3C47.4 46.1 51.1 47.5 54.7 48.3C58.3 49.1 62.6 49.4 66.3 49.1C70.0 48.8 73.9 47.9 76.9 46.6C80.0 45.2 82.8 43.2 84.6 41.1C86.4 39.0 87.5 36.3 87.7 33.8C88.0 31.4 87.3 28.6 85.9 26.2C84.6 23.8 82.3 21.4 79.6 19.7C77.0 17.9 73.5 16.4 70.2 15.5C66.8 14.7 62.9 14.4 59.6 14.6C56.2 14.9 52.7 15.8 49.9 17.0C47.2 18.3 44.7 20.2 43.2 22.3C41.7 24.3 40.8 26.8 40.7 29.2C40.7 31.6 41.5 34.2 43.0 36.4C44.4 38.7 46.8 40.9 49.5 42.5C52.1 44.1 55.6 45.5 58.9 46.2C62.2 46.9 66.1 47.1 69.5 46.7C72.9 46.4 76.4 45.4 79.2 44.0C82.0 42.6 84.5 40.6 86.1 38.6C87.7 36.5 88.7 33.9 88.8 31.5C88.9 29.2 88.2 26.5 86.8 24.4C85.4 22.2 83.0 20.1 80.4 18.5C77.7 17.0 74.3 15.8 70.9 15.2C67.6 14.6 63.7 14.6 60.3 15.0C56.9 15.5 53.3 16.5 50.5 17.9C47.8 19.3 45.3 21.2 43.7 23.2C42.1 25.2 41.2 27.6 41.1 29.8C41.0 32.0 41.8 34.4 43.3 36.4C44.7 38.3 47.1 40.2 49.8 41.6C52.4 43.0 55.9 44.0 59.3 44.5C62.6 45.0 66.5 45.0 69.9 44.6C73.2 44.2 76.8 43.2 79.5 41.9C82.2 40.7 84.6 38.9 86.2 37.1C87.7 35.2 85.9 32.7 88.6 31.0C91.3 29.2 97.7 27.0 102.3 26.5C106.9 26.0 113.7 27.7 116.0 28.0"/></svg><span class="term" dir="ltr">Action</span><p>یک نفر شروع کرده باشه ولی نتونه ادامه بده.</p></li>
+      <li class="stage rv" style="--d:210ms"><svg class="loose" viewBox="0 0 120 64" aria-hidden="true"><path d="M4.0 36.0C6.7 36.2 14.7 37.7 20.0 37.0C25.3 36.3 32.9 31.7 36.0 32.0C39.1 32.3 36.9 36.6 38.4 38.5C39.9 40.5 42.3 42.4 45.0 43.7C47.8 45.1 51.3 46.1 54.7 46.6C58.0 47.1 62.0 47.1 65.3 46.6C68.7 46.1 72.2 45.1 75.0 43.7C77.7 42.4 80.1 40.5 81.6 38.5C83.1 36.6 84.0 34.2 84.0 32.0C84.0 29.8 83.1 27.4 81.6 25.5C80.1 23.5 77.7 21.6 75.0 20.3C72.2 18.9 68.7 17.9 65.3 17.4C62.0 16.9 58.0 16.9 54.7 17.4C51.3 17.9 47.8 18.9 45.0 20.3C42.3 21.6 39.9 23.5 38.4 25.5C36.9 27.4 36.0 29.8 36.0 32.0C36.0 34.2 36.9 36.6 38.4 38.5C39.9 40.5 42.3 42.4 45.0 43.7C47.8 45.1 51.3 46.1 54.7 46.6C58.0 47.1 62.0 47.1 65.3 46.6C68.7 46.1 72.2 45.1 75.0 43.7C77.7 42.4 80.1 40.5 81.6 38.5C83.1 36.6 80.9 33.9 84.0 32.0C87.1 30.1 94.7 27.7 100.0 27.0C105.3 26.3 113.3 27.8 116.0 28.0"/></svg><span class="term" dir="ltr">Maintenance</span><p>و یک نفر درگیر حفظ تغییری باشه که ساخته.</p></li>
+    </ol>
+    <div class="m-more">
+      <p class="rv">پس منطقی نیست به همه یک توصیه‌ی یکسان بدیم. بذر سعی می‌کنه مسیر، تمرین‌ها و قدم‌های بعدی رو متناسب با مرحله‌ای که فرد در اون قرار داره طراحی کنه.</p>
+      <p class="rv">در کنار <span class="term" dir="ltr">TTM</span>، مسیر بذر با استفاده از دانش و رویکردهایی مثل این‌ها طراحی می‌شه:</p>
+      <ul class="ways rv"><li dir="ltr">Behavior Change</li><li dir="ltr">Lifestyle &amp; Health Coaching</li><li dir="ltr">Motivational Interviewing</li><li dir="ltr">Habit Formation</li><li dir="ltr">Self-Compassion</li></ul>
+    </div>
+    <p class="ask-lead rv">یعنی قبل از اینکه بذر بهتون بگه «چی کار کنید»، سعی می‌کنه بفهمه:</p>
+    <ul class="ask">
+      <li class="rv" data-w="body"><span class="tag-w" aria-hidden="true">ب</span>الان کجای مسیرید؟</li>
+      <li class="rv" data-w="mind"><span class="tag-w" aria-hidden="true">ذ</span>چه چیزی جلوی تغییرتون رو گرفته؟</li>
+      <li class="rv" data-w="soul"><span class="tag-w" aria-hidden="true">ر</span>چه چیزی واقعاً براتون مهمه؟</li>
+      <li class="rv" data-w="change"><span class="tag-w" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20.5V11"/><path d="M12 14c-.8-4-4.4-5.6-8-4.6 1 3.7 4.4 5.2 8 4.6z"/><path d="M12 11.5c.8-4 4.4-5.6 8-4.6-1 3.7-4.4 5.2-8 4.6z"/></svg></span>و قدم بعدی‌ای که واقعاً می‌تونید انجام بدید چیه؟</li>
+    </ul>
+    <p class="science rv">علم در بذر قرار نیست تبدیل به اصطلاحات پیچیده بشه. قراره نتیجه‌ش رو در یک مسیر ساده، شخصی و قابل اجرا ببینید.</p>
+  </div>
+</section>
+
+<!-- ════ Inside Bazr (highlight 4, no app screens: ADR-0006) and the stages of growth (the Owner's stage art) ════ -->
+<section class="sec" id="inside">
+  <div class="wrap grid">
+    <div class="head in-head">
+      <p class="kick rv">داخل بذر</p>
+      <h2 class="h2 rv">بذر فقط یک مجموعه محتوای آموزشی نیست.</h2>
+      <p class="lead rv">ما در حال ساخت یک تجربه‌ی شخصی‌سازی‌شده برای تغییر سبک زندگی هستیم. داخل اپ، مسیر با شناخت شروع می‌شه.</p>
+    </div>
+    <ul class="trio">
+      <li class="item rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3.5" y="13.5" width="4" height="6.5" rx="1.6"/><rect x="16.5" y="13.5" width="4" height="6.5" rx="1.6"/></svg>ویس گوش می‌دید.</li>
+      <li class="item rv" style="--d:80ms"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2"/><path d="M12 8v6M7 11l5 3 5-3M9 21l3-7 3 7"/></svg>تمرین انجام می‌دید.</li>
+      <li class="item rv" style="--d:160ms"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h4L19.5 9.5a2.1 2.1 0 0 0-3-3L6 17v3z"/><path d="M14.5 8.5l3 3"/></svg>احساسات و موقعیت‌های مهم رو ثبت می‌کنید.</li>
+    </ul>
+    <div class="note rv"><b>الگوها</b><p>و به مرور، بذر از این داده‌ها برای پیدا کردن الگوهای تکرارشونده‌ی شما استفاده می‌کنه.</p></div>
+    <div class="note" hidden data-pending="E3"><p><span class="term" dir="ltr">AI</span> در بذر قرار نیست جای انسان تصمیم بگیره. وظیفه‌ش کمک به تحلیل اطلاعات، پیدا کردن الگوها و شخصی‌تر کردن تجربه‌ی هر کاربره.</p><p class="term" dir="ltr">We illuminate. You decide.</p></div>
+
+    <div class="grow" id="grow">
+      <div class="head">
+        <p class="kick rv">مراحل رشد</p>
+        <h2 class="h2 rv">هر قدمی که در مسیرتون جلو می‌رید، بذر شما هم رشد می‌کنه.</h2>
+      </div>
+      <ol class="plants">
+        <li class="rv"><svg viewBox="12 22 96 134" aria-hidden="true"><path class="gd" d="M8 118.5C30 117.5 44 119 52 118.6M68 118.6C78 118.2 94 119.2 112 118"/><path class="pl" d="M54.0 152.0C54.5 150.8 57.0 147.2 57.0 145.0C57.0 142.8 53.8 141.0 54.0 139.0C54.2 137.0 57.0 134.5 58.0 133.0C59.0 131.5 59.7 130.6 60.0 130.0C60.3 129.4 60.7 129.8 60.0 129.6C59.3 129.4 57.0 129.3 55.9 128.7C54.8 128.2 53.8 127.3 53.3 126.4C52.9 125.6 52.9 124.4 53.3 123.6C53.8 122.7 54.8 121.8 55.9 121.3C57.0 120.7 58.6 120.4 60.0 120.4C61.4 120.4 63.0 120.7 64.1 121.3C65.2 121.8 66.2 122.7 66.7 123.6C67.1 124.4 67.1 125.6 66.7 126.4C66.2 127.3 65.2 128.2 64.1 128.7C63.0 129.3 60.4 131.4 60.0 129.6C59.6 127.8 61.3 120.6 62.0 118.0C62.7 115.4 63.7 114.7 64.0 114.0"/></svg><span class="no">مرحله‌ی ۱</span><b>ریشه</b></li>
+        <li class="rv" style="--d:60ms"><svg viewBox="12 22 96 134" aria-hidden="true"><path class="gd" d="M8 118.5C30 117.5 44 119 52 118.6M68 118.6C78 118.2 94 119.2 112 118"/><path class="pl" d="M54.0 152.0C54.5 150.8 57.0 147.2 57.0 145.0C57.0 142.8 53.8 141.0 54.0 139.0C54.2 137.0 57.0 134.5 58.0 133.0C59.0 131.5 59.7 130.6 60.0 130.0C60.3 129.4 60.7 129.8 60.0 129.6C59.3 129.4 57.0 129.3 55.9 128.7C54.8 128.2 53.8 127.3 53.3 126.4C52.9 125.6 52.9 124.4 53.3 123.6C53.8 122.7 54.8 121.8 55.9 121.3C57.0 120.7 58.6 120.4 60.0 120.4C61.4 120.4 63.0 120.7 64.1 121.3C65.2 121.8 66.2 122.7 66.7 123.6C67.1 124.4 67.1 125.6 66.7 126.4C66.2 127.3 65.2 128.2 64.1 128.7C63.0 129.3 60.6 132.1 60.0 129.6C59.4 127.1 60.3 117.8 60.4 114.0C60.4 110.2 60.5 109.3 60.4 107.0C60.3 104.7 59.4 101.1 59.9 100.0C60.3 98.9 62.2 100.4 63.2 100.4C64.3 100.5 65.3 100.6 66.2 100.5C67.1 100.4 67.9 100.3 68.6 99.9C69.4 99.6 70.0 99.1 70.4 98.5C70.9 97.9 71.3 97.1 71.6 96.3C71.9 95.4 72.1 94.4 72.2 93.4C72.4 92.4 73.0 90.6 72.6 90.1C72.2 89.7 70.8 90.4 70.0 90.5C69.2 90.7 68.3 90.9 67.6 91.1C66.8 91.4 66.1 91.7 65.4 92.1C64.7 92.5 64.1 92.9 63.6 93.5C63.1 94.0 62.6 94.7 62.2 95.3C61.7 96.0 61.4 96.8 61.0 97.6C60.6 98.3 60.7 99.5 60.0 100.0C59.3 100.5 57.8 100.4 56.8 100.4C55.7 100.5 54.7 100.6 53.8 100.5C52.9 100.4 52.1 100.3 51.4 99.9C50.6 99.6 50.0 99.1 49.6 98.5C49.1 97.9 48.7 97.1 48.4 96.3C48.1 95.4 47.9 94.4 47.8 93.4C47.6 92.4 47.0 90.6 47.4 90.1C47.8 89.7 49.2 90.4 50.0 90.5C50.8 90.7 51.7 90.9 52.4 91.1C53.2 91.4 53.9 91.7 54.6 92.1C55.3 92.5 55.9 92.9 56.4 93.5C56.9 94.0 57.4 94.7 57.8 95.3C58.3 96.0 58.6 96.8 59.0 97.6C59.4 98.3 59.8 100.3 60.0 100.0C60.2 99.7 60.0 96.7 60.0 96.0"/></svg><span class="no">مرحله‌ی ۲</span><b>جوانه</b></li>
+        <li class="rv" style="--d:120ms"><svg viewBox="12 22 96 134" aria-hidden="true"><path class="gd" d="M8 118.5C30 117.5 44 119 52 118.6M68 118.6C78 118.2 94 119.2 112 118"/><path class="pl" d="M54.0 152.0C54.5 150.8 57.0 147.2 57.0 145.0C57.0 142.8 53.8 141.0 54.0 139.0C54.2 137.0 57.0 134.5 58.0 133.0C59.0 131.5 59.7 130.6 60.0 130.0C60.3 129.4 60.7 129.8 60.0 129.6C59.3 129.4 57.0 129.3 55.9 128.7C54.8 128.2 53.8 127.3 53.3 126.4C52.9 125.6 52.9 124.4 53.3 123.6C53.8 122.7 54.8 121.8 55.9 121.3C57.0 120.7 58.6 120.4 60.0 120.4C61.4 120.4 63.0 120.7 64.1 121.3C65.2 121.8 66.2 122.7 66.7 123.6C67.1 124.4 67.1 125.6 66.7 126.4C66.2 127.3 65.2 128.2 64.1 128.7C63.0 129.3 60.6 132.2 60.0 129.6C59.4 127.0 60.3 117.3 60.4 113.3C60.4 109.3 60.5 108.2 60.4 105.7C60.3 103.1 59.3 99.1 59.9 98.0C60.5 96.9 62.7 98.8 64.0 99.1C65.3 99.5 66.6 99.7 67.8 99.8C69.0 99.9 70.1 99.8 71.1 99.6C72.2 99.3 73.1 98.9 74.0 98.3C74.9 97.6 75.6 96.8 76.3 95.8C77.0 94.9 77.6 93.7 78.2 92.5C78.8 91.3 80.2 89.3 79.9 88.7C79.6 88.1 77.6 88.6 76.4 88.7C75.3 88.7 74.2 88.7 73.1 88.9C72.0 89.0 70.9 89.3 70.0 89.6C69.0 89.9 68.0 90.4 67.1 90.9C66.2 91.5 65.4 92.1 64.5 92.9C63.7 93.6 63.0 94.4 62.2 95.3C61.4 96.2 60.5 98.5 60.0 98.0C59.5 97.5 59.5 94.0 59.5 92.0C59.5 90.0 60.5 86.8 59.9 86.0C59.3 85.2 57.3 86.8 56.0 87.1C54.7 87.5 53.4 87.7 52.2 87.8C51.0 87.9 49.9 87.8 48.9 87.6C47.8 87.3 46.9 86.9 46.0 86.3C45.1 85.6 44.4 84.8 43.7 83.8C43.0 82.9 42.4 81.7 41.8 80.5C41.2 79.3 39.8 77.3 40.1 76.7C40.4 76.1 42.4 76.6 43.6 76.7C44.7 76.7 45.8 76.7 46.9 76.9C48.0 77.0 49.1 77.3 50.0 77.6C51.0 77.9 52.0 78.4 52.9 78.9C53.8 79.5 54.6 80.1 55.5 80.9C56.3 81.6 57.0 82.4 57.8 83.3C58.6 84.2 59.7 86.4 60.0 86.0C60.3 85.6 59.9 82.7 59.8 81.0C59.7 79.3 59.1 76.8 59.5 76.0C59.9 75.2 61.4 76.0 62.1 75.9C62.9 75.8 63.4 75.8 64.0 75.6C64.5 75.5 65.0 75.3 65.4 75.0C65.8 74.7 66.1 74.3 66.4 73.9C66.6 73.4 66.7 72.9 66.7 72.3C66.8 71.8 66.8 71.1 66.7 70.4C66.7 69.8 66.7 68.6 66.4 68.3C66.1 68.1 65.4 68.7 64.8 68.9C64.3 69.1 63.8 69.3 63.4 69.5C62.9 69.8 62.5 70.0 62.2 70.4C61.8 70.7 61.5 71.1 61.3 71.5C61.0 71.9 60.8 72.3 60.6 72.8C60.5 73.3 60.4 73.8 60.3 74.3C60.1 74.9 60.4 75.7 60.0 76.0C59.6 76.3 58.6 76.0 57.9 75.9C57.2 75.8 56.6 75.8 56.0 75.6C55.5 75.5 55.0 75.3 54.6 75.0C54.2 74.7 53.9 74.3 53.6 73.9C53.4 73.4 53.3 72.9 53.3 72.3C53.2 71.8 53.2 71.1 53.3 70.4C53.3 69.8 53.3 68.6 53.6 68.3C53.9 68.1 54.6 68.7 55.2 68.9C55.7 69.1 56.2 69.3 56.6 69.5C57.1 69.8 57.5 70.0 57.8 70.4C58.2 70.7 58.5 71.1 58.7 71.5C59.0 71.9 59.2 72.3 59.4 72.8C59.5 73.3 59.6 73.8 59.7 74.3C59.9 74.9 60.0 76.4 60.0 76.0C60.0 75.6 60.0 72.7 60.0 72.0"/></svg><span class="no">مرحله‌ی ۳</span><b>ساقه</b></li>
+        <li class="rv" style="--d:180ms"><svg viewBox="12 22 96 134" aria-hidden="true"><path class="gd" d="M8 118.5C30 117.5 44 119 52 118.6M68 118.6C78 118.2 94 119.2 112 118"/><path class="pl" d="M54.0 152.0C54.5 150.8 57.0 147.2 57.0 145.0C57.0 142.8 53.8 141.0 54.0 139.0C54.2 137.0 57.0 134.5 58.0 133.0C59.0 131.5 59.7 130.6 60.0 130.0C60.3 129.4 60.7 129.8 60.0 129.6C59.3 129.4 57.0 129.3 55.9 128.7C54.8 128.2 53.8 127.3 53.3 126.4C52.9 125.6 52.9 124.4 53.3 123.6C53.8 122.7 54.8 121.8 55.9 121.3C57.0 120.7 58.6 120.4 60.0 120.4C61.4 120.4 63.0 120.7 64.1 121.3C65.2 121.8 66.2 122.7 66.7 123.6C67.1 124.4 67.1 125.6 66.7 126.4C66.2 127.3 65.2 128.2 64.1 128.7C63.0 129.3 60.6 131.9 60.0 129.6C59.4 127.3 60.3 118.2 60.4 114.7C60.4 111.1 60.5 110.4 60.4 108.3C60.3 106.2 59.3 102.8 59.9 102.0C60.4 101.2 62.5 103.0 63.8 103.4C65.1 103.8 66.3 104.2 67.4 104.3C68.5 104.5 69.6 104.5 70.6 104.3C71.6 104.1 72.6 103.8 73.4 103.2C74.3 102.6 75.0 101.8 75.8 100.9C76.5 100.0 77.1 98.9 77.7 97.8C78.3 96.7 79.7 94.8 79.5 94.1C79.2 93.5 77.2 93.9 76.1 93.8C75.0 93.8 73.9 93.8 72.9 93.8C71.8 93.9 70.8 94.1 69.8 94.3C68.9 94.6 68.0 95.0 67.1 95.5C66.2 95.9 65.3 96.5 64.5 97.2C63.7 97.9 63.0 98.7 62.2 99.5C61.5 100.3 60.4 102.6 60.0 102.0C59.6 101.4 59.5 98.0 59.6 96.0C59.6 94.0 60.8 90.8 60.1 90.0C59.4 89.2 57.0 91.0 55.5 91.4C54.0 91.8 52.5 92.1 51.2 92.2C49.8 92.3 48.5 92.3 47.4 92.1C46.2 91.8 45.1 91.3 44.1 90.6C43.1 89.9 42.2 89.0 41.4 87.9C40.6 86.8 39.9 85.5 39.2 84.1C38.4 82.8 36.8 80.6 37.2 79.8C37.5 79.1 39.8 79.7 41.1 79.7C42.4 79.7 43.7 79.7 45.0 79.9C46.2 80.0 47.4 80.3 48.5 80.6C49.7 81.0 50.8 81.5 51.8 82.1C52.8 82.7 53.8 83.4 54.7 84.2C55.7 85.1 56.6 86.0 57.4 87.0C58.3 87.9 59.6 90.5 60.0 90.0C60.4 89.5 59.7 86.0 59.6 84.0C59.5 82.0 58.8 78.8 59.6 78.0C60.4 77.2 63.0 78.9 64.6 79.2C66.1 79.6 67.5 79.9 68.9 79.9C70.2 80.0 71.5 79.9 72.7 79.6C73.9 79.3 74.9 78.8 75.9 78.0C76.9 77.3 77.7 76.3 78.5 75.2C79.3 74.1 80.0 72.8 80.6 71.4C81.3 70.0 82.8 67.8 82.5 67.0C82.1 66.3 79.8 67.0 78.5 67.0C77.2 67.1 75.9 67.2 74.7 67.4C73.5 67.6 72.3 67.8 71.1 68.2C70.0 68.6 68.9 69.2 67.9 69.8C66.9 70.4 66.0 71.2 65.0 72.1C64.1 72.9 63.3 73.9 62.4 74.9C61.6 75.9 60.4 78.4 60.0 78.0C59.6 77.6 60.2 74.3 60.2 72.5C60.1 70.7 60.3 67.8 59.6 67.0C58.9 66.2 57.3 67.7 56.2 67.9C55.0 68.2 53.7 68.4 52.6 68.4C51.5 68.4 50.4 68.3 49.5 68.0C48.6 67.7 47.8 67.3 47.0 66.6C46.3 66.0 45.7 65.1 45.2 64.1C44.6 63.2 44.2 62.0 43.8 60.8C43.4 59.6 42.3 57.6 42.7 57.0C43.0 56.4 44.9 57.0 45.9 57.1C47.0 57.2 48.0 57.3 49.0 57.5C50.0 57.7 50.9 58.0 51.8 58.3C52.7 58.7 53.5 59.2 54.3 59.8C55.1 60.3 55.8 61.0 56.4 61.8C57.1 62.5 57.7 63.4 58.3 64.3C58.9 65.1 59.6 67.3 60.0 67.0C60.4 66.7 60.5 64.0 60.5 62.5C60.5 61.0 59.8 58.8 60.1 58.0C60.3 57.2 61.5 57.9 62.1 57.8C62.8 57.7 63.4 57.7 64.0 57.5C64.5 57.3 65.0 57.1 65.4 56.8C65.8 56.5 66.1 56.1 66.3 55.7C66.5 55.2 66.6 54.7 66.6 54.1C66.7 53.5 66.6 52.9 66.5 52.2C66.4 51.5 66.5 50.4 66.2 50.1C65.8 49.9 65.1 50.5 64.6 50.7C64.1 50.9 63.6 51.1 63.2 51.4C62.7 51.7 62.3 52.0 62.0 52.3C61.6 52.6 61.3 53.0 61.1 53.4C60.9 53.8 60.7 54.3 60.5 54.8C60.4 55.3 60.3 55.8 60.2 56.3C60.1 56.9 60.4 57.8 60.0 58.0C59.6 58.2 58.6 57.9 57.9 57.8C57.2 57.7 56.6 57.7 56.0 57.5C55.5 57.3 55.0 57.1 54.6 56.8C54.2 56.5 53.9 56.1 53.7 55.7C53.5 55.2 53.4 54.7 53.4 54.1C53.3 53.5 53.4 52.9 53.5 52.2C53.6 51.5 53.5 50.4 53.8 50.1C54.2 49.9 54.9 50.5 55.4 50.7C55.9 50.9 56.4 51.1 56.8 51.4C57.3 51.7 57.7 52.0 58.0 52.3C58.4 52.6 58.7 53.0 58.9 53.4C59.1 53.8 59.3 54.3 59.5 54.8C59.6 55.3 59.7 55.8 59.8 56.3C59.9 56.9 60.0 58.4 60.0 58.0C60.0 57.6 60.0 54.7 60.0 54.0"/></svg><span class="no">مرحله‌ی ۴</span><b>برگ</b></li>
+        <li class="rv" style="--d:240ms"><svg viewBox="12 22 96 134" aria-hidden="true"><path class="gd" d="M8 118.5C30 117.5 44 119 52 118.6M68 118.6C78 118.2 94 119.2 112 118"/><path class="pl" d="M54.0 152.0C54.5 150.8 57.0 147.2 57.0 145.0C57.0 142.8 53.8 141.0 54.0 139.0C54.2 137.0 57.0 134.5 58.0 133.0C59.0 131.5 59.7 130.6 60.0 130.0C60.3 129.4 60.7 129.8 60.0 129.6C59.3 129.4 57.0 129.3 55.9 128.7C54.8 128.2 53.8 127.3 53.3 126.4C52.9 125.6 52.9 124.4 53.3 123.6C53.8 122.7 54.8 121.8 55.9 121.3C57.0 120.7 58.6 120.4 60.0 120.4C61.4 120.4 63.0 120.7 64.1 121.3C65.2 121.8 66.2 122.7 66.7 123.6C67.1 124.4 67.1 125.6 66.7 126.4C66.2 127.3 65.2 128.2 64.1 128.7C63.0 129.3 60.6 131.9 60.0 129.6C59.4 127.3 60.3 118.4 60.4 115.0C60.4 111.6 60.5 111.0 60.4 109.0C60.3 107.0 59.3 103.8 59.9 103.0C60.4 102.2 62.5 104.0 63.8 104.4C65.1 104.8 66.3 105.2 67.4 105.3C68.5 105.5 69.6 105.5 70.6 105.3C71.6 105.1 72.6 104.8 73.4 104.2C74.3 103.6 75.0 102.8 75.8 101.9C76.5 101.0 77.1 99.9 77.7 98.8C78.3 97.7 79.7 95.8 79.5 95.1C79.2 94.5 77.2 94.9 76.1 94.8C75.0 94.8 73.9 94.8 72.9 94.8C71.8 94.9 70.8 95.1 69.8 95.3C68.9 95.6 68.0 96.0 67.1 96.5C66.2 96.9 65.3 97.5 64.5 98.2C63.7 98.9 63.0 99.7 62.2 100.5C61.5 101.3 60.4 103.6 60.0 103.0C59.6 102.4 59.6 99.0 59.6 97.0C59.6 95.0 60.9 91.8 60.2 91.0C59.5 90.2 57.0 92.0 55.5 92.4C54.0 92.8 52.5 93.1 51.2 93.2C49.8 93.3 48.5 93.3 47.4 93.1C46.2 92.8 45.1 92.3 44.1 91.6C43.1 90.9 42.2 90.0 41.4 88.9C40.6 87.8 39.9 86.5 39.2 85.1C38.4 83.8 36.8 81.6 37.2 80.8C37.5 80.1 39.8 80.7 41.1 80.7C42.4 80.7 43.7 80.7 45.0 80.9C46.2 81.0 47.4 81.3 48.5 81.6C49.7 82.0 50.8 82.5 51.8 83.1C52.8 83.7 53.8 84.4 54.7 85.2C55.7 86.1 56.6 87.0 57.4 88.0C58.3 88.9 59.6 91.5 60.0 91.0C60.4 90.5 59.6 87.0 59.6 85.0C59.5 83.0 58.8 79.8 59.6 79.0C60.5 78.2 63.0 79.9 64.6 80.2C66.1 80.6 67.5 80.9 68.9 80.9C70.2 81.0 71.5 80.9 72.7 80.6C73.9 80.3 74.9 79.8 75.9 79.0C76.9 78.3 77.7 77.3 78.5 76.2C79.3 75.1 80.0 73.8 80.6 72.4C81.3 71.0 82.8 68.8 82.5 68.0C82.1 67.3 79.8 68.0 78.5 68.0C77.2 68.1 75.9 68.2 74.7 68.4C73.5 68.6 72.3 68.8 71.1 69.2C70.0 69.6 68.9 70.2 67.9 70.8C66.9 71.4 66.0 72.2 65.0 73.1C64.1 73.9 63.3 74.9 62.4 75.9C61.6 76.9 60.4 79.5 60.0 79.0C59.6 78.5 60.2 75.0 60.1 73.0C60.0 71.0 60.2 67.8 59.6 67.0C58.9 66.2 57.3 67.7 56.2 67.9C55.0 68.2 53.7 68.4 52.6 68.4C51.5 68.4 50.4 68.3 49.5 68.0C48.6 67.7 47.8 67.3 47.0 66.6C46.3 66.0 45.7 65.1 45.2 64.1C44.6 63.2 44.2 62.0 43.8 60.8C43.4 59.6 42.3 57.6 42.7 57.0C43.0 56.4 44.9 57.0 45.9 57.1C47.0 57.2 48.0 57.3 49.0 57.5C50.0 57.7 50.9 58.0 51.8 58.3C52.7 58.7 53.5 59.2 54.3 59.8C55.1 60.3 55.8 61.0 56.4 61.8C57.1 62.5 57.7 63.4 58.3 64.3C58.9 65.1 59.6 67.7 60.0 67.0C60.4 66.3 60.5 62.3 60.5 60.0C60.5 57.7 60.2 55.3 60.1 53.0C59.9 50.7 59.2 48.5 59.5 46.0C59.9 43.5 61.7 38.7 62.3 38.3C62.9 37.8 62.9 41.8 62.9 43.2C62.8 44.6 62.4 45.9 61.9 46.7C61.4 47.5 60.6 48.0 60.0 48.0C59.4 48.0 58.6 47.5 58.1 46.7C57.6 45.9 57.2 44.6 57.1 43.2C57.1 41.8 57.4 39.7 57.7 38.3C58.0 36.8 59.2 34.9 58.9 34.7C58.5 34.4 57.0 36.1 55.7 36.8C54.4 37.5 52.5 38.5 51.2 38.9C49.8 39.3 48.4 39.3 47.5 39.0C46.6 38.8 45.9 38.2 45.7 37.6C45.5 37.0 45.7 36.1 46.4 35.4C47.0 34.7 48.1 33.9 49.4 33.4C50.7 32.9 52.8 32.6 54.3 32.4C55.7 32.3 58.0 32.8 58.1 32.4C58.2 32.0 56.1 31.1 55.0 30.1C54.0 29.1 52.4 27.6 51.7 26.4C50.9 25.3 50.5 23.9 50.4 23.0C50.3 22.1 50.7 21.2 51.2 20.9C51.7 20.5 52.6 20.4 53.5 20.8C54.3 21.1 55.4 21.9 56.3 23.0C57.2 24.2 58.2 26.1 58.8 27.4C59.4 28.7 59.5 31.0 59.9 31.0C60.4 31.0 60.6 28.7 61.2 27.4C61.9 26.1 62.8 24.2 63.7 23.0C64.6 21.9 65.7 21.1 66.5 20.8C67.4 20.4 68.3 20.5 68.8 20.9C69.3 21.2 69.7 22.1 69.6 23.0C69.5 23.9 69.1 25.3 68.3 26.4C67.6 27.6 66.0 29.1 65.0 30.1C63.9 31.1 61.8 31.9 61.9 32.3C62.0 32.7 64.3 32.3 65.7 32.4C67.2 32.6 69.3 32.9 70.6 33.4C71.9 33.9 73.0 34.7 73.6 35.4C74.3 36.1 74.5 37.0 74.3 37.6C74.1 38.2 73.4 38.8 72.5 39.0C71.6 39.3 70.2 39.3 68.8 38.9C67.5 38.5 65.6 37.5 64.3 36.8C63.0 36.1 61.4 35.2 61.2 34.6C61.0 33.9 63.0 32.9 63.2 33.0C63.4 33.1 62.8 34.7 62.3 35.3C61.7 35.8 60.8 36.2 60.0 36.2C59.2 36.2 58.3 35.8 57.7 35.3C57.2 34.7 56.8 33.8 56.8 33.0C56.8 32.2 57.2 31.3 57.7 30.7C58.3 30.2 59.2 29.8 60.0 29.8C60.8 29.8 61.7 30.2 62.3 30.7C62.8 31.3 63.0 32.6 63.2 33.0"/></svg><span class="no">مرحله‌ی ۵</span><b>گل</b></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ════ Membership: names, periods and prices stay empty until announced (ADR-0006) ════ -->
+<section class="sec" id="membership">
+  <div class="wrap grid">
+    <div class="head mem-head">
+      <p class="kick rv">قیمت‌ها</p>
+      <h2 class="h2 rv">عضویت بذر</h2>
+      <p class="lead rv">نام طرح‌ها، مدت و مبلغ هر کدوم به‌زودی همین‌جا اعلام می‌شه.</p>
+    </div>
+    <div class="plans">
+      <div class="plan rv"><div class="plan-top"><b>نام طرح</b><span class="soon">به‌زودی</span></div><div class="lines" aria-hidden="true"><span class="skel w80"></span><span class="skel w60"></span><span class="skel w40"></span></div></div>
+      <div class="plan rv" style="--d:70ms"><div class="plan-top"><b>نام طرح</b><span class="soon">به‌زودی</span></div><div class="lines" aria-hidden="true"><span class="skel w80"></span><span class="skel w60"></span><span class="skel w40"></span></div></div>
+      <div class="plan rv" style="--d:140ms"><div class="plan-top"><b>نام طرح</b><span class="soon">به‌زودی</span></div><div class="lines" aria-hidden="true"><span class="skel w80"></span><span class="skel w60"></span><span class="skel w40"></span></div></div>
+    </div>
+    <div class="mem-foot rv"><a class="btn btn-go" href="https://app.bazrlife.ir/login">شروع</a><p class="small muted">مبلغ‌ها و جزئیات هر طرح بعد از اعلام رسمی اینجا قرار می‌گیرن.</p></div>
+  </div>
+</section>
+
+<!-- ════ Questions (highlight 5). «AI» waits for E3; the weight-loss question and the first answer's diet sentence wait for مرجع تغذیه. ════ -->
+<section class="sec" id="faq">
+  <div class="wrap grid">
+    <div class="head">
+      <p class="kick rv">سؤال‌های شما</p>
+      <h2 class="h2 rv">چیزهایی که معمولاً می‌پرسن.</h2>
+    </div>
+    <div class="faqs">
+      <article class="faq rv"><h3>بذر رژیم غذاییه؟</h3><p>نه. بذر فقط روی غذا یا وزن متمرکز نیست.</p></article>
+      <article class="faq rv" style="--d:80ms"><h3>بذر روان‌درمانیه؟</h3><p>نه. بذر جایگزین روان‌درمانی یا خدمات پزشکی نیست. تمرکز بذر روی <span class="term" dir="ltr">Lifestyle Coaching</span>، شناخت رفتار و ایجاد تغییرات قابل اجرا در زندگی روزمره است.</p></article>
+      <article class="faq" hidden data-pending="E3"><h3><span class="term" dir="ltr">AI</span> چه کاری انجام می‌ده؟</h3><p>کمک می‌کنه اطلاعاتی که در طول مسیر ثبت می‌کنید بهتر تحلیل بشن، الگوهای تکرارشونده شناسایی بشن و تجربه‌ی شخصی‌تری داشته باشید.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ════ Behind the scenes (highlight 6, slides 1–4) ════ -->
+<section class="sec" id="story">
+  <div class="wrap grid">
+    <div class="story-q">
+      <p class="kick rv" style="margin-bottom:22px">پشت صحنه‌ی بذر</p>
+      <blockquote class="quote rv">«بذر از یک سؤال برای من شروع شد: چرا ما خیلی وقت‌ها می‌دونیم چه چیزی برای ما بهتره، اما باز هم نمی‌تونیم تغییرش بدیم؟»</blockquote>
+      <p class="by rv"><span class="avatar" aria-hidden="true">آ</span>آیناز، بنیان‌گذار بذر</p>
+    </div>
+    <div class="story-side">
+      <p class="rv">همین سؤال باعث شد وارد دنیای <span class="term" dir="ltr">Behavior Change</span>، <span class="term" dir="ltr">Lifestyle Coaching</span> و علوم مرتبط با تغییر رفتار بشیم.</p>
+      <p class="rv">امروز بذر توسط یک تیم چندتخصصی در حال ساخته شدنه؛ از سلامت و علوم رفتاری تا محصول، فناوری و <span class="term" dir="ltr">AI</span>.</p>
+      <p class="rv" style="color:var(--ink);font-weight:700">ما هنوز در حال ساختیم.</p>
+      <ul class="cycle rv"><li>تحقیق می‌کنیم.</li><li class="arr" aria-hidden="true">←</li><li>تست می‌کنیم.</li><li class="arr" aria-hidden="true">←</li><li>اشتباه می‌کنیم.</li><li class="arr" aria-hidden="true">←</li><li>دوباره طراحی می‌کنیم.</li><li class="arr" aria-hidden="true">↻</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════ The end: the gate at night, its lanterns lit (brand book 1.1, «اصل بنیادین») ════ -->
+<section class="sec end" id="start">
+  <div class="wrap grid">
+    <div class="end-text">
+      <p class="principle latin rv" dir="ltr">We illuminate. You decide.</p>
+      <h2 class="h2 rv">ما مسیر را روشن‌تر می‌کنیم؛ انتخاب با شماست.</h2>
+      <p class="lead rv">مسیر مناسب خودتان را انتخاب کنید.</p>
+      <a class="btn btn-go rv" href="https://app.bazrlife.ir/login">شروع</a>
+      <p class="small muted rv"><span class="term" dir="ltr">A place to know, to be, to become.</span></p>
+    </div>
+    <figure class="end-art rv-frame" aria-hidden="true"><canvas class="closing"></canvas></figure>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap grid">
+    <div class="f-brand stack">
+      <img class="foot-logo" src="../assets/looks/brand/logo-208.webp" width="208" height="216" alt="نشان بذر" loading="lazy">
+      <p class="small">مسیری برای آگاهی، حضور و تغییر</p>
+      <p class="small muted" style="margin-top:4px">بذر جایگزین روان‌درمانی یا خدمات پزشکی نیست.</p>
+    </div>
+    <div class="f-a">
+      <p class="foot-h">بذر</p>
+      <ul><li><a href="#body">بدن</a></li><li><a href="#mind">ذهن</a></li><li><a href="#soul">روح</a></li><li><a href="#path">مسیر</a></li><li><a href="#method">متد</a></li></ul>
+    </div>
+    <div class="f-b">
+      <p class="foot-h">بیشتر</p>
+      <ul><li><a href="#inside">داخل بذر</a></li><li><a href="#membership">عضویت بذر</a></li><li><a href="#faq">سؤال‌های شما</a></li><li><a href="https://app.bazrlife.ir/privacy">حریم خصوصی</a></li><li><a href="https://app.bazrlife.ir/terms">قوانین و شرایط</a></li></ul>
+    </div>
+    <!-- Contact and business identity (BZR-138, BZR-67): empty until Owner پروژه gives the facts, as on /garden/. -->
+    <div class="f-c" id="contact">
+      <p class="foot-h">تماس با ما</p>
+      <dl class="biz">
+        <div><dt>مالک کسب‌وکار</dt><dd data-fact="owner"></dd></div>
+        <div><dt>نشانی</dt><dd data-fact="address"></dd></div>
+        <div><dt>تلفن</dt><dd data-fact="phone"></dd></div>
+        <div><dt>ایمیل</dt><dd data-fact="email"></dd></div>
+      </dl>
+      <div class="seal" id="enamad"></div>
+    </div>
+    <div class="legal"><span>© ۱۴۰۵ بذر</span><span>پیش‌نمایش داخلی تیم · هنوز منتشر نشده</span></div>
+  </div>
+</footer>
+
+<script src="../assets/looks/thread/thread.js" defer></script>
+</body>
+</html>
