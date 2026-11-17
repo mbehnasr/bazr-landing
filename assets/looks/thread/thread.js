@@ -14,6 +14,11 @@
    Its position, whether it shows and its face at rest follow the scroll; its acting (time-based, the app's engine)
    plays only on a forward arrival, once the screen has settled and it is in view, and stops when you leave. Under
    «کاهش حرکت» it is still and happy. With no script or no seed.js, v5's tiny glowing seed is drawn instead.
+   v6.1 (the review): the seed is never under words, in any chapter: where a heading, a line or a card would pass over
+   it, it steps out of their way (seedCovered; the story screens' words where their exit drift has taken them); on a
+   phone too short for a screen's figure zone it stays at the heart wherever it is clear of the words; it is awake with
+   its eyes open in بدن and ذهن (the app's streak: its calm has closed eyes); and the glow's heartbeat holds still with
+   the page (hidden where it cannot be seen, paused after 30 s without input and in a hidden tab).
    v5: one long wire, generated here in code, loops around the volume of a standing person. A single large figure stays fixed
    behind the whole page (one canvas, moved by transform and opacity only) and changes with each part:
      the hero          the person, bowed and frazzled inside a skein of loose wire, which unwinds as you scroll while
