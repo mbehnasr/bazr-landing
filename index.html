@@ -462,6 +462,11 @@ html:not(.js) .try, html:not(.js) [data-water-btn]{ display:none; }
 </style>
 <script src="assets/looks/story/characters.js" defer></script>
 <script src="assets/looks/story/story.js" defer></script>
+<!-- The faces chosen in the panel, «لندینگ» (BZR-221): the app writes this sheet (bazr-app src/lib/site-fonts.ts); where it
+     cannot be had, the page keeps its own Vazirmatn. ?font= or ?headings= in the address show that face on this page
+     only, for the panel's preview. -->
+<link rel="stylesheet" href="/site/font.css">
+<script>(function(q){var p=new URLSearchParams();["font","headings"].forEach(function(k){var v=q.get(k);if(v)p.set(k,v)});if(!String(p))return;var l=document.createElement("link");l.rel="stylesheet";l.href="/site/font.css?"+p;document.head.appendChild(l)})(new URLSearchParams(location.search))</script>
 </head>
 <body>
 <a class="skip" href="#main">رفتن به متن اصلی</a>

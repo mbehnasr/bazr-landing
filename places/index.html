@@ -361,6 +361,11 @@ main > .sec .frame-sm{ display:none; }
 .dock a{ flex:1 0 auto; min-height:44px; display:grid; place-items:center; padding-inline:12px; border-radius:999px; color:var(--ink); font-weight:700; font-size:.88rem; text-decoration:none; white-space:nowrap; }
 .dock a:active{ background:var(--stone); }
 </style>
+<!-- The faces chosen in the panel, «لندینگ» (BZR-221): the app writes this sheet (bazr-app src/lib/site-fonts.ts); where it
+     cannot be had, the page keeps its own Vazirmatn. ?font= or ?headings= in the address show that face on this page
+     only, for the panel's preview. -->
+<link rel="stylesheet" href="/site/font.css">
+<script>(function(q){var p=new URLSearchParams();["font","headings"].forEach(function(k){var v=q.get(k);if(v)p.set(k,v)});if(!String(p))return;var l=document.createElement("link");l.rel="stylesheet";l.href="/site/font.css?"+p;document.head.appendChild(l)})(new URLSearchParams(location.search))</script>
 </head>
 <body>
 
